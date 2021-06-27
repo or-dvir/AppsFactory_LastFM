@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -31,14 +32,86 @@ android {
     }
 }
 
-dependencies {
+repositories {
+    maven { url 'https://jitpack.io' }
+}
 
+dependencies {
+    //todo when the project is ready, check which dependencies are unused and remove them
+
+    //general
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+    //kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.5.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
+
+    //unit tests
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
+    androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
+
+    //instrumented tests
+    def espresso_version = "3.3.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso_version"
+    implementation "androidx.test.espresso:espresso-idling-resource:$espresso_version"
+    debugImplementation 'androidx.fragment:fragment-testing:1.3.5'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //coroutines
+    def coroutine_version = "1.4.3"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutine_version"
+//    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version"
+//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+
+    //mockk
+    def mock_version = "1.11.0"
+    testImplementation "io.mockk:mockk:$mock_version"
+    androidTestImplementation "io.mockk:mockk-android:$mock_version"
+
+    //material components
+    implementation 'com.google.android.material:material:1.3.0'
+
+    //dxAdapter (importing everything)
+    implementation 'com.github.or-dvir:DxAdapterV2:1.1.6'
+
+    //dxUtils
+    implementation 'com.github.or-dvir:DxUtils-lib:1.37'
+
+    //leak canary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+
+    //navigation
+    def nav_version = "2.3.5"
+    androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //ViewModel and LiveData
+    def lifecycle_version = "2.3.1"
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycle_version")
+
+    //moshi
+    def moshi_version = "1.12.0"
+    implementation "com.squareup.moshi:moshi-adapters:$moshi_version"
+    implementation "com.squareup.moshi:moshi:$moshi_version"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
+
+    //koin (already includes koin-android and koin-androidx-scope)
+    implementation "io.insert-koin:koin-android:$koin_version"
+    testImplementation "io.insert-koin:koin-test:$koin_version"
+    androidTestImplementation "io.insert-koin:koin-test:$koin_version"
+
+    //material dialogs
+    def md_version = "3.3.0"
+    implementation "com.afollestad.material-dialogs:core:$md_version"
+    implementation "com.afollestad.material-dialogs:input:$md_version"
+    implementation "com.afollestad.material-dialogs:datetime:$md_version"
+
 }
