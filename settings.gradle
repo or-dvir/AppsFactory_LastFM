@@ -1,0 +1,2 @@
+rootProject.name = "AppsFactory_LastFM"
+include ':app'
