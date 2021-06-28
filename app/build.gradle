@@ -114,4 +114,9 @@ dependencies {
     implementation "com.afollestad.material-dialogs:input:$md_version"
     implementation "com.afollestad.material-dialogs:datetime:$md_version"
 
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:1.6.0'
+
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.8'
 }
