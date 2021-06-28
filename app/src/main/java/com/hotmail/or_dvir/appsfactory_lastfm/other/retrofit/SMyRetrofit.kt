@@ -1,4 +1,4 @@
-package com.hotmail.or_dvir.appsfactory_lastfm.other
+package com.hotmail.or_dvir.appsfactory_lastfm.other.retrofit
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -8,13 +8,13 @@ import java.util.concurrent.TimeUnit
 object SMyRetrofit
 {
     private const val TIMEOUT_SECONDS: Long = 15
-    //todo keep for reference.
-    // remove when not longer needed
-//    val countriesClient: ICountriesClient
+
+    internal val lastFmApi: ILastFmApi
 
     init
     {
         val retrofit = Retrofit.Builder()
+            //todo do i need slash here?
             .baseUrl("https://ws.audioscrobbler.com/2.0/")
             .addConverterFactory(MoshiConverterFactory.create())
             .client(
@@ -26,8 +26,6 @@ object SMyRetrofit
             )
             .build()
 
-        //todo keep for reference.
-        // remove when not longer needed
-//        countriesClient = retrofit.create<ICountriesClient>(ICountriesClient::class.java)
+        lastFmApi = retrofit.create(ILastFmApi::class.java)
     }
 }
