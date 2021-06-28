@@ -3,6 +3,7 @@
     package="com.hotmail.or_dvir.appsfactory_lastfm">
 
     <application
+        android:name=".other.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
