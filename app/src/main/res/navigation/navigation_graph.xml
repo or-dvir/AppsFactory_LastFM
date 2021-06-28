@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/frag">
+
+    <fragment
+        android:id="@+id/frag"
+        android:name="com.hotmail.or_dvir.appsfactory_lastfm.vvm.Frag" />
+
+    <!--    //todo keep for reference until the end-->
+    <!--    <fragment-->
+    <!--        android:id="@+id/fragmentUserLists"-->
+    <!--        android:name="com.hotmail.or_dvir.arislistkt2.vvm.FragmentUserLists"-->
+    <!--        android:label="@string/myLists"-->
+    <!--        tools:layout="@layout/fragment_user_lists">-->
+    <!--        <action-->
+    <!--            android:id="@+id/action_fragmentUserLists_to_fragmentNewList"-->
+    <!--            app:destination="@id/fragmentNewEditList"-->
+    <!--            app:enterAnim="@anim/slide_in_from_top"-->
+    <!--            app:popExitAnim="@anim/slide_out_to_top" />-->
+    <!--        <action-->
+    <!--            android:id="@+id/action_fragmentUserLists_to_fragmentListItems"-->
+    <!--            app:destination="@id/fragmentListItems"-->
+    <!--            app:enterAnim="@anim/slide_in_from_right"-->
+    <!--            app:exitAnim="@anim/slide_out_to_left"-->
+    <!--            app:popEnterAnim="@anim/slide_in_from_left"-->
+    <!--            app:popExitAnim="@anim/slide_out_to_right" />-->
+    <!--    </fragment>-->
+    <!--    <fragment-->
+    <!--        android:id="@+id/fragmentNewEditList"-->
+    <!--        android:name="com.hotmail.or_dvir.arislistkt2.vvm.FragmentNewEditList"-->
+    <!--        android:label="@string/title_newList"-->
+    <!--        tools:layout="@layout/fragment_new_edit_list">-->
+    <!--        <argument-->
+    <!--            android:name="existingItems"-->
+    <!--            app:argType="string[]"-->
+    <!--            app:nullable="true" />-->
+    <!--        <argument-->
+    <!--            android:name="listId"-->
+    <!--            app:argType="string"-->
+    <!--            app:nullable="true" />-->
+
+    <!--        <action-->
+    <!--            android:id="@+id/action_fragmentNewEditList_to_fragmentListItems"-->
+    <!--            app:destination="@id/fragmentListItems"-->
+    <!--            app:enterAnim="@anim/slide_in_from_right"-->
+    <!--            app:exitAnim="@anim/slide_out_to_top"-->
+    <!--            app:popEnterAnim="@anim/slide_in_from_left"-->
+    <!--            app:popExitAnim="@anim/slide_out_to_right"-->
+    <!--            app:popUpTo="@id/fragmentUserLists" />-->
+    <!--    </fragment>-->
+
+    <!--    <fragment-->
+    <!--        android:id="@+id/fragmentListItems"-->
+    <!--        android:name="com.hotmail.or_dvir.arislistkt2.vvm.FragmentListItems"-->
+    <!--        tools:layout="@layout/fragment_list_items">-->
+    <!--        <argument-->
+    <!--            android:name="listId"-->
+    <!--            app:argType="string" />-->
+    <!--        <argument-->
+    <!--            android:name="listName"-->
+    <!--            app:argType="string" />-->
+    <!--        <action-->
+    <!--            android:id="@+id/action_fragmentListItems_to_fragmentNewItems"-->
+    <!--            app:destination="@id/fragmentNewListItems"-->
+    <!--            app:enterAnim="@anim/slide_in_from_top"-->
+    <!--            app:popExitAnim="@anim/slide_out_to_top" />-->
+    <!--        <action-->
+    <!--            android:id="@+id/action_fragmentListItems_to_fragmentEditListItem"-->
+    <!--            app:destination="@id/fragmentEditListItem"-->
+    <!--            app:enterAnim="@anim/slide_in_from_top"-->
+    <!--            app:popExitAnim="@anim/slide_out_to_top" />-->
+    <!--    </fragment>-->
+    <!--    <fragment-->
+    <!--        android:id="@+id/fragmentNewListItems"-->
+    <!--        android:name="com.hotmail.or_dvir.arislistkt2.vvm.FragmentNewListItems"-->
+    <!--        android:label="@string/title_newItems"-->
+    <!--        tools:layout="@layout/fragment_new_list_items">-->
+
+    <!--        <argument-->
+    <!--            android:name="existingItems"-->
+    <!--            app:argType="string[]"-->
+    <!--            app:nullable="true" />-->
+    <!--        <argument-->
+    <!--            android:name="listId"-->
+    <!--            app:argType="string" />-->
+    <!--        <argument-->
+    <!--            android:name="listName"-->
+    <!--            app:argType="string" />-->
+    <!--    </fragment>-->
+    <!--    <fragment-->
+    <!--        android:id="@+id/fragmentEditListItem"-->
+    <!--        android:name="com.hotmail.or_dvir.arislistkt2.vvm.FragmentEditListItem"-->
+    <!--        android:label="@string/title_editItem"-->
+    <!--        tools:layout="@layout/fragment_edit_list_item">-->
+
+    <!--        <argument-->
+    <!--            android:name="existingItems"-->
+    <!--            app:argType="string[]"-->
+    <!--            app:nullable="true" />-->
+    <!--        <argument-->
+    <!--            android:name="listId"-->
+    <!--            app:argType="string" />-->
+    <!--        <argument-->
+    <!--            android:name="itemId"-->
+    <!--            app:argType="string" />-->
+    <!--    </fragment>-->
+    <!--    <fragment-->
+    <!--        android:id="@+id/fragmentSettings"-->
+    <!--        android:name="com.hotmail.or_dvir.arislistkt2.vvm.FragmentPreferences"-->
+    <!--        android:label="@string/settings" />-->
+    <!--    <action-->
+    <!--        android:id="@+id/action_global_fragmentSettings"-->
+    <!--        app:destination="@id/fragmentSettings" />-->
+</navigation>
