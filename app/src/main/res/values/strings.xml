@@ -3,4 +3,5 @@
     <string name="search">Search</string>
     <string name="artistSearch">Artist Search</string>
     <string name="hint_artistName">artist name</string>
+    <string name="error_general">Some error occurred</string>
 </resources>
