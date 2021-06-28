@@ -2,11 +2,15 @@ package com.hotmail.or_dvir.appsfactory_lastfm.other
 
 import android.app.Application
 import android.util.Log
+import androidx.annotation.VisibleForTesting
+import com.hotmail.or_dvir.appsfactory_lastfm.vvm.FragmentSearchViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import org.koin.dsl.module
@@ -18,9 +22,10 @@ class MyApplication : Application()
         private const val TAG = "MyApplication"
     }
 
-    //todo keeo for reference. delete if unused
+    //todo keep for reference. delete if unused
+    @VisibleForTesting
     val appModule = module {
-//        viewModel { FragmentUserListsViewModel(get(), androidApplication()) }
+        viewModel { FragmentSearchViewModel(androidApplication()) }
 //        viewModel { FragmentNewEditListViewModel(get(), androidApplication()) }
 //        viewModel { FragmentListItemsViewModel(androidApplication()) }
 //        viewModel { FragmentNewListItemsViewModel(androidApplication()) }

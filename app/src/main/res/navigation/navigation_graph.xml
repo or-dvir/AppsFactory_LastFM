@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/frag">
+    app:startDestination="@id/fragmentSearch">
+    <!--    //todo change the start destination according to the instructions-->
 
     <fragment
-        android:id="@+id/frag"
-        android:name="com.hotmail.or_dvir.appsfactory_lastfm.vvm.Frag" />
+        android:id="@+id/fragmentSearch"
+        android:label="@string/artistSearch"
+        android:name="com.hotmail.or_dvir.appsfactory_lastfm.vvm.FragmentSearch"
+        tools:layout="@layout/fragment_search" />
 
     <!--    //todo keep for reference until the end-->
     <!--    <fragment-->
