@@ -1,11 +1,11 @@
 package com.hotmail.or_dvir.appsfactory_lastfm.other.repositories
 
-import com.hotmail.or_dvir.appsfactory_lastfm.model.Artist
+import com.hotmail.or_dvir.appsfactory_lastfm.model.server_wrappers.ServerWrapperArtistsSearch
 
 abstract class RepositoryArtists
 {
     //region READ
-    abstract suspend fun searchArtists(searchQuery: String): List<Artist>
+    abstract suspend fun searchArtists(searchQuery: String): ServerWrapperArtistsSearch
     //endregion
 
     //region WRITE

@@ -1,8 +1,7 @@
 package com.hotmail.or_dvir.appsfactory_lastfm.other.retrofit
 
-import com.hotmail.or_dvir.appsfactory_lastfm.model.Artist
+import com.hotmail.or_dvir.appsfactory_lastfm.model.server_wrappers.ServerWrapperArtistsSearch
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ILastFmApi
@@ -13,11 +12,9 @@ interface ILastFmApi
         private const val API_PARAMS = "api_key=$API_KEY&format=json"
     }
 
-    //todo do i need slash here?
     //todo defaults to first page and first 30 artists! add pagination!
-//    @GET("/?method=artist.search&{searchQuery}&$API_PARAMS")
-    @GET("/?method=artist.search&$API_PARAMS")
-    suspend fun search(@Query("artist") searchQuery: String): List<Artist>
+    @GET("?method=artist.search&$API_PARAMS")
+    suspend fun search(@Query("artist") searchQuery: String): ServerWrapperArtistsSearch
 
     //todo keep for reference.
     // remove when no longer needed

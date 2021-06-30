@@ -20,7 +20,7 @@ class FragmentSearchViewModel(
     {
         viewModelScope.launch(Dispatchers.Main) {
             isLoading.value = true
-            artists.value = repoArtists.searchArtists(query)
+            artists.value = repoArtists.searchArtists(query).getArtistsSearchResults()
             isLoading.value = false
         }
     }
