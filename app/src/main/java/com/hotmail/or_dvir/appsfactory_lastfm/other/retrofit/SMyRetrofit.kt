@@ -1,6 +1,8 @@
 package com.hotmail.or_dvir.appsfactory_lastfm.other.retrofit
 
+import com.hotmail.or_dvir.appsfactory_lastfm.other.SMyMoshi
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
@@ -8,17 +10,20 @@ import java.util.concurrent.TimeUnit
 object SMyRetrofit
 {
     private const val TIMEOUT_SECONDS: Long = 15
-
     internal val lastFmApi: ILastFmApi
 
     init
     {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
         val retrofit = Retrofit.Builder()
-            //todo do i need slash here?
             .baseUrl("https://ws.audioscrobbler.com/2.0/")
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(SMyMoshi.instance).asLenient())
             .client(
                 OkHttpClient.Builder()
+                    .addInterceptor(loggingInterceptor)
                     .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                     .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                     .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
