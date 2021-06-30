@@ -10,6 +10,7 @@ import com.hotmail.or_dvir.appsfactory_lastfm.databinding.ActivityMainBinding
 class ActivityMain : AppCompatActivity()
 {
     //todo
+    // go over ALL todo notes!!!
     // add documentation for everything!!!
     // go over EVERY SINGLE FILE and check if there is any unnecessary/commented out code
     // go over EVERY SINGLE FILE and auto arrange code and imports
