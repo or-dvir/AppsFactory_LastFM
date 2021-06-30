@@ -4,11 +4,10 @@ import com.squareup.moshi.Moshi
 
 object SMyMoshi
 {
-    private val instance: Moshi =
+    internal val instance: Moshi =
         Moshi.Builder()
             //todo keep for reference.
             // remove if not needed
-//            .add(UUIDAdapter())
 //            .add(CalendarAdapter())
 //            .add(
 //                PolymorphicJsonAdapterFactory.of(BaseItem::class.java, BaseItem.MOSHI_ITEM_TYPE)
@@ -74,18 +73,4 @@ object SMyMoshi
 //        fun fromJson(s: String) = UUID.fromString(s)
 //    }
 //
-//    ////////////////////////////////////////////////////////////
-//    ////////////////////////////////////////////////////////////
-//    ////////////////////////////////////////////////////////////
-//    ////////////////////////////////////////////////////////////
-//
-//    @Suppress("unused", "HasPlatformType")
-//    private class CalendarAdapter {
-//        @ToJson
-//        fun toJson(cal: Calendar) = cal.timeInMillis
-//
-//        @FromJson
-//        fun fromJson(millis: Long) =
-//            Calendar.getInstance().apply { timeInMillis = millis }
-//    }
 }
