@@ -4,4 +4,7 @@
     <string name="artistSearch">Artist Search</string>
     <string name="hint_artistName">artist name</string>
     <string name="error_general">Some error occurred</string>
+    <string name="error_artistSearchResults_s">No results found for \"%s\"</string>
+    <string name="searchDescription">When you search for an artist, the results will appear here</string>
+    <string name="contentDescription_artistImage">artist image</string>
 </resources>

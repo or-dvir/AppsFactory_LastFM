@@ -14,7 +14,7 @@ class FragmentSearchViewModel(
     private val repoArtists: RepositoryArtists
 ) : BaseAndroidViewModel(app)
 {
-    val artists = MutableLiveData<List<Artist>>()
+    val artists = MutableLiveData<List<Artist>>(listOf())
 
     fun searchArtists(query: String)
     {
