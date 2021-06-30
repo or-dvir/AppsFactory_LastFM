@@ -17,7 +17,10 @@ data class Artist(
     val images: List<Image>
 ) : IDxItemClickable
 {
-    fun getImageUrl(size: Size) = images.find { it.size == size }?.url
+    fun getImageUrl(size: Size) = images.find {
+        //blank urls are not allowed in Picasso
+        it.size == size && it.url.isNotBlank()
+    }?.url
 
     override fun getViewType() = R.id.viewType_Artist
 
