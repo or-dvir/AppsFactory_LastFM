@@ -35,7 +35,8 @@ class FragmentSearch : BaseFragment()
     override fun getLoadingView() = binding.loadingView.parent
     override fun getViewModel() = viewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         initializeObservers()
     }
@@ -81,8 +82,6 @@ class FragmentSearch : BaseFragment()
                 {
                     override fun onQueryTextSubmit(query: String?): Boolean
                     {
-                        test me!!!!
-                        right now i get "malformed json"
                         query?.let { viewModel.searchArtists(it) }
                         return true
                     }
@@ -97,9 +96,11 @@ class FragmentSearch : BaseFragment()
         }
     }
 
-    private fun initializeObservers() {
+    private fun initializeObservers()
+    {
         observerArtistsSearch = Observer {
-            if (it == null) {
+            if (it == null)
+            {
                 view?.longSnackbar(R.string.error_general)
                 return@Observer
             }
