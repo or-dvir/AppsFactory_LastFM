@@ -190,6 +190,20 @@ class FragmentSearch : BaseFragment()
 
                     //handle views visibility
                     binding.apply {
+                        //if no results were found, and the user has performed at least one
+                        // search before, show an appropriate error message.
+                        //(this observer will be called with an empty list the first time the
+                        // fragment is created)
+                        if (isEmpty() && viewModel.hasSearchedBefore)
+                        {
+                            emptyView.text =
+                                String.format(
+                                    getString(R.string.error_artistSearchResults_s),
+                                    viewModel.lastSearchQuery
+                                )
+                        }
+
+
                         rv.makeVisibleOrGone(!isEmpty())
                         emptyView.makeVisibleOrGone(isEmpty())
                     }

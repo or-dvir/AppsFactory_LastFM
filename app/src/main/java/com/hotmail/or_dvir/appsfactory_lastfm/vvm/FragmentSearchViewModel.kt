@@ -14,10 +14,17 @@ class FragmentSearchViewModel(
     private val repoArtists: RepositoryArtists
 ) : BaseAndroidViewModel(app)
 {
+    var hasSearchedBefore = false
+        private set
+
     val artists = MutableLiveData<List<Artist>>(listOf())
+    var lastSearchQuery = ""
+        private set
 
     fun searchArtists(query: String)
     {
+        hasSearchedBefore = true
+        lastSearchQuery = query
         viewModelScope.launch(Dispatchers.Main) {
             isLoading.value = true
             artists.value = repoArtists.searchArtists(query).getArtistsSearchResults()
