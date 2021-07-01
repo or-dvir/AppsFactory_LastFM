@@ -4,12 +4,5 @@ import com.hotmail.or_dvir.appsfactory_lastfm.model.server_wrappers.ServerWrappe
 
 abstract class RepositoryArtists
 {
-    //region READ
     abstract suspend fun searchArtists(searchQuery: String): ServerWrapperArtistsSearch
-    //endregion
-
-    //region WRITE
-    abstract suspend fun addFavorite(artistId: String): Boolean
-    abstract suspend fun removeFavorite(artistId: String): Boolean
-    //endregion
 }

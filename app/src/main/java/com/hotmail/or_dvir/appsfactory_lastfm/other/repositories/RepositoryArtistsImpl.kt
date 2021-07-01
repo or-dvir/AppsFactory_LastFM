@@ -12,14 +12,4 @@ class RepositoryArtistsImpl(private val lastFmApi: ILastFmApi) : RepositoryArtis
         withContext(Dispatchers.IO) {
             lastFmApi.search(searchQuery)
         }
-
-    override suspend fun addFavorite(artistId: String): Boolean
-    {
-        TODO("not implemented")
-    }
-
-    override suspend fun removeFavorite(artistId: String): Boolean
-    {
-        TODO("not implemented")
-    }
 }
