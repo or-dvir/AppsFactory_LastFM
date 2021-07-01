@@ -13,8 +13,10 @@ data class Artist(
     val id: String,
     @Json(name = "name")
     val name: String,
+    //when searching for albums, they include an Artist field without images,
+    //so we give it a default value for those cases
     @Json(name = "image")
-    val images: List<Image>
+    val images: List<Image> = listOf()
 ) : IDxItemClickable
 {
     fun getImageUrl(size: Size) = images.find {
@@ -25,6 +27,8 @@ data class Artist(
     override fun getViewType() = R.id.viewType_Artist
 
     //todo some artists dont have ids!!! e.g. "Alice Cooper feat. Roger Glover"
+    // consider this when calculating DiffUtil!!!
+    // is it possible for an album not to have an id???
 
     ////////////////////////////////////////////////////
     ////////////////////////////////////////////////////
