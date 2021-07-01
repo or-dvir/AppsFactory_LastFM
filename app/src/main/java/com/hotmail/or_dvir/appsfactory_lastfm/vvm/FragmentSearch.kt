@@ -205,6 +205,7 @@ class FragmentSearch : BaseFragment()
 
                         rv.makeVisibleOrGone(!isEmpty())
                         emptyView.makeVisibleOrGone(isEmpty())
+                        rv.scrollToPosition(0)
                     }
                 }
             }
