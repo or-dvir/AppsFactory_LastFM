@@ -3,8 +3,11 @@ package com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.hotmail.or_dvir.appsfactory_lastfm.R
 import or_dvir.hotmail.com.dxutils.hideKeyBoard
 import or_dvir.hotmail.com.dxutils.makeVisibleOrGone
 
@@ -48,4 +51,7 @@ abstract class BaseFragment() : Fragment()
             getLoadingView()?.makeVisibleOrGone(it)
         }
     }
+
+    fun getColor(@ColorRes color: Int) =
+        ContextCompat.getColor(requireContext(), color)
 }

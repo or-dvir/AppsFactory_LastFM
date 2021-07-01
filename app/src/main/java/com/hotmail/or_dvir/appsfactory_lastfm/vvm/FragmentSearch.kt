@@ -11,7 +11,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
@@ -127,9 +126,8 @@ class FragmentSearch : BaseFragment()
             queryHint = getString(R.string.hint_artistName)
             isSubmitButtonEnabled = true
             findViewById<EditText>(androidx.appcompat.R.id.search_src_text).apply {
-                val textColor = ContextCompat.getColor(context, R.color.white)
-                setTextColor(textColor)
-                setHintTextColor(textColor)
+                setTextColor(getColor(R.color.white))
+                setHintTextColor(getColor(R.color.whiteTransparent))
             }
 
             setOnQueryTextListener(
