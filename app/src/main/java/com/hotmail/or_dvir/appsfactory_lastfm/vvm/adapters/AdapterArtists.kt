@@ -35,13 +35,24 @@ class AdapterArtists(val items: MutableList<Artist>) :
 
         holder.binding.apply {
             val item = items[holder.bindingAdapterPosition]
+            val placeholderImageRes = R.drawable.ic_artist_placeholder
 
             tvArtistName.text = item.name
-            //todo add placeholder?
+
+            val imageUrl = item.getImageUrl(Size.MEDIUM)
+            val picassoRequest =
+                if (imageUrl.isNullOrBlank())
+                {
+                    Picasso.get().load(placeholderImageRes)
+                } else
+                {
+                    //we have a valid url
+                    Picasso.get().load(imageUrl)
+                }
+
             //todo do i need scaling?
-            Picasso.get()
-                .load(item.getImageUrl(Size.MEDIUM))
-                .error(R.drawable.ic_artist_placeholder)
+            picassoRequest
+                .error(placeholderImageRes)
                 .into(ivArtistImage)
         }
     }

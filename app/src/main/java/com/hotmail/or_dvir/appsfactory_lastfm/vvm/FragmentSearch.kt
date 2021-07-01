@@ -40,8 +40,6 @@ class FragmentSearch : BaseFragment()
     }
 
     //todo are all artist images just star icons???
-    //todo search for "alice cooper". some images are empty (because there is no image? its null?)
-    // how can i tell picasso in that case to show the default image?
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
