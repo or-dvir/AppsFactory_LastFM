@@ -13,6 +13,10 @@ class RepositoryAlbumsImpl(private val lastFmApi: ILastFmApi) : RepositoryAlbums
             lastFmApi.getTopAlbums(artistName)
         }
 
+    i stopped after creating this.
+    next step is to create the "albums overview" (step 3 in instructions)
+    fragment (after clicking on an artist)
+
     override suspend fun addFavorite(albumId: String): Boolean
     {
         TODO("not implemented")
