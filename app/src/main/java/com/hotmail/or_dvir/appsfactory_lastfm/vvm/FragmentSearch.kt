@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.widget.SearchView
@@ -28,6 +29,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import or_dvir.hotmail.com.dxutils.hideKeyBoard
 import or_dvir.hotmail.com.dxutils.makeGone
 import or_dvir.hotmail.com.dxutils.makeVisibleOrGone
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -152,6 +154,8 @@ class FragmentSearch : BaseFragment()
     private fun initializeObservers()
     {
         observerArtistsSearch = Observer { newList ->
+            view?.let { hideKeyBoard(it, InputMethodManager.HIDE_NOT_ALWAYS) }
+
             if (newList == null)
             {
                 binding.apply {
