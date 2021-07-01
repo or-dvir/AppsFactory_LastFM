@@ -19,10 +19,12 @@ data class Artist(
 {
     fun getImageUrl(size: Size) = images.find {
         //blank urls are not allowed in Picasso
-        it.size == size && it.url.isNotBlank()
+        it.size == size //&& it.url.isNotBlank()
     }?.url
 
     override fun getViewType() = R.id.viewType_Artist
+
+    //todo some artists dont have ids!!! e.g. "Alice Cooper feat. Roger Glover"
 
     ////////////////////////////////////////////////////
     ////////////////////////////////////////////////////
