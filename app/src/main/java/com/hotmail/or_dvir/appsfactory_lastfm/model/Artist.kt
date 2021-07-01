@@ -2,7 +2,6 @@ package com.hotmail.or_dvir.appsfactory_lastfm.model
 
 import androidx.recyclerview.widget.DiffUtil
 import com.hotmail.or_dvir.appsfactory_lastfm.R
-import com.hotmail.or_dvir.appsfactory_lastfm.model.Image.Companion.Size
 import com.hotmail.or_dvir.dxclick.IDxItemClickable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -13,17 +12,11 @@ data class Artist(
     val id: String,
     @Json(name = "name")
     val name: String,
-    //when searching for albums, they include an Artist field without images,
-    //so we give it a default value for those cases
     @Json(name = "image")
     val images: List<Image> = listOf()
-) : IDxItemClickable
+) : IDxItemClickable, IModelWithImages
 {
-    fun getImageUrl(size: Size) = images.find {
-        //blank urls are not allowed in Picasso
-        it.size == size //&& it.url.isNotBlank()
-    }?.url
-
+    override fun getImageList() = images
     override fun getViewType() = R.id.viewType_Artist
 
     //todo some artists dont have ids!!! e.g. "Alice Cooper feat. Roger Glover"
