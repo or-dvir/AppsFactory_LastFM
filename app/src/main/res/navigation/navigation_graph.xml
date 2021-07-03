@@ -4,56 +4,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
     app:startDestination="@id/fragmentSearch">
-    <!--    //todo change the start destination according to the instructions-->
-
+    <!--    todo change the start destination according to the instructions-->
+    <!--    todo check the animations-->
     <fragment
         android:id="@+id/fragmentSearch"
-        android:label="@string/artistSearch"
         android:name="com.hotmail.or_dvir.appsfactory_lastfm.vvm.FragmentSearch"
-        tools:layout="@layout/fragment_search" />
+        android:label="@string/title_artistSearch"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_fragmentSearch_to_fragmentTopAlbums"
+            app:destination="@id/fragmentTopAlbums"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_top"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right" />
+    </fragment>
 
-    <!--    //todo keep for reference until the end-->
-    <!--    <fragment-->
-    <!--        android:id="@+id/fragmentUserLists"-->
-    <!--        android:name="com.hotmail.or_dvir.arislistkt2.vvm.FragmentUserLists"-->
-    <!--        android:label="@string/myLists"-->
-    <!--        tools:layout="@layout/fragment_user_lists">-->
-    <!--        <action-->
-    <!--            android:id="@+id/action_fragmentUserLists_to_fragmentNewList"-->
-    <!--            app:destination="@id/fragmentNewEditList"-->
-    <!--            app:enterAnim="@anim/slide_in_from_top"-->
-    <!--            app:popExitAnim="@anim/slide_out_to_top" />-->
-    <!--        <action-->
-    <!--            android:id="@+id/action_fragmentUserLists_to_fragmentListItems"-->
-    <!--            app:destination="@id/fragmentListItems"-->
-    <!--            app:enterAnim="@anim/slide_in_from_right"-->
-    <!--            app:exitAnim="@anim/slide_out_to_left"-->
-    <!--            app:popEnterAnim="@anim/slide_in_from_left"-->
-    <!--            app:popExitAnim="@anim/slide_out_to_right" />-->
-    <!--    </fragment>-->
-    <!--    <fragment-->
-    <!--        android:id="@+id/fragmentNewEditList"-->
-    <!--        android:name="com.hotmail.or_dvir.arislistkt2.vvm.FragmentNewEditList"-->
-    <!--        android:label="@string/title_newList"-->
-    <!--        tools:layout="@layout/fragment_new_edit_list">-->
-    <!--        <argument-->
-    <!--            android:name="existingItems"-->
-    <!--            app:argType="string[]"-->
-    <!--            app:nullable="true" />-->
-    <!--        <argument-->
-    <!--            android:name="listId"-->
-    <!--            app:argType="string"-->
-    <!--            app:nullable="true" />-->
+    <fragment
+        android:id="@+id/fragmentTopAlbums"
+        android:name="com.hotmail.or_dvir.appsfactory_lastfm.vvm.FragmentTopAlbums"
+        android:label="@string/title_TopAlbums"
+        tools:layout="@layout/fragment_top_albums">
+        <argument
+            android:name="artistName"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
 
-    <!--        <action-->
-    <!--            android:id="@+id/action_fragmentNewEditList_to_fragmentListItems"-->
-    <!--            app:destination="@id/fragmentListItems"-->
-    <!--            app:enterAnim="@anim/slide_in_from_right"-->
-    <!--            app:exitAnim="@anim/slide_out_to_top"-->
-    <!--            app:popEnterAnim="@anim/slide_in_from_left"-->
-    <!--            app:popExitAnim="@anim/slide_out_to_right"-->
-    <!--            app:popUpTo="@id/fragmentUserLists" />-->
-    <!--    </fragment>-->
+
+    <!--todo keep for reference until the end-->
+    <!-- -->
+    <!--        <fragment-->
+    <!--            android:id="@+id/fragmentUserLists"-->
+    <!--            android:name="com.hotmail.or_dvir.arislistkt2.vvm.FragmentUserLists"-->
+    <!--            android:label="@string/myLists"-->
+    <!--            tools:layout="@layout/fragment_user_lists">-->
+    <!--            <action-->
+    <!--                android:id="@+id/action_fragmentUserLists_to_fragmentNewList"-->
+    <!--                app:destination="@id/fragmentNewEditList"-->
+    <!--                app:enterAnim="@anim/slide_in_from_top"-->
+    <!--                app:popExitAnim="@anim/slide_out_to_top" />-->
+    <!--            <action-->
+    <!--                android:id="@+id/action_fragmentUserLists_to_fragmentListItems"-->
+    <!--                app:destination="@id/fragmentListItems"-->
+    <!--                app:enterAnim="@anim/slide_in_from_right"-->
+    <!--                app:exitAnim="@anim/slide_out_to_left"-->
+    <!--                app:popEnterAnim="@anim/slide_in_from_left"-->
+    <!--                app:popExitAnim="@anim/slide_out_to_right" />-->
+    <!--        </fragment>-->
+    <!--        <fragment-->
+    <!--            android:id="@+id/fragmentNewEditList"-->
+    <!--            android:name="com.hotmail.or_dvir.arislistkt2.vvm.FragmentNewEditList"-->
+    <!--            android:label="@string/title_newList"-->
+    <!--            tools:layout="@layout/fragment_new_edit_list">-->
+    <!--            <argument-->
+    <!--                android:name="existingItems"-->
+    <!--                app:argType="string[]"-->
+    <!--                app:nullable="true" />-->
+    <!--            <argument-->
+    <!--                android:name="listId"-->
+    <!--                app:argType="string"-->
+    <!--                app:nullable="true" />-->
+
+    <!--            <action-->
+    <!--                android:id="@+id/action_fragmentNewEditList_to_fragmentListItems"-->
+    <!--                app:destination="@id/fragmentListItems"-->
+    <!--                app:enterAnim="@anim/slide_in_from_right"-->
+    <!--                app:exitAnim="@anim/slide_out_to_top"-->
+    <!--                app:popEnterAnim="@anim/slide_in_from_left"-->
+    <!--                app:popExitAnim="@anim/slide_out_to_right"-->
+    <!--                app:popUpTo="@id/fragmentUserLists" />-->
+    <!--        </fragment>-->
 
     <!--    <fragment-->
     <!--        android:id="@+id/fragmentListItems"-->
