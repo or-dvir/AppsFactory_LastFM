@@ -197,8 +197,8 @@ class FragmentSearch : BaseFragment()
                         if (isEmpty() && viewModel.hasSearchedBefore)
                         {
                             emptyView.text =
-                                String.format(
-                                    getString(R.string.error_artistSearchResults_s),
+                                getString(
+                                    R.string.error_noResults_s,
                                     viewModel.lastSearchQuery
                                 )
                         }
