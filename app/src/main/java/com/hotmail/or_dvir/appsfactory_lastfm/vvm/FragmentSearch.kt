@@ -13,6 +13,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +21,6 @@ import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.appsfactory_lastfm.databinding.FragmentSearchBinding
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Artist
 import com.hotmail.or_dvir.appsfactory_lastfm.other.longSnackbar
-import com.hotmail.or_dvir.appsfactory_lastfm.other.snackbar
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.adapters.AdapterArtists
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseFragment
 import com.hotmail.or_dvir.dxclick.DxFeatureClick
@@ -77,11 +77,15 @@ class FragmentSearch : BaseFragment()
         rvAdapter = AdapterArtists(mutableListOf()).apply {
             addFeature(
                 DxFeatureClick<Artist>(
-                    onItemClick = { view, adapterPosition, item ->
-                        //todo do me!!!
-                        getView()?.snackbar("click")
+                    onItemClick = { _, _, item ->
+
+                        findNavController().navigate(
+                            FragmentSearchDirections.actionFragmentSearchToFragmentTopAlbums(
+                                item.name
+                            )
+                        )
                     },
-                    onItemLongClick = { view, adapterPosition, item ->
+                    onItemLongClick = { _, _, _ ->
                         //do nothing
                         false
                     }
