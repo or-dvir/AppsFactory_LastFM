@@ -75,7 +75,10 @@ class FragmentTopAlbums : BaseFragment()
         rvAdapter = AdapterAlbums(mutableListOf())
 
         binding.apply {
-            tvTitle.text = getString(R.string.title_topAlbumsFor_s, fragArgs.artistName)
+            fragArgs.artistName.let {
+                tvTitle.text = getString(R.string.title_topAlbumsFor_s, it)
+                viewModel.getTopAlbums(it)
+            }
 
             rv.apply {
                 //todo might be needed for pagination?
