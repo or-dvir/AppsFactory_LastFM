@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!--    todo check on device if the title is too big-->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:padding="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        tools:text="top albums for <artist name>" />
+
+    <com.hotmail.or_dvir.dxrecyclerview.DxRecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv_title"
+        tools:listitem="@layout/row_album" />
+
+    <!--loading view should take the whole screen
+    because it intercepts user clicks.
+    this view must be last so it shows above the other-->
+    <include
+        android:id="@+id/loadingView"
+        layout="@layout/generic_loading_view"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</RelativeLayout>
