@@ -9,6 +9,7 @@ import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryArtis
 import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryArtistsImpl
 import com.hotmail.or_dvir.appsfactory_lastfm.other.retrofit.SMyRetrofit
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.FragmentSearchViewModel
+import com.hotmail.or_dvir.appsfactory_lastfm.vvm.FragmentTopAlbumsViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -31,6 +32,7 @@ class MyApplication : Application()
     @VisibleForTesting
     val appModule = module {
         viewModel { FragmentSearchViewModel(androidApplication(), get()) }
+        viewModel { FragmentTopAlbumsViewModel(androidApplication(), get()) }
 //        viewModel { FragmentNewEditListViewModel(get(), androidApplication()) }
 //        viewModel { FragmentListItemsViewModel(androidApplication()) }
 //        viewModel { FragmentNewListItemsViewModel(androidApplication()) }
