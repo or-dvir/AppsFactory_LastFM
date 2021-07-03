@@ -18,6 +18,7 @@ class ActivityMain : AppCompatActivity()
     //      if you have time, handle nulls
     // in every fragment/activity, check the error messages and make them more specific
     // look in the instructions, and wherever appropriate, add "no internet" error
+    // some entire folders were copied from other projects. remove all unused files!!!
 
     private lateinit var binding: ActivityMainBinding
 
