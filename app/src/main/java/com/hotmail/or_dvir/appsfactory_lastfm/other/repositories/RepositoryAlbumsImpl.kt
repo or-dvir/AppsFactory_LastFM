@@ -14,6 +14,7 @@ class RepositoryAlbumsImpl(private val lastFmApi: ILastFmApi) : RepositoryAlbums
             lastFmApi.getTopAlbums(artistName)
         }
 
+    //todo MUST FINISH no matter what!
     override suspend fun addFavorite(album: Album): Boolean
     {
         withContext(Dispatchers.IO) {
@@ -21,6 +22,7 @@ class RepositoryAlbumsImpl(private val lastFmApi: ILastFmApi) : RepositoryAlbums
         }
     }
 
+    //todo MUST FINISH no matter what!
     override suspend fun removeFavorite(album: Album): Boolean
     {
         withContext(Dispatchers.IO) {
