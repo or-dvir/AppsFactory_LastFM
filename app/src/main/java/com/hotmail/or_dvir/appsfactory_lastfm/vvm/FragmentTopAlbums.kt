@@ -77,10 +77,7 @@ class FragmentTopAlbums : BaseFragment()
         rvAdapter = AdapterAlbums(mutableListOf())
 
         binding.apply {
-            fragArgs.artistName.let {
-                tvTitle.text = getString(R.string.title_topAlbumsFor_s, it)
-                viewModel.getTopAlbums(it)
-            }
+            viewModel.getTopAlbums(fragArgs.artistName)
 
             rv.apply {
                 //todo might be needed for pagination?
@@ -149,12 +146,16 @@ class FragmentTopAlbums : BaseFragment()
 
                     //handle views visibility
                     binding.apply {
-                        if (isEmpty())
-                        {
-                            tvTitle.text =
-                                getString(R.string.error_noResults_s, fragArgs.artistName)
-                        }
+                        val titleRes =
+                            if (isEmpty())
+                            {
+                                R.string.title_topAlbumsFor_s
+                            } else
+                            {
+                                R.string.error_noResults_s
+                            }
 
+                        tvTitle.text = getString(titleRes, fragArgs.artistName)
                         rv.makeVisibleOrGone(!isEmpty())
                     }
                 }
