@@ -179,7 +179,7 @@ class FragmentSearch : BaseFragment()
                 val result = withContext(Dispatchers.Default) {
                     DiffUtil.calculateDiff(
                         Artist.DiffCallback(rvAdapter.items, newList),
-                        true
+                        false
                     )
                 }
 
