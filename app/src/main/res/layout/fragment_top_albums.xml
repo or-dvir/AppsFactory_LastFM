@@ -15,7 +15,7 @@
         android:layout_gravity="center_horizontal"
         android:padding="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        tools:text="top albums for <artist name>" />
+        tools:text="top albums for artist name" />
 
     <com.hotmail.or_dvir.dxrecyclerview.DxRecyclerView
         android:id="@+id/rv"
