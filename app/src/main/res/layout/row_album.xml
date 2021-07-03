@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <!--        todo check size-->
+        <!--        todo which scale type to use?-->
+        <ImageView
+            android:id="@+id/iv_albumImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:contentDescription="@string/contentDescription_album_image"
+            tools:src="@mipmap/ic_launcher" />
+
+        <!--        todo set initial image-->
+        <ImageView
+            android:id="@+id/iv_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="8dp"
+            android:clickable="true"
+            android:contentDescription="@string/contentDescription_album_addRemoveFavorite"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/tv_albumName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_albumImage"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="8dp"
+            tools:text="album name" />
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

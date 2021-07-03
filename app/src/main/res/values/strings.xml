@@ -4,6 +4,8 @@
     <string name="searchDescription">When you search for an artist, the results will appear here</string>
 
     <string name="contentDescription_artistImage">artist image</string>
+    <string name="contentDescription_album_image">album image</string>
+    <string name="contentDescription_album_addRemoveFavorite">add/remove to/from favorites</string>
 
     <string name="hint_artistName">artist name</string>
 
@@ -14,4 +16,5 @@
     <string name="error_artistSearchResults_s">No results found for \"%s\"</string>
     <string name="error_addingAlbum_s">Error adding album \"%s\" to favorites</string>
     <string name="error_removingAlbum_s">Error removing album \"%s\" from favorites</string>
+
 </resources>
