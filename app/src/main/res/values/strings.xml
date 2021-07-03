@@ -1,10 +1,17 @@
 <resources>
     <string name="app_name">AppsFactory_LastFM</string>
     <string name="search">Search</string>
-    <string name="artistSearch">Artist Search</string>
+    <string name="searchDescription">When you search for an artist, the results will appear here</string>
+
+    <string name="contentDescription_artistImage">artist image</string>
+
     <string name="hint_artistName">artist name</string>
+
+    <string name="title_TopAlbums">Top Albums</string>
+    <string name="title_artistSearch">Artist Search</string>
+
     <string name="error_general">Some error occurred</string>
     <string name="error_artistSearchResults_s">No results found for \"%s\"</string>
-    <string name="searchDescription">When you search for an artist, the results will appear here</string>
-    <string name="contentDescription_artistImage">artist image</string>
+    <string name="error_addingAlbum_s">Error adding album \"%s\" to favorites</string>
+    <string name="error_removingAlbum_s">Error removing album \"%s\" from favorites</string>
 </resources>
