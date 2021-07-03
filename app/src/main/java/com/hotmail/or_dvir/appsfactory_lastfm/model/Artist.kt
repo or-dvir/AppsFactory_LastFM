@@ -21,7 +21,9 @@ data class Artist(
 
     //todo some artists dont have ids!!! e.g. "Alice Cooper feat. Roger Glover"
     // consider this when calculating DiffUtil!!!
-    // is it possible for an album not to have an id???
+    // handle situation where the id is empty and also completely doesnt exist!
+
+    //todo assume all variables can be null!
 
     ////////////////////////////////////////////////////
     ////////////////////////////////////////////////////

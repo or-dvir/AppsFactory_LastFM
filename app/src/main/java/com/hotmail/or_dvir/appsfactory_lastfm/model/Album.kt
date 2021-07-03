@@ -9,7 +9,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class Album(
     @Json(name = "mbid")
-    val id: String,
+    val id: String?,
     @Json(name = "name")
     val name: String,
     @Json(name = "artist")
@@ -18,7 +18,11 @@ data class Album(
     val images: List<Image> = listOf()
 ) : IDxBaseItem, IModelWithImages
 {
-    //todo is it possible to have an album without an id? (possible for artist!)
+    //todo some albums dont have ids!!!
+    // consider this when calculating DiffUtil!!!
+    // handle situation where the id is empty and also completely doesnt exist!
+
+    //todo assume all variables can be null!
 
     override fun getImageList() = images
     override fun getViewType() = R.id.viewType_Album

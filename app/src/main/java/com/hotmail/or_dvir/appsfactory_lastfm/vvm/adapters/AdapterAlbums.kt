@@ -37,6 +37,7 @@ class AdapterAlbums(val items: MutableList<Album>) :
 
         holder.binding.apply {
             //todo add status for favorite or not!!!
+            //todo handle clicking favorite button
 
             val item = items[holder.bindingAdapterPosition]
             val placeholderImageRes = R.drawable.ic_album_placeholder
@@ -65,7 +66,9 @@ class AdapterAlbums(val items: MutableList<Album>) :
     {
         holder.binding.apply {
             tvAlbumName.text = ""
-            ivFavorite.setImageDrawable(null)
+            //todo some of the images dont show.
+            //it might be fixed when setting image in onBindViewHolder()
+//            ivFavorite.setImageDrawable(null)
             Picasso.get().cancelRequest(ivAlbumImage)
         }
 
