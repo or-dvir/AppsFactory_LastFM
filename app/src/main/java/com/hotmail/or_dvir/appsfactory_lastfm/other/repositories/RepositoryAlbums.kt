@@ -1,5 +1,6 @@
 package com.hotmail.or_dvir.appsfactory_lastfm.other.repositories
 
+import com.hotmail.or_dvir.appsfactory_lastfm.model.Album
 import com.hotmail.or_dvir.appsfactory_lastfm.model.server_wrappers.ServerWrapperTopAlbums
 
 abstract class RepositoryAlbums
@@ -9,7 +10,7 @@ abstract class RepositoryAlbums
     //endregion
 
     //region WRITE
-    abstract suspend fun addFavorite(albumId: String): Boolean
-    abstract suspend fun removeFavorite(albumId: String): Boolean
+    abstract suspend fun addFavorite(album: Album): Boolean
+    abstract suspend fun removeFavorite(album: Album): Boolean
     //endregion
 }
