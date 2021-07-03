@@ -20,7 +20,7 @@
             android:contentDescription="@string/contentDescription_album_image"
             tools:src="@mipmap/ic_launcher" />
 
-        <!--        todo set initial image-->
+        <!--        todo check size-->
         <ImageView
             android:id="@+id/iv_favorite"
             android:layout_width="wrap_content"
@@ -29,7 +29,8 @@
             android:layout_margin="8dp"
             android:clickable="true"
             android:contentDescription="@string/contentDescription_album_addRemoveFavorite"
-            android:focusable="true" />
+            android:focusable="true"
+            android:src="@drawable/ic_favorite_outline" />
 
         <TextView
             android:id="@+id/tv_albumName"
