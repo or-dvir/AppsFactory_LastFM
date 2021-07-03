@@ -92,6 +92,8 @@ class FragmentTopAlbums : BaseFragment()
                 adapter = rvAdapter
 
                 //todo dynamically calculate number of columns?
+                // if not, add note that this is based on your own device and in production
+                // will be calculated dynamically
                 layoutManager = GridLayoutManager(context, 3)
             }
         }
