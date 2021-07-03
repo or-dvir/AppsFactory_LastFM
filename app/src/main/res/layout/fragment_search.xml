@@ -7,6 +7,8 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <!--initialize text with the description,
+   because the user has not performed a search yet-->
     <TextView
         android:id="@+id/emptyView"
         android:layout_width="wrap_content"
@@ -16,8 +18,6 @@
         android:visibility="gone"
         tools:visibility="visible" />
 
-    <!--initialize text with the description,
-    because the user has not performed a search yet-->
     <com.hotmail.or_dvir.dxrecyclerview.DxRecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
