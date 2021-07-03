@@ -1,7 +1,6 @@
 package com.hotmail.or_dvir.appsfactory_lastfm.vvm
 
 import android.os.Bundle
-import android.text.TextUtils.isEmpty
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +16,7 @@ import com.hotmail.or_dvir.appsfactory_lastfm.databinding.FragmentTopAlbumsBindi
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Album
 import com.hotmail.or_dvir.appsfactory_lastfm.other.longSnackbar
 import com.hotmail.or_dvir.appsfactory_lastfm.other.snackbar
+import com.hotmail.or_dvir.appsfactory_lastfm.vvm.adapters.AdapterAlbums
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseFragment
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
