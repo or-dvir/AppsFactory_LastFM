@@ -40,8 +40,12 @@ class FragmentTopAlbums : BaseFragment()
         private const val TAG = "FragmentTopAlbums"
     }
 
-    //todo when showing an error for adding/removing album, if many albums have errors,
-    // the snackbar will quickly disappear.
+    //todo
+    // when showing an error for adding/removing album, if many albums have errors,
+    //      the snackbar will quickly disappear.
+    // observe albums list
+    // observe albums error
+    // check api!!!! album object does not include list of tracks!!!
 
     private var _binding: FragmentTopAlbums? = null
     private val binding get() = _binding!!
