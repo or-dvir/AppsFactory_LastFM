@@ -11,6 +11,7 @@
 
     <string name="title_TopAlbums">Top Albums</string>
     <string name="title_artistSearch">Artist Search</string>
+    <string name="title_topAlbumsFor_s">Top Albums for \"%s\"</string>
 
     <string name="error_general">Some error occurred</string>
     <string name="error_noResults_s">No results found for \"%s\"</string>
