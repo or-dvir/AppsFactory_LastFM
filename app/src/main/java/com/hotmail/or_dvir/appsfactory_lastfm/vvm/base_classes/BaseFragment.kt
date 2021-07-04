@@ -16,7 +16,7 @@ abstract class BaseFragment() : Fragment()
     //region abstract
     abstract fun getLoadingView(): View?
     abstract fun getViewModel(): BaseAndroidViewModel
-    abstract fun getRecyclerView(): RecyclerView
+    abstract fun getRecyclerView(): RecyclerView?
     //endregion
 
     private lateinit var observerLoading: Observer<Boolean>
@@ -59,7 +59,7 @@ abstract class BaseFragment() : Fragment()
     override fun onDestroyView()
     {
         //prevents memory leak
-        getRecyclerView().adapter = null
+        getRecyclerView()?.adapter = null
         super.onDestroyView()
     }
 }
