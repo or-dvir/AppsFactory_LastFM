@@ -23,6 +23,9 @@ data class Album(
     // handle situation where the id is empty and also completely doesnt exist!
 
     //todo assume all variables can be null!
+    //todo do i even need an id if its unreliable????
+    // can i use something else as a database id???
+    //      maybe use an auto generated id, but actually treat the name as an id?
 
     override fun getImageList() = images
     override fun getViewType() = R.id.viewType_Album

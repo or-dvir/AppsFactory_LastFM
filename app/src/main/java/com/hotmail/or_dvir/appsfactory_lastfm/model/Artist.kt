@@ -23,6 +23,10 @@ data class Artist(
     // consider this when calculating DiffUtil!!!
     // handle situation where the id is empty and also completely doesnt exist!
 
+    //todo do i even need an id if its unreliable????
+    // can i use something else as a database id???
+    //      maybe use an auto generated id, but actually treat the name as an id?
+
     //todo assume all variables can be null!
 
     ////////////////////////////////////////////////////
