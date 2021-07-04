@@ -37,7 +37,6 @@ class FragmentTopAlbums : BaseFragment()
     // when showing an error for adding/removing album, if many albums have errors,
     //      the snackbar will quickly disappear.
     // check api!!!! album object does not include list of tracks!!! (need to store this)
-    // some of the "favorite" icons dont show!!! (search for "cher")
 
     private var _binding: FragmentTopAlbumsBinding? = null
     private val binding get() = _binding!!
