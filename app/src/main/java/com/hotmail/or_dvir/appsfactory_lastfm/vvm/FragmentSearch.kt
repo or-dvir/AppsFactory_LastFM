@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.appsfactory_lastfm.databinding.FragmentSearchBinding
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Artist
@@ -52,6 +53,7 @@ class FragmentSearch : BaseFragment()
 
     override fun getLoadingView() = binding.loadingView.parent
     override fun getViewModel() = viewModel
+    override fun getRecyclerView() = binding.rv
 
     override fun onCreate(savedInstanceState: Bundle?)
     {

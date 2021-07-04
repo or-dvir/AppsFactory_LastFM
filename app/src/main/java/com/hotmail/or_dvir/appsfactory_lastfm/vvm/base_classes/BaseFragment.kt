@@ -7,7 +7,7 @@ import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.hotmail.or_dvir.appsfactory_lastfm.R
+import androidx.recyclerview.widget.RecyclerView
 import or_dvir.hotmail.com.dxutils.hideKeyBoard
 import or_dvir.hotmail.com.dxutils.makeVisibleOrGone
 
@@ -16,6 +16,7 @@ abstract class BaseFragment() : Fragment()
     //region abstract
     abstract fun getLoadingView(): View?
     abstract fun getViewModel(): BaseAndroidViewModel
+    abstract fun getRecyclerView(): RecyclerView
     //endregion
 
     private lateinit var observerLoading: Observer<Boolean>
@@ -54,4 +55,11 @@ abstract class BaseFragment() : Fragment()
 
     fun getColor(@ColorRes color: Int) =
         ContextCompat.getColor(requireContext(), color)
+
+    override fun onDestroyView()
+    {
+        //prevents memory leak
+        getRecyclerView().adapter = null
+        super.onDestroyView()
+    }
 }
