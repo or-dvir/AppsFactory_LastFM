@@ -1,5 +1,6 @@
 package com.hotmail.or_dvir.appsfactory_lastfm.other.retrofit
 
+import com.hotmail.or_dvir.appsfactory_lastfm.model.server_wrappers.ServerWrapperAlbumDetails
 import com.hotmail.or_dvir.appsfactory_lastfm.model.server_wrappers.ServerWrapperArtistsSearch
 import com.hotmail.or_dvir.appsfactory_lastfm.model.server_wrappers.ServerWrapperTopAlbums
 import retrofit2.http.GET
@@ -21,6 +22,12 @@ interface ILastFmApi
     @GET("?method=artist.gettopalbums&$API_PARAMS")
     suspend fun getTopAlbums(@Query("artist") artistName: String): ServerWrapperTopAlbums
 
+
+    @GET("?method=album.getinfo&$API_PARAMS")
+    suspend fun getAlbumDetails(
+        @Query("artist") artistName: String,
+        @Query("album") albumName: String
+    ): ServerWrapperAlbumDetails
 
     //todo keep for reference.
     // remove when no longer needed
