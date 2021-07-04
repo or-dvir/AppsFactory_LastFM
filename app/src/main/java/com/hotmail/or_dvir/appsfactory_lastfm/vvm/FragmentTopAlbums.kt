@@ -150,10 +150,10 @@ class FragmentTopAlbums : BaseFragment()
                         val titleRes =
                             if (isEmpty())
                             {
-                                R.string.title_topAlbumsFor_s
+                                R.string.error_noResults_s
                             } else
                             {
-                                R.string.error_noResults_s
+                                R.string.title_topAlbumsFor_s
                             }
 
                         tvTitle.text = getString(titleRes, fragArgs.artistName)
