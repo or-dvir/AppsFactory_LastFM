@@ -22,6 +22,8 @@ data class Artist(
     //todo some artists dont have ids!!! e.g. "Alice Cooper feat. Roger Glover"
     // consider this when calculating DiffUtil!!!
     // handle situation where the id is empty and also completely doesnt exist!
+    // use name instead? everything is based on name anyways... but i guess name can also be empty
+    //      or not exist
 
     //todo do i even need an id if its unreliable????
     // can i use something else as a database id???

@@ -2,6 +2,7 @@ package com.hotmail.or_dvir.appsfactory_lastfm.model
 
 import androidx.recyclerview.widget.DiffUtil
 import com.hotmail.or_dvir.appsfactory_lastfm.R
+import com.hotmail.or_dvir.appsfactory_lastfm.model.server_wrappers.ServerWrapperAlbumDetails
 import com.hotmail.or_dvir.dxclick.IDxItemClickable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -23,6 +24,8 @@ data class Album(
     //todo some albums dont have ids!!!
     // consider this when calculating DiffUtil!!!
     // handle situation where the id is empty and also completely doesnt exist!
+    // use name instead? everything is based on name anyways... but i guess name can also be empty
+    //      or not exist
 
     //todo assume all variables can be null!
     //todo do i even need an id if its unreliable????
