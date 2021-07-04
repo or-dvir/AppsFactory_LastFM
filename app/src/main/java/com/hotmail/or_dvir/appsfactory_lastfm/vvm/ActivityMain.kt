@@ -1,10 +1,11 @@
-package com.hotmail.or_dvir.appsfactory_lastfm
+package com.hotmail.or_dvir.appsfactory_lastfm.vvm
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.appsfactory_lastfm.databinding.ActivityMainBinding
 
 class ActivityMain : AppCompatActivity()
