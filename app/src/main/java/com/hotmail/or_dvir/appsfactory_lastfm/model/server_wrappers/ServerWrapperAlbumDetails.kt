@@ -14,9 +14,7 @@ class ServerWrapperAlbumDetails(
     @Json(name = "image")
     val images: List<Image> = listOf(),
     @Json(name = "tracks")
-    val tracks: Tracks?,
-    @Json(name = "mbid")
-    val id: String?
+    val tracks: Tracks?
 )
 //todo BUG WITH MOSHI!!!!!!!!!!!!!!!!!!
 // for some reason it cannot properly serialize the server response to this object!
