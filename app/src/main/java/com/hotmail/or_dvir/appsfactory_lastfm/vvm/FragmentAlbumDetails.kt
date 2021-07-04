@@ -72,10 +72,10 @@ class FragmentAlbumDetails : BaseFragment()
 
                 tvAlbumNameAndArtist.text = getString(
                     R.string.title_s_by_s,
+                    it.name,
                     //todo should i use the info from the object, or from the arguments
                     // of the fragment?
-                    it.artist.name,
-                    fragArgs.artistName
+                    it.artist.name
                 )
 
                 tvTracks.text = viewModel.getAlbumTracksAsListText()
