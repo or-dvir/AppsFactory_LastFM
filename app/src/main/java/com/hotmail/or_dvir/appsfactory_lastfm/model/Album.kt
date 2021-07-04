@@ -2,7 +2,7 @@ package com.hotmail.or_dvir.appsfactory_lastfm.model
 
 import androidx.recyclerview.widget.DiffUtil
 import com.hotmail.or_dvir.appsfactory_lastfm.R
-import com.hotmail.or_dvir.dxadapter.IDxBaseItem
+import com.hotmail.or_dvir.dxclick.IDxItemClickable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -16,7 +16,7 @@ data class Album(
     val artist: Artist,
     @Json(name = "image")
     val images: List<Image> = listOf()
-) : IDxBaseItem, IModelWithImages
+) : IDxItemClickable, IModelWithImages
 {
     //todo some albums dont have ids!!!
     // consider this when calculating DiffUtil!!!

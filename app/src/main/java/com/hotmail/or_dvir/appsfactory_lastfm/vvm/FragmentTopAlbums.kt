@@ -18,6 +18,7 @@ import com.hotmail.or_dvir.appsfactory_lastfm.other.longSnackbar
 import com.hotmail.or_dvir.appsfactory_lastfm.other.snackbar
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.adapters.AdapterAlbums
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseFragment
+import com.hotmail.or_dvir.dxclick.DxFeatureClick
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -73,7 +74,25 @@ class FragmentTopAlbums : BaseFragment()
         super.onViewCreated(view, savedInstanceState)
 
         //initialize with empty list
-        rvAdapter = AdapterAlbums(mutableListOf())
+        rvAdapter = AdapterAlbums(mutableListOf()).apply {
+            addFeature(
+                DxFeatureClick<Album>(
+                    onItemClick = { _, _, item ->
+                        //todo navigate to album details page
+                        //todo keep for reference
+//                        findNavController().navigate(
+//                            FragmentSearchDirections.actionFragmentSearchToFragmentTopAlbums(
+//                                item.name
+//                            )
+//                        )
+                    },
+                    onItemLongClick = { _, _, _ ->
+                        //do nothing
+                        false
+                    }
+                )
+            )
+        }
 
         binding.apply {
             viewModel.getTopAlbums(fragArgs.artistName)
