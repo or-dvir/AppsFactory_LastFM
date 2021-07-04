@@ -15,7 +15,9 @@ data class Album(
     @Json(name = "artist")
     val artist: Artist,
     @Json(name = "image")
-    val images: List<Image> = listOf()
+    val images: List<Image> = listOf(),
+    @Json(name = "tracks")
+    val tracks: Tracks?
 ) : IDxItemClickable, IModelWithImages
 {
     //todo some albums dont have ids!!!
@@ -29,6 +31,16 @@ data class Album(
 
     override fun getImageList() = images
     override fun getViewType() = R.id.viewType_Album
+
+    fun getTracks(sorted: Boolean = true) =
+        tracks?.trackList?.apply {
+            if (sorted)
+            {
+                sortedBy {
+                    it.attr.rank
+                }
+            }
+        }
 
     ////////////////////////////////////////////////////
     ////////////////////////////////////////////////////
