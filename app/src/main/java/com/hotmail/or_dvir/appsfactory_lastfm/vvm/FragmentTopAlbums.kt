@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
@@ -78,13 +79,12 @@ class FragmentTopAlbums : BaseFragment()
             addFeature(
                 DxFeatureClick<Album>(
                     onItemClick = { _, _, item ->
-                        //todo navigate to album details page
-                        //todo keep for reference
-//                        findNavController().navigate(
-//                            FragmentSearchDirections.actionFragmentSearchToFragmentTopAlbums(
-//                                item.name
-//                            )
-//                        )
+                        findNavController().navigate(
+                            FragmentTopAlbumsDirections.actionFragmentTopAlbumsToFragmentAlbumDetails(
+                                getArtistName(),
+                                item.name
+                            )
+                        )
                     },
                     onItemLongClick = { _, _, _ ->
                         //do nothing
@@ -95,7 +95,7 @@ class FragmentTopAlbums : BaseFragment()
         }
 
         binding.apply {
-            viewModel.getTopAlbums(fragArgs.artistName)
+            viewModel.getTopAlbums(getArtistName())
 
             rv.apply {
                 //todo might be needed for pagination?
@@ -173,13 +173,15 @@ class FragmentTopAlbums : BaseFragment()
                                 R.string.title_topAlbumsFor_s
                             }
 
-                        tvTitle.text = getString(titleRes, fragArgs.artistName)
+                        tvTitle.text = getString(titleRes, getArtistName())
                         rv.makeVisibleOrGone(!isEmpty())
                     }
                 }
             }
         }
     }
+
+    private fun getArtistName() = fragArgs.artistName
 
     override fun onDestroyView()
     {
