@@ -37,7 +37,7 @@ data class Album(
             if (sorted)
             {
                 sortedBy {
-                    it.attr.rank
+                    it.attributes.rank
                 }
             }
         }

@@ -12,7 +12,7 @@ data class Tracks(
     @JsonClass(generateAdapter = true)
     data class Track(
         @Json(name = "@attr")
-        val attr: Attr,
+        val attributes: Attr,
         @Json(name = "name")
         val name: String
     )
