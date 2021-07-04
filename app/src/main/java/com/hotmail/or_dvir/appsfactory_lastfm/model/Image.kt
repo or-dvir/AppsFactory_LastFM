@@ -29,7 +29,12 @@ data class Image(
             EXTRA_LARGE,
 
             @Json(name = "mega")
-            MEGA()
+            MEGA(),
+
+            //todo what other possible "edge case" values are there?
+            // add a note in documentation...
+            @Json(name = "")
+            UNKNOWN()
         }
     }
 }
