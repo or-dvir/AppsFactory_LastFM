@@ -15,13 +15,19 @@ class FragmentTopAlbumsViewModel(
     private val repoAlbums: RepositoryAlbums
 ) : BaseAndroidViewModel(app)
 {
-    val albums = MutableLiveData<List<Album>>(listOf())
+    val albums = MutableLiveData<List<Album>?>(listOf())
 
     //do NOT initialize the error! if you do, the UI will respond when the view model is created
     val error = MutableLiveData<String>()
 
-    fun getTopAlbums(artistName: String)
+    fun getTopAlbums(artistName: String?)
     {
+        if (artistName == null)
+        {
+            albums.value = null
+            return
+        }
+
         viewModelScope.launch(Dispatchers.Main) {
             isLoading.value = true
             albums.value = repoAlbums.getTopAlbums(artistName).getTopAlbums()
@@ -57,7 +63,7 @@ class FragmentTopAlbumsViewModel(
                     R.string.error_removingAlbum_s
                 }
 
-                error.value = getString(errorRes, album.name)
+                error.value = getString(errorRes, album.name ?: "")
             }
         }
     }

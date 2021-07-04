@@ -2,7 +2,6 @@ package com.hotmail.or_dvir.appsfactory_lastfm.model
 
 import androidx.recyclerview.widget.DiffUtil
 import com.hotmail.or_dvir.appsfactory_lastfm.R
-import com.hotmail.or_dvir.appsfactory_lastfm.model.server_wrappers.ServerWrapperAlbumDetails
 import com.hotmail.or_dvir.dxclick.IDxItemClickable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -12,7 +11,7 @@ data class Album(
     @Json(name = "mbid")
     val id: String?,
     @Json(name = "name")
-    val name: String,
+    val name: String?,
     @Json(name = "artist")
     val artist: Artist,
     @Json(name = "image")

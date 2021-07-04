@@ -46,7 +46,7 @@ class FragmentTopAlbums : BaseFragment()
 
     @VisibleForTesting
     internal val viewModel: FragmentTopAlbumsViewModel by viewModel()
-    private lateinit var observerAlbums: Observer<List<Album>>
+    private lateinit var observerAlbums: Observer<List<Album>?>
     private lateinit var observerError: Observer<String>
     private lateinit var rvAdapter: AdapterAlbums
 

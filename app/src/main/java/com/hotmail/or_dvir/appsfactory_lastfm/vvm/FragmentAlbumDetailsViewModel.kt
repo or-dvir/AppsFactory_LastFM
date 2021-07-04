@@ -10,6 +10,7 @@ import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryAlbum
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseAndroidViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import or_dvir.hotmail.com.dxutils.atLeastOneNull
 
 class FragmentAlbumDetailsViewModel(
     app: Application,
@@ -20,7 +21,7 @@ class FragmentAlbumDetailsViewModel(
 
     //do NOT initialize this with null or empty data! the UI observer will be triggered!
     //todo observe me!
-    val album = MutableLiveData<Album>()
+    val album = MutableLiveData<Album?>()
 
     //todo does this work as expected?
     fun getAlbumTracksAsListText(): String?
@@ -35,11 +36,22 @@ class FragmentAlbumDetailsViewModel(
         }
     }
 
-    fun getAlbumDetails(artistName: String, albumName: String)
+    fun getAlbumDetails(artistName: String?, albumName: String?)
     {
+        //todo can theoretically use id (if exists) instead.
+        // but there is no time for this... just add a note in the documentation
+        if (atLeastOneNull(artistName, albumName))
+        {
+            album.value = null
+            return
+        }
+
+        //if we get here, artistName and albumName should not be null
+        //due to the above "if" statement
+
         viewModelScope.launch(Dispatchers.Main) {
             isLoading.value = true
-            val serverAlbumDetails = repoAlbums.getAlbumDetails(artistName, albumName)
+            val serverAlbumDetails = repoAlbums.getAlbumDetails(artistName!!, albumName!!)
             album.value = convertServerAlbumToAppAlbum(serverAlbumDetails)
             isLoading.value = false
         }

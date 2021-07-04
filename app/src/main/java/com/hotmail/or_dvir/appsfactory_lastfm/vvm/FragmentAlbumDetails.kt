@@ -25,7 +25,7 @@ class FragmentAlbumDetails : BaseFragment()
 
     @VisibleForTesting
     internal val viewModel: FragmentAlbumDetailsViewModel by viewModel()
-    private lateinit var observerAlbum: Observer<Album>
+    private lateinit var observerAlbum: Observer<Album?>
 
     override fun getLoadingView() = binding.loadingView.parent
     override fun getViewModel() = viewModel
@@ -64,18 +64,20 @@ class FragmentAlbumDetails : BaseFragment()
             binding.apply {
                 if (it == null)
                 {
-
                     view?.snackbar(R.string.error_general)
                     svAlbumDetailsContainer.makeGone()
                     return@Observer
                 }
 
+                //NOTE:
+                //for some reason, moshi does not properly convert the server response
+                //to Album object (all fields are set to their default values).
+                //however we have the album and artist names in the fragment arguments,
+                //so use those to at least show some information to the uer
                 tvAlbumNameAndArtist.text = getString(
                     R.string.title_s_by_s,
-                    it.name,
-                    //todo should i use the info from the object, or from the arguments
-                    // of the fragment?
-                    it.artist.name
+                    fragArgs.albumName,
+                    fragArgs.artistName
                 )
 
                 tvTracks.text = viewModel.getAlbumTracksAsListText()
