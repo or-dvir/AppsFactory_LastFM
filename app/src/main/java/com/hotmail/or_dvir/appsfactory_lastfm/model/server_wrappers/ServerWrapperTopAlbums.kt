@@ -11,10 +11,10 @@ class ServerWrapperTopAlbums(
 )
 {
     fun getTopAlbums() = topAlbums.albums
-}
 
-@JsonClass(generateAdapter = true)
-class TopAlbums(
-    @Json(name = "album")
-    val albums: List<Album>
-)
+    @JsonClass(generateAdapter = true)
+    class TopAlbums(
+        @Json(name = "album")
+        val albums: List<Album>
+    )
+}

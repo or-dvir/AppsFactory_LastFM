@@ -11,16 +11,16 @@ class ServerWrapperArtistsSearch(
 )
 {
     fun getArtistsSearchResults() = result.matches.artists
+
+    @JsonClass(generateAdapter = true)
+    class Result(
+        @Json(name = "artistmatches")
+        val matches: ArtistMatches
+    )
+
+    @JsonClass(generateAdapter = true)
+    class ArtistMatches(
+        @Json(name = "artist")
+        val artists: List<Artist>
+    )
 }
-
-@JsonClass(generateAdapter = true)
-class Result(
-    @Json(name = "artistmatches")
-    val matches: ArtistMatches
-)
-
-@JsonClass(generateAdapter = true)
-class ArtistMatches(
-    @Json(name = "artist")
-    val artists: List<Artist>
-)
