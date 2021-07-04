@@ -9,7 +9,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class Artist(
     @Json(name = "mbid")
-    val id: String,
+    val id: String?,
     @Json(name = "name")
     val name: String?,
     @Json(name = "image")

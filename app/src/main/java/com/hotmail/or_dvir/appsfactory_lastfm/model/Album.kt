@@ -5,6 +5,7 @@ import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.dxclick.IDxItemClickable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import or_dvir.hotmail.com.dxutils.atLeastOne
 
 @JsonClass(generateAdapter = true)
 data class Album(
@@ -13,7 +14,7 @@ data class Album(
     @Json(name = "name")
     val name: String?,
     @Json(name = "artist")
-    val artist: Artist,
+    val artist: Artist?,
     @Json(name = "image")
     val images: List<Image> = listOf(),
     @Json(name = "tracks")
@@ -36,10 +37,13 @@ data class Album(
 
     fun getTracks(sorted: Boolean = true) =
         tracks?.trackList?.apply {
-            if (sorted)
+            val isSortable = atLeastOne { it.attributes?.rank == null }
+
+            if (sorted && isSortable)
             {
                 sortedBy {
-                    it.attributes.rank
+                    //if any of "attributes" is null, we should not be here
+                    it.attributes!!.rank
                 }
             }
         }

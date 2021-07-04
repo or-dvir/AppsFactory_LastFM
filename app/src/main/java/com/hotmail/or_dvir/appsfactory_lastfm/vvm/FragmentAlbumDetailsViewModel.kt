@@ -20,7 +20,6 @@ class FragmentAlbumDetailsViewModel(
     //todo add option to add/remove album to/from favorites?
 
     //do NOT initialize this with null or empty data! the UI observer will be triggered!
-    //todo observe me!
     val album = MutableLiveData<Album?>()
 
     //todo does this work as expected?
@@ -30,7 +29,13 @@ class FragmentAlbumDetailsViewModel(
             album.getTracks()?.joinToString(
                 separator = "\n",
                 transform = { track ->
-                    "${track.attributes.rank}. "
+                    val trackNumber = track.attributes?.rank
+                    val trackName = track.name
+
+                    StringBuilder().apply {
+                        trackNumber?.let { append("$it. ") }
+                        trackName?.let { append(it) }
+                    }.toString()
                 }
             )
         }

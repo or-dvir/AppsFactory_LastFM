@@ -6,20 +6,20 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class Tracks(
     @Json(name = "track")
-    val trackList: List<Track>
+    val trackList: List<Track> = listOf()
 )
 {
     @JsonClass(generateAdapter = true)
     data class Track(
         @Json(name = "@attr")
-        val attributes: Attr,
+        val attributes: Attr?,
         @Json(name = "name")
-        val name: String
+        val name: String?
     )
 
     @JsonClass(generateAdapter = true)
     data class Attr(
         @Json(name = "rank")
-        val rank: Int
+        val rank: Int?
     )
 }

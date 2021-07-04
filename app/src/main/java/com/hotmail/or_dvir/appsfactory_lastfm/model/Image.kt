@@ -6,9 +6,9 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class Image(
     @Json(name = "#text")
-    val url: String,
+    val url: String?,
     @Json(name = "size")
-    val size: Size
+    val size: Size?
 )
 {
     companion object
