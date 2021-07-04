@@ -7,14 +7,14 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 class ServerWrapperTopAlbums(
     @Json(name = "topalbums")
-    val topAlbums: TopAlbums
+    val topAlbums: TopAlbums?
 )
 {
-    fun getTopAlbums() = topAlbums.albums
+    fun getTopAlbums() = topAlbums?.albums
 
     @JsonClass(generateAdapter = true)
     class TopAlbums(
         @Json(name = "album")
-        val albums: List<Album>
+        val albums: List<Album> = listOf()
     )
 }
