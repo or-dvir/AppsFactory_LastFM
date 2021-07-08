@@ -33,9 +33,6 @@ data class Album(
     var dbId: Long = 0L
 ) : IDxItemClickable, IModelWithImages
 {
-
-    //todo how can i save Tracks and list of Image to DB?!
-
     override fun getImageList() = images
     override fun getViewType() = R.id.viewType_Album
 
