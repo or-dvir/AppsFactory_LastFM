@@ -10,7 +10,7 @@ import com.hotmail.or_dvir.appsfactory_lastfm.other.database.daos.IDaoAlbums
 @Database(entities = [Album::class], version = 1)
 abstract class SMyDatabase : RoomDatabase()
 {
-    abstract val daoAlbums: IDaoAlbums
+    abstract fun daoAlbums(): IDaoAlbums
 
     companion object
     {
