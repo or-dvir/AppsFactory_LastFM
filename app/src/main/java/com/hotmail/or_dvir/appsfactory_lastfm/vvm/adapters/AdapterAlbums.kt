@@ -45,10 +45,13 @@ class AdapterAlbums(val items: MutableList<Album>) :
                 if (!item.canBeStoredInDb())
                 {
                     setImageResource(R.drawable.ic_favorite_broken)
+                } else
+                {
+                    //todo set icon for albums according to whether they are already
+                    // in favorites or not
+                    setImageResource(R.drawable.ic_favorite_outline)
                 }
 
-                //todo set icon for albums according to whether they are already
-                // in favorites or not
                 //todo handle clicking favorite button
             }
 
