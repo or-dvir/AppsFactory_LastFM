@@ -13,11 +13,11 @@ interface IDaoAlbums
      * @return Long the id of the inserted row (NOT the object!), or -1 if failed
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(album: Album): Long
+    suspend fun insert(album: Album): Long
 
     /**
      * @return Int number of rows deleted
      */
     @Delete
-    fun delete(album: Album): Int
+    suspend fun delete(album: Album): Int
 }
