@@ -30,7 +30,7 @@
             android:clickable="true"
             android:contentDescription="@string/contentDescription_album_addRemoveFavorite"
             android:focusable="true"
-            android:src="@drawable/ic_favorite_outline" />
+            tools:src="@drawable/ic_favorite_outline" />
 
         <TextView
             android:id="@+id/tv_albumName"

@@ -36,29 +36,39 @@ class AdapterAlbums(val items: MutableList<Album>) :
         super.onBindViewHolder(holder, position)
 
         holder.binding.apply {
-            //todo add status for favorite or not!!!
-            //todo handle clicking favorite button
-
             val item = items[holder.bindingAdapterPosition]
             val placeholderImageRes = R.drawable.ic_album_placeholder
 
             tvAlbumName.text = item.name
 
-            val imageUrl = item.getImageUrl(Size.LARGE)
-            val picassoRequest =
-                if (imageUrl.isNullOrBlank())
+            ivFavorite.apply {
+                if (!item.canBeStoredInDb())
                 {
-                    Picasso.get().load(placeholderImageRes)
-                } else
-                {
-                    //we have a valid url
-                    Picasso.get().load(imageUrl)
+                    setImageResource(R.drawable.ic_favorite_broken)
                 }
 
-            //todo do i need scaling?
-            picassoRequest
-                .error(placeholderImageRes)
-                .into(ivAlbumImage)
+                //todo set icon for albums according to whether they are already
+                // in favorites or not
+                //todo handle clicking favorite button
+            }
+
+            ivAlbumImage.apply {
+                val imageUrl = item.getImageUrl(Size.LARGE)
+                val picassoRequest =
+                    if (imageUrl.isNullOrBlank())
+                    {
+                        Picasso.get().load(placeholderImageRes)
+                    } else
+                    {
+                        //we have a valid url
+                        Picasso.get().load(imageUrl)
+                    }
+
+                //todo do i need scaling?
+                picassoRequest
+                    .error(placeholderImageRes)
+                    .into(this)
+            }
         }
     }
 
