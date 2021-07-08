@@ -3,6 +3,7 @@ package com.hotmail.or_dvir.appsfactory_lastfm.other
 import android.app.Application
 import android.util.Log
 import androidx.annotation.VisibleForTesting
+import com.hotmail.or_dvir.appsfactory_lastfm.other.database.SMyDatabase
 import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryAlbums
 import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryAlbumsImpl
 import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryArtists
@@ -46,6 +47,8 @@ class MyApplication : Application()
 //        factory<RepositoryListItems> { (listId: UUID) -> RepositoryListItemsImpl(listId) }
         single<RepositoryArtists> { RepositoryArtistsImpl(SMyRetrofit.lastFmApi) }
         single<RepositoryAlbums> { RepositoryAlbumsImpl(SMyRetrofit.lastFmApi) }
+        single { SMyDatabase.getInstance(androidApplication()) }
+        single { get<SMyDatabase>().daoAlbums() }
     }
 
 //todo delete this when ready
