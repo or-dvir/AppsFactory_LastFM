@@ -35,15 +35,32 @@ class RepositoryAlbumsImpl(
 
     //todo MUST FINISH no matter what!
     override suspend fun addFavoriteAlbum(album: Album) =
+        //todo should do nothing if already exists
         withContext(Dispatchers.IO) {
-            val rowId = albumsDao.insert(album)
-            rowId != -1L
+            //if we cannot uniquely identify the album, we cannot save it to the database
+            if (album.canBeStoredInDb())
+            {
+                val rowId = albumsDao.insert(album)
+                rowId != -1L
+            } else
+            {
+                false
+            }
         }
 
     //todo MUST FINISH no matter what!
     override suspend fun deleteFavoriteAlbum(album: Album) =
         withContext(Dispatchers.IO) {
-            val numDeleted = albumsDao.delete(album)
-            numDeleted != 0
+            if (album.canBeStoredInDb())
+            {
+                //album.dbUUID should not be null because of the "if" statement
+                val numDeleted = albumsDao.delete(album.dbUUID!!)
+                numDeleted != 0
+            } else
+            {
+                //if an album cannot be stored in the db, there is nothing to delete.
+                //return TRUE for success
+                true
+            }
         }
 }
