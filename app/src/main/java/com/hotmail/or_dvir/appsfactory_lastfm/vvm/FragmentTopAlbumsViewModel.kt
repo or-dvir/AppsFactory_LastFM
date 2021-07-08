@@ -47,10 +47,10 @@ class FragmentTopAlbumsViewModel(
         viewModelScope.launch(Dispatchers.Main) {
             val success = if (isAdding)
             {
-                repoAlbums.addFavorite(album)
+                repoAlbums.addFavoriteAlbum(album)
             } else
             {
-                repoAlbums.removeFavorite(album)
+                repoAlbums.deleteFavoriteAlbum(album)
             }
 
             if (!success)

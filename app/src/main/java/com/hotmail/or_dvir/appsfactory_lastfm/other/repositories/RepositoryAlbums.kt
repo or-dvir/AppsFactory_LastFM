@@ -15,7 +15,7 @@ abstract class RepositoryAlbums
     //endregion
 
     //region WRITE
-    abstract suspend fun addFavorite(album: Album): Boolean
-    abstract suspend fun removeFavorite(album: Album): Boolean
+    abstract suspend fun addFavoriteAlbum(album: Album): Boolean
+    abstract suspend fun deleteFavoriteAlbum(album: Album): Boolean
     //endregion
 }

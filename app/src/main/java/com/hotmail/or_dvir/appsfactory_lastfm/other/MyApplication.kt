@@ -46,7 +46,7 @@ class MyApplication : Application()
 //        factory<RepositoryUserLists> { RepositoryUserListsImpl() }
 //        factory<RepositoryListItems> { (listId: UUID) -> RepositoryListItemsImpl(listId) }
         single<RepositoryArtists> { RepositoryArtistsImpl(SMyRetrofit.lastFmApi) }
-        single<RepositoryAlbums> { RepositoryAlbumsImpl(SMyRetrofit.lastFmApi) }
+        single<RepositoryAlbums> { RepositoryAlbumsImpl(SMyRetrofit.lastFmApi, get()) }
         single { SMyDatabase.getInstance(androidApplication()) }
         single { get<SMyDatabase>().daoAlbums() }
     }
