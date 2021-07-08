@@ -48,7 +48,11 @@ class AdapterAlbums(val items: MutableList<Album>) :
                 } else
                 {
                     //todo set icon for albums according to whether they are already
-                    // in favorites or not
+                    // in favorites or not.
+                    // a possible way without querying the dataabase everytime this method is called
+                    //      would be to load ALL favorites together with the "top albums" fragment
+                    //      and accessing that list from here somehow. that way its quick and easy access
+                    //      and no extra db queries
                     setImageResource(R.drawable.ic_favorite_outline)
                 }
 
