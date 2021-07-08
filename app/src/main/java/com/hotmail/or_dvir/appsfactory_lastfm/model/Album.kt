@@ -3,6 +3,7 @@ package com.hotmail.or_dvir.appsfactory_lastfm.model
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.appsfactory_lastfm.other.isBlankOrNull
@@ -47,9 +48,11 @@ data class Album(
      * note that if one of these values is null or empty, the object does not have a unique id
      * and therefore it cannot be saved in the database.
      */
-    @ColumnInfo(name = "dbUUID")
+    @Ignore
     @Json(name = "dbUUID")
-    val dbUUID = name?.let { albumName ->
+    //made var and not val for convenience (otherwise Room complains).
+    //in real app, a better solution would be used
+    var dbUUID = name?.let { albumName ->
         artist?.name?.let { artistName ->
             if (artistName.isBlankOrNull() || albumName.isBlankOrNull())
             {
