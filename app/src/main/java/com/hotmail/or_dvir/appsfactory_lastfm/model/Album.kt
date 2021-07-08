@@ -1,23 +1,41 @@
 package com.hotmail.or_dvir.appsfactory_lastfm.model
 
 import androidx.recyclerview.widget.DiffUtil
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.dxclick.IDxItemClickable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+@Entity(tableName = "table_favoriteAlbums")
 @JsonClass(generateAdapter = true)
 data class Album(
+    //note: the names of the columns and json just HAPPEN to be the same.
+    //they should NOT be extracted to a constant for flexibility, so that
+    //they may change independently of each other
+    @ColumnInfo(name = "name")
     @Json(name = "name")
     val name: String?,
+    @ColumnInfo(name = "artist")
     @Json(name = "artist")
     val artist: Artist?,
+    @ColumnInfo(name = "tracks")
+    @Json(name = "tracks")
+    val tracks: Tracks?,
+    @ColumnInfo(name = "image")
     @Json(name = "image")
     val images: List<Image> = listOf(),
-    @Json(name = "tracks")
-    val tracks: Tracks?
+    @ColumnInfo(name = "dbId")
+    @Json(name = "dbId")
+    @PrimaryKey(autoGenerate = true)
+    var dbId: Long = 0L
 ) : IDxItemClickable, IModelWithImages
 {
+
+    //todo how can i save Tracks and list of Image to DB?!
+
     override fun getImageList() = images
     override fun getViewType() = R.id.viewType_Album
 
