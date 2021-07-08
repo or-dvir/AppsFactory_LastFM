@@ -13,7 +13,6 @@ data class Image(
 {
     companion object
     {
-        //todo make sure serialization of this works with retrofit/moshi!!!!
         enum class Size
         {
             @Json(name = "small")
