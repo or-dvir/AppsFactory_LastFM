@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.hotmail.or_dvir.appsfactory_lastfm.R
+import com.hotmail.or_dvir.appsfactory_lastfm.other.isBlankOrNull
 import com.hotmail.or_dvir.dxclick.IDxItemClickable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -27,12 +28,41 @@ data class Album(
     @ColumnInfo(name = "image")
     @Json(name = "image")
     val images: List<Image> = listOf(),
-    @ColumnInfo(name = "dbId")
-    @Json(name = "dbId")
+    @ColumnInfo(name = "dbPrimaryKey")
+    @Json(name = "dbPrimaryKey")
     @PrimaryKey(autoGenerate = true)
-    var dbId: Long = 0L
+    var dbPrimaryKey: Long = 0L
 ) : IDxItemClickable, IModelWithImages
 {
+    //todo index the field names used to delete in the database
+
+    /**
+     * unfortunately there doesn't seem to be a reliable field to use as id from the LastFm API.
+     * even "mbid" may bu empty, null, or completely missing!
+     *
+     * note that we CANNOT use [dbPrimaryKey] because that is not a value retrieved
+     * from the server so we cannot use it to identify existing rows.
+     *
+     * so instead we use a combination of the artist name and the album name.
+     * note that if one of these values is null or empty, the object does not have a unique id
+     * and therefore it cannot be saved in the database.
+     */
+    @ColumnInfo(name = "dbUUID")
+    @Json(name = "dbUUID")
+    val dbUUID = name?.let { albumName ->
+        artist?.name?.let { artistName ->
+            if (artistName.isBlankOrNull() || albumName.isBlankOrNull())
+            {
+                "$artistName$albumName"
+            } else
+            {
+                null
+            }
+        }
+    }
+
+    fun canBeStoredInDb() = dbUUID != null
+
     override fun getImageList() = images
     override fun getViewType() = R.id.viewType_Album
 
