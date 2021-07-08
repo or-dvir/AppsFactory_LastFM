@@ -66,7 +66,7 @@ class FragmentAlbumDetailsViewModel(
         Album(
             serverAlbum.albumName,
             Artist(serverAlbum.artistName),
-            serverAlbum.images,
-            serverAlbum.tracks
+            serverAlbum.tracks,
+            serverAlbum.images
         )
 }

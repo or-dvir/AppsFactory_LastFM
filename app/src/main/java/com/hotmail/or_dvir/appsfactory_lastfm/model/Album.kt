@@ -48,7 +48,7 @@ data class Album(
      * note that if one of these values is null or empty, the object does not have a unique id
      * and therefore it cannot be saved in the database.
      */
-    @Ignore
+    @ColumnInfo(name = "dbUUID")
     @Json(name = "dbUUID")
     //made var and not val for convenience (otherwise Room complains).
     //in real app, a better solution would be used
