@@ -67,7 +67,7 @@ class AdapterAlbums(val items: MutableList<Album>) :
         holder.binding.apply {
             tvAlbumName.text = ""
             //todo some of the images dont show.
-            //it might be fixed when setting image in onBindViewHolder()
+            // it might be fixed when setting image in onBindViewHolder()
 //            ivFavorite.setImageDrawable(null)
             Picasso.get().cancelRequest(ivAlbumImage)
         }
