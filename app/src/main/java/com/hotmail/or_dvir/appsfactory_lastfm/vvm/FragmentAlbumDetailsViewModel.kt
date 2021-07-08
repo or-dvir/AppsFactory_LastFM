@@ -64,10 +64,8 @@ class FragmentAlbumDetailsViewModel(
 
     private fun convertServerAlbumToAppAlbum(serverAlbum: ServerWrapperAlbumDetails) =
         Album(
-            serverAlbum.id,
             serverAlbum.albumName,
-            //todo is empty id ok here? better idea?
-            Artist("", serverAlbum.artistName),
+            Artist(serverAlbum.artistName),
             serverAlbum.images,
             serverAlbum.tracks
         )
