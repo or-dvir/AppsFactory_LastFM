@@ -3,10 +3,9 @@ package com.hotmail.or_dvir.appsfactory_lastfm.model
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.hotmail.or_dvir.appsfactory_lastfm.R
-import com.hotmail.or_dvir.appsfactory_lastfm.other.isBlankOrNull
+import com.hotmail.or_dvir.appsfactory_lastfm.other.isBlankOrEquals
 import com.hotmail.or_dvir.dxclick.IDxItemClickable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -36,6 +35,13 @@ data class Album(
 ) : IDxItemClickable, IModelWithImages
 {
     //todo index the field names used to delete in the database
+    //todo some album names are "(null)"
+    // handle this in the recycler view (search for albums by "cher")
+
+    private companion object
+    {
+        private const val LASTFM_NULL = "(null)"
+    }
 
     /**
      * unfortunately there doesn't seem to be a reliable field to use as id from the LastFm API.
@@ -54,12 +60,12 @@ data class Album(
     //in real app, a better solution would be used
     var dbUUID = name?.let { albumName ->
         artist?.name?.let { artistName ->
-            if (artistName.isBlankOrNull() || albumName.isBlankOrNull())
-            {
-                "$artistName$albumName"
-            } else
+            if (artistName.isBlankOrEquals(LASTFM_NULL) || albumName.isBlankOrEquals(LASTFM_NULL))
             {
                 null
+            } else
+            {
+                "$artistName$albumName"
             }
         }
     }
