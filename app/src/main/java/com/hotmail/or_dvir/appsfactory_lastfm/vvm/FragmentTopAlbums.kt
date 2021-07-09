@@ -114,7 +114,7 @@ class FragmentTopAlbums : BaseFragment()
         }
 
         viewModel.apply {
-            albums.observe(viewLifecycleOwner, observerAlbums)
+            topAlbums.observe(viewLifecycleOwner, observerAlbums)
             //todo test what happens when there is an error, then the user goes to the home screen,
             // then returns to the app - does the error message show again?
             error.observe(viewLifecycleOwner, observerError)
@@ -159,7 +159,7 @@ class FragmentTopAlbums : BaseFragment()
 
                 //back to using main dispatcher
                 rvAdapter.apply {
-                    setData(newList)
+                    setData(newList, viewModel.favoriteAlbums)
                     result.dispatchUpdatesTo(this)
 
                     //handle views visibility
