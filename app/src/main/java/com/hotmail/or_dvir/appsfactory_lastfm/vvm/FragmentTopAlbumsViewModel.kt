@@ -8,6 +8,7 @@ import com.hotmail.or_dvir.appsfactory_lastfm.model.Album
 import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryAlbums
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseAndroidViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class FragmentTopAlbumsViewModel(
@@ -19,8 +20,9 @@ class FragmentTopAlbumsViewModel(
 
     //do NOT initialize the error! if you do, the UI will respond when the view model is created
     val error = MutableLiveData<String>()
+    var favoriteAlbums: List<Album>? = null
 
-    fun getTopAlbums(artistName: String?)
+    fun getTopAlbumsAndLoadFavorites(artistName: String?)
     {
         if (artistName == null)
         {
@@ -30,7 +32,15 @@ class FragmentTopAlbumsViewModel(
 
         viewModelScope.launch(Dispatchers.Main) {
             isLoading.value = true
-            albums.value = repoAlbums.getTopAlbums(artistName).getTopAlbums()
+            //load top albums and favorites in parallel
+            val favoriteDeferred = async { repoAlbums.getFavoriteAlbums() }
+            val topDeferred = async { repoAlbums.getTopAlbums(artistName).getTopAlbums() }
+
+            favoriteAlbums = favoriteDeferred.await()
+            albums.value = topDeferred.await()
+
+            i stopped here. now when top albums are in the recycler, favoriteAlbums field
+            should be set and can be passed to the adapter
             isLoading.value = false
         }
     }

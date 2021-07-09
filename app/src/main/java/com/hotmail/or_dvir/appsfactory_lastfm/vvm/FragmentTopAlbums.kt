@@ -95,7 +95,7 @@ class FragmentTopAlbums : BaseFragment()
         }
 
         binding.apply {
-            viewModel.getTopAlbums(getArtistName())
+            viewModel.getTopAlbumsAndLoadFavorites(getArtistName())
 
             rv.apply {
                 //todo might be needed for pagination?
