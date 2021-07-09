@@ -10,8 +10,9 @@ import com.hotmail.or_dvir.appsfactory_lastfm.model.Image.Companion.Size
 import com.hotmail.or_dvir.dxadapter.DxAdapter
 import com.squareup.picasso.Picasso
 
-class AdapterAlbums(val items: MutableList<Album>) :
-    DxAdapter<Album, AdapterAlbums.ViewHolder>()
+class AdapterAlbums(
+    val items: MutableList<Album>
+) : DxAdapter<Album, AdapterAlbums.ViewHolder>()
 {
     //todo some code is duplicated from artist adapter. can i create a shared base adapter?
 
@@ -115,5 +116,20 @@ class AdapterAlbums(val items: MutableList<Album>) :
     /////////////////////////////////////////
     /////////////////////////////////////////
 
-    class ViewHolder(val binding: RowAlbumBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(
+        val binding: RowAlbumBinding
+    ) : RecyclerView.ViewHolder(binding.root)
+    {
+        init
+        {
+            proposed solution:
+                    have 2 interfaces (or lambdas). one for view holder (only with position)
+                    and one for adapter (with position and item)
+            then propagae the click from the view holder (only with position)
+            to the adapter inside getAdapterViewHolder (where you can retrieve the item),
+            to the fragment (who will receive both position and item)
+
+                    see here https://oozou.com/blog/a-better-way-to-handle-click-action-in-a-recyclerview-item-60
+        }
+    }
 }
