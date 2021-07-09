@@ -63,4 +63,9 @@ class RepositoryAlbumsImpl(
                 true
             }
         }
+
+    override suspend fun getFavoriteAlbums() =
+        withContext(Dispatchers.IO) {
+            daoAlbums.getFavoriteAlbums()
+        }
 }

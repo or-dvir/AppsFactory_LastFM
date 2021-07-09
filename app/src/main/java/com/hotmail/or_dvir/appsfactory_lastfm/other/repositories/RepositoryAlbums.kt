@@ -7,6 +7,7 @@ import com.hotmail.or_dvir.appsfactory_lastfm.model.server_wrappers.ServerWrappe
 abstract class RepositoryAlbums
 {
     //region READ
+    abstract suspend fun getFavoriteAlbums(): List<Album>
     abstract suspend fun getTopAlbums(artistName: String): ServerWrapperTopAlbums
     abstract suspend fun getAlbumDetails(
         artistName: String,

@@ -26,4 +26,7 @@ interface IDaoAlbums
      */
     @Query("delete from table_favoriteAlbums where dbUUID=:dbUUID")
     suspend fun delete(dbUUID: String): Int
+
+    @Query("select * from table_favoriteAlbums")
+    suspend fun getFavoriteAlbums(): List<Album>
 }
