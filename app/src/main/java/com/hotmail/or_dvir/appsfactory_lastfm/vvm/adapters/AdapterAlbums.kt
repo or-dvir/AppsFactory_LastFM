@@ -15,6 +15,8 @@ class AdapterAlbums(val items: MutableList<Album>) :
 {
     //todo some code is duplicated from artist adapter. can i create a shared base adapter?
 
+    private var favoriteAlbums = listOf<Album>()
+
     override fun getDxAdapterItems() = items
 
     override fun createAdapterViewHolder(
@@ -42,20 +44,15 @@ class AdapterAlbums(val items: MutableList<Album>) :
             tvAlbumName.text = item.name
 
             ivFavorite.apply {
-                if (!item.canBeStoredInDb())
+                val favoriteRes = when
                 {
-                    setImageResource(R.drawable.ic_favorite_broken)
-                } else
-                {
-                    //todo set icon for albums according to whether they are already
-                    // in favorites or not.
-                    // a possible way without querying the dataabase everytime this method is called
-                    //      would be to load ALL favorites together with the "top albums" fragment
-                    //      and accessing that list from here somehow. that way its quick and easy access
-                    //      and no extra db queries
-                    setImageResource(R.drawable.ic_favorite_outline)
+                    !item.canBeStoredInDb() -> R.drawable.ic_favorite_broken
+                    isInFavorites(item) -> R.drawable.ic_favorite_filled
+                    //item can be stored and is NOT in favorites
+                    else -> R.drawable.ic_favorite_outline
                 }
 
+                setImageResource(favoriteRes)
                 //todo handle clicking favorite button
             }
 
@@ -71,7 +68,6 @@ class AdapterAlbums(val items: MutableList<Album>) :
                         Picasso.get().load(imageUrl)
                     }
 
-                //todo do i need scaling?
                 picassoRequest
                     .error(placeholderImageRes)
                     .into(this)
@@ -92,11 +88,21 @@ class AdapterAlbums(val items: MutableList<Album>) :
         super.onViewRecycled(holder)
     }
 
-    fun setData(data: List<Album>)
+    //we do not use the contains() function because that is based on Album.equals().
+    //since Album is a data class, its' equals() function consists of all the fields in the
+    //primary constructor, whereas 2 albums might be the same even with slightly varied fields
+    //(e.g. from database and from lastFM API, since they don't exactly match).
+    //it's easier to have this function than to override the Album.equals() method.
+    private fun isInFavorites(album: Album) =
+        favoriteAlbums.find { it.dbUUID == album.dbUUID } != null
+
+    fun setData(newData: List<Album>, favoriteAlbums: List<Album>)
     {
+        this.favoriteAlbums = favoriteAlbums
+
         items.apply {
             clear()
-            addAll(data)
+            addAll(newData)
         }
         //note that there is no need to notify the adapter because we are using DiffUtil
     }
