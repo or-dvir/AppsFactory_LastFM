@@ -8,8 +8,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class RepositoryAlbumsImpl(
-    private val lastFmApi: ILastFmApi,
-    private val albumsDao: IDaoAlbums
+    private val apiLastFM: ILastFmApi,
+    private val daoAlbums: IDaoAlbums
 ) : RepositoryAlbums()
 {
     //todo try all kinds of scenarios and handle errors appropriately
@@ -20,7 +20,7 @@ class RepositoryAlbumsImpl(
     //      if the user removes and saves the information again
     override suspend fun getTopAlbums(artistName: String) =
         withContext(Dispatchers.IO) {
-            lastFmApi.getTopAlbums(artistName)
+            apiLastFM.getTopAlbums(artistName)
         }
 
     //todo this should work offline!
@@ -30,7 +30,7 @@ class RepositoryAlbumsImpl(
         albumName: String
     ): ServerWrapperAlbumDetails =
         withContext(Dispatchers.IO) {
-            lastFmApi.getAlbumDetails(artistName, albumName)
+            apiLastFM.getAlbumDetails(artistName, albumName)
         }
 
     //todo MUST FINISH no matter what!
@@ -40,7 +40,7 @@ class RepositoryAlbumsImpl(
             //if we cannot uniquely identify the album, we cannot save it to the database
             if (album.canBeStoredInDb())
             {
-                val rowId = albumsDao.insert(album)
+                val rowId = daoAlbums.insert(album)
                 rowId != -1L
             } else
             {
@@ -54,7 +54,7 @@ class RepositoryAlbumsImpl(
             if (album.canBeStoredInDb())
             {
                 //album.dbUUID should not be null because of the "if" statement
-                val numDeleted = albumsDao.delete(album.dbUUID!!)
+                val numDeleted = daoAlbums.delete(album.dbUUID!!)
                 numDeleted != 0
             } else
             {
