@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/fragmentSearch">
-    <!--    todo change the start destination according to the instructions-->
+    app:startDestination="@id/fragmentFavoriteAlbums">
     <!--    todo check the animations-->
     <fragment
         android:id="@+id/fragmentSearch"
@@ -20,13 +19,34 @@
             app:popExitAnim="@anim/slide_out_to_right" />
     </fragment>
 
+    <fragment
+        android:id="@+id/fragmentFavoriteAlbums"
+        android:name="com.hotmail.or_dvir.appsfactory_lastfm.vvm.FragmentFavoriteAlbums"
+        android:label="@string/title_favorites"
+        tools:layout="@layout/fragment_favorite_albums">
+        <action
+            android:id="@+id/action_fragmentFavorites_to_fragmentAlbumDetails"
+            app:destination="@id/fragmentAlbumDetails"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_top"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right" />
+        <action
+            android:id="@+id/action_fragmentFavorites_to_fragmentSearch"
+            app:destination="@id/fragmentSearch"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_top"
+            app:popEnterAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right" />
+    </fragment>
+
     <!--    todo any way to not allow empty strings as arguments?
             todo they may be used as ids for the database... valid for all fragments!!!-->
 
     <fragment
         android:id="@+id/fragmentTopAlbums"
         android:name="com.hotmail.or_dvir.appsfactory_lastfm.vvm.FragmentTopAlbums"
-        android:label="@string/title_TopAlbums"
+        android:label="@string/title_topAlbums"
         tools:layout="@layout/fragment_top_albums">
         <action
             android:id="@+id/action_fragmentTopAlbums_to_fragmentAlbumDetails"

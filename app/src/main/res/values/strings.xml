@@ -9,7 +9,8 @@
 
     <string name="hint_artistName">artist name</string>
 
-    <string name="title_TopAlbums">Top Albums</string>
+    <string name="title_topAlbums">Top Albums</string>
+    <string name="title_favorites">Favorites</string>
     <string name="title_albumDetails">Album Details</string>
     <string name="title_artistSearch">Artist Search</string>
     <string name="title_topAlbumsFor_s">Top Albums for \"%s\"</string>
