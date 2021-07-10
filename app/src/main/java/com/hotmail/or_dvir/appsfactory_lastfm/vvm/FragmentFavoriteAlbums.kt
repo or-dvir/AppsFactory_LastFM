@@ -33,6 +33,8 @@ class FragmentFavoriteAlbums : BaseFragment()
         private const val TAG = "FragmentFavoriteAlbums"
     }
 
+    i stopped here! fix all todo notes!!!
+
     //todo
     // FIX NAVIGATION GRAPH!!!
     // clicking an album opens the details page
