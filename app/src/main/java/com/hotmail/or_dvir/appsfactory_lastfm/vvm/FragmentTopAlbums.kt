@@ -81,13 +81,13 @@ class FragmentTopAlbums : BaseFragment()
                     ?: rvAdapter.notifyItemChanged(position)
             }
 
-            i stopped here
-            the problem is that i tell the adapter something has changed, but the
-            list of favorites in the adapter has not changed!!!
-            so the icon itself does not change!!!
-            can i observe livedata directly from the adapter????
+//            i stopped here
+//            the problem is that i tell the adapter something has changed, but the
+//            list of favorites in the adapter has not changed!!!
+//            so the icon itself does not change!!!
+//            can i observe livedata directly from the adapter????
 
-            //todo add note about not using listener and not diff util:
+            //todo add note about using listener and not diff util:
             // there is no indication in the Album class as to whether
             // it is in favorites or not, so the diffcallback will think nothing has changed
         }.apply {
@@ -110,7 +110,7 @@ class FragmentTopAlbums : BaseFragment()
         }
 
         binding.apply {
-            viewModel.getTopAlbumsAndLoadFavorites(getArtistName())
+            viewModel.loadTopAlbums(getArtistName())
 
             rv.apply {
                 //todo might be needed for pagination?
