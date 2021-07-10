@@ -1,5 +1,6 @@
 package com.hotmail.or_dvir.appsfactory_lastfm.other.database.daos
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -28,5 +29,5 @@ interface IDaoAlbums
     suspend fun delete(dbUUID: String): Int
 
     @Query("select * from table_favoriteAlbums")
-    suspend fun getFavoriteAlbums(): List<Album>
+    fun getFavoriteAlbums(): LiveData<List<Album>>
 }
