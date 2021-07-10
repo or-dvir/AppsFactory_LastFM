@@ -47,7 +47,6 @@ class FragmentTopAlbums : BaseFragment()
     @VisibleForTesting
     internal val viewModel: FragmentTopAlbumsViewModel by viewModel()
     private lateinit var observerAlbums: Observer<List<Album>?>
-    private lateinit var observerError: Observer<String>
     private lateinit var rvAdapter: AdapterAlbums
 
     override fun getLoadingView() = binding.loadingView.parent
@@ -75,7 +74,23 @@ class FragmentTopAlbums : BaseFragment()
         super.onViewCreated(view, savedInstanceState)
 
         //initialize with empty list
-        rvAdapter = AdapterAlbums(mutableListOf()).apply {
+        rvAdapter = AdapterAlbums(mutableListOf()) { position, album ->
+            //favorite icon click listener
+            viewModel.addOrRemoveAlbum(album) { error ->
+                error?.let { getView()?.snackbar(it) }
+                    ?: rvAdapter.notifyItemChanged(position)
+            }
+
+            i stopped here
+            the problem is that i tell the adapter something has changed, but the
+            list of favorites in the adapter has not changed!!!
+            so the icon itself does not change!!!
+            can i observe livedata directly from the adapter????
+
+            //todo add note about not using listener and not diff util:
+            // there is no indication in the Album class as to whether
+            // it is in favorites or not, so the diffcallback will think nothing has changed
+        }.apply {
             addFeature(
                 DxFeatureClick<Album>(
                     onItemClick = { _, _, item ->
@@ -113,20 +128,11 @@ class FragmentTopAlbums : BaseFragment()
             }
         }
 
-        viewModel.apply {
-            topAlbums.observe(viewLifecycleOwner, observerAlbums)
-            //todo test what happens when there is an error, then the user goes to the home screen,
-            // then returns to the app - does the error message show again?
-            error.observe(viewLifecycleOwner, observerError)
-        }
+        viewModel.topAlbums.observe(viewLifecycleOwner, observerAlbums)
     }
 
     private fun initializeObservers()
     {
-        observerError = Observer {
-            view?.snackbar(it ?: getString(R.string.error_general))
-        }
-
         observerAlbums = Observer { newList ->
             if (newList == null)
             {

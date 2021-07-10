@@ -18,8 +18,9 @@
     <string name="error_general">Some error occurred</string>
     <string name="error_noResults_s">No results found for \"%s\"</string>
     <string name="error_loadingAlbum">Error loading album</string>
-    <string name="error_addingAlbum_s">Error adding album \"%s\" to favorites</string>
-    <string name="error_removingAlbum_s">Error removing album \"%s\" from favorites</string>
+    <string name="error_addingAlbum">Error adding album to favorites</string>
+    <string name="error_removingAlbum">Error removing album from favorites</string>
+    <string name="error_cannotAddAlbumToFavorites">Cannot add this album to favorites</string>
     <string name="error_noTrackInformationAvailable">Tracks information not available</string>
 
 </resources>

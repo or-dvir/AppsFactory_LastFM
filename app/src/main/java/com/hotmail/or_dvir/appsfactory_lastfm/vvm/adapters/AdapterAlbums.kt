@@ -11,7 +11,8 @@ import com.hotmail.or_dvir.dxadapter.DxAdapter
 import com.squareup.picasso.Picasso
 
 class AdapterAlbums(
-    val items: MutableList<Album>
+    val items: MutableList<Album>,
+    val onFavoriteClick: (Int, Album) -> Unit
 ) : DxAdapter<Album, AdapterAlbums.ViewHolder>()
 {
     //todo some code is duplicated from artist adapter. can i create a shared base adapter?
@@ -31,7 +32,9 @@ class AdapterAlbums(
             false
         )
 
-        return ViewHolder(binding)
+        return ViewHolder(binding) {
+            onFavoriteClick(it, items[it])
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
@@ -117,19 +120,13 @@ class AdapterAlbums(
     /////////////////////////////////////////
 
     class ViewHolder(
-        val binding: RowAlbumBinding
+        val binding: RowAlbumBinding,
+        val onFavoriteClick: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root)
     {
         init
         {
-            proposed solution:
-                    have 2 interfaces (or lambdas). one for view holder (only with position)
-                    and one for adapter (with position and item)
-            then propagae the click from the view holder (only with position)
-            to the adapter inside getAdapterViewHolder (where you can retrieve the item),
-            to the fragment (who will receive both position and item)
-
-                    see here https://oozou.com/blog/a-better-way-to-handle-click-action-in-a-recyclerview-item-60
+            binding.ivFavorite.setOnClickListener { onFavoriteClick(bindingAdapterPosition) }
         }
     }
 }

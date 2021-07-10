@@ -18,10 +18,7 @@ class FragmentTopAlbumsViewModel(
 {
     val topAlbums = MutableLiveData<List<Album>?>(listOf())
 
-    //do NOT initialize the error! if you do, the UI will respond when the view model is created
-    //todo scenario: say we had an error, fragment goes to background, fragment comes back
-    //      to foreground. live data will trigger and we will see the same error again!
-    val error = MutableLiveData<String>()
+    //todo should probably make this observe a livedata query from room
     var favoriteAlbums = listOf<Album>()
 
     fun getTopAlbumsAndLoadFavorites(artistName: String?)
@@ -50,41 +47,51 @@ class FragmentTopAlbumsViewModel(
         }
     }
 
-    //todo
-    // when adding and removing albums to/from favorites, should i show a loading dialog
-    //      on the album itself???
-    fun addAlbumToFavorites(album: Album) = addOrRemoveAlbum(true, album)
-    fun removeAlbumFromFavorites(album: Album) = addOrRemoveAlbum(false, album)
-
-    private fun addOrRemoveAlbum(isAdding: Boolean, album: Album)
+    /**
+     * @return String? error string, or null if successful
+     */
+    //using a listener and not making this a suspend function because it will be called
+    //from the fragment with the fragment lifecycle scope. so if the fragment dies,
+    //it will also cancel coroutines started here (as child coroutines of the fragment scope)
+    fun addOrRemoveAlbum(album: Album, onFinish: (String?) -> Unit)
     {
+        if (!album.canBeStoredInDb())
+        {
+            onFinish(getString(R.string.error_cannotAddAlbumToFavorites))
+            return
+        }
+
+        //we do not use the contains() function because that is based on Album.equals().
+        //since Album is a data class, its' equals() function consists of all the fields in the
+        //primary constructor, whereas 2 albums might be the same even with slightly varied fields
+        //(e.g. from database and from lastFM API, since they don't exactly match).
+        val isInFavorite = favoriteAlbums.find { it.dbUUID == album.dbUUID } != null
+
+        var success: Boolean
+        var error: String? = null
         viewModelScope.launch(Dispatchers.Main) {
             isLoading.value = true
 
-            val success =
-                if (isAdding)
+            if (isInFavorite)
+            {
+                //removing album from favorites
+                success = repoAlbums.deleteFavoriteAlbum(album)
+                if (!success)
                 {
-                    repoAlbums.addFavoriteAlbum(album)
-                } else
-                {
-                    repoAlbums.deleteFavoriteAlbum(album)
+                    error = getString(R.string.error_removingAlbum)
                 }
+            } else
+            {
+                //adding album to favorites
+                success = repoAlbums.addFavoriteAlbum(album)
+                if (!success)
+                {
+                    error = getString(R.string.error_addingAlbum)
+                }
+            }
 
             isLoading.value = false
-
-            if (!success)
-            {
-                val errorRes =
-                    if (isAdding)
-                    {
-                        R.string.error_addingAlbum_s
-                    } else
-                    {
-                        R.string.error_removingAlbum_s
-                    }
-
-                error.value = getString(errorRes, album.name ?: "")
-            }
+            onFinish(error)
         }
     }
 }
