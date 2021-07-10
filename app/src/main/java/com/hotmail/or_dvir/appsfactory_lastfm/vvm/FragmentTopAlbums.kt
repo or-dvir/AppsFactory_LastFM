@@ -165,7 +165,7 @@ class FragmentTopAlbums : BaseFragment()
 
                 //back to using main dispatcher
                 rvAdapter.apply {
-                    setData(newList, viewModel.favoriteAlbums)
+                    setData(newList)
                     result.dispatchUpdatesTo(this)
 
                     //handle views visibility

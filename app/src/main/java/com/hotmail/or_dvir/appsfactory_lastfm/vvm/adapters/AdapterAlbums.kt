@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
@@ -70,7 +71,9 @@ class AdapterAlbums(
                         else -> R.drawable.ic_favorite_outline
                     }
 
-                    setImageResource(favoriteRes)
+                    withContext(Dispatchers.Main) {
+                        setImageResource(favoriteRes)
+                    }
                 }
             }
 
