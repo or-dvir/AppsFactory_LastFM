@@ -17,8 +17,6 @@ class AdapterAlbums(
 {
     //todo some code is duplicated from artist adapter. can i create a shared base adapter?
 
-    private var favoriteAlbums = listOf<Album>()
-
     override fun getDxAdapterItems() = items
 
     override fun createAdapterViewHolder(
@@ -100,10 +98,8 @@ class AdapterAlbums(
     private fun isInFavorites(album: Album) =
         favoriteAlbums.find { it.dbUUID == album.dbUUID } != null
 
-    fun setData(newData: List<Album>, favoriteAlbums: List<Album>)
+    fun setData(newData: List<Album>)
     {
-        this.favoriteAlbums = favoriteAlbums
-
         items.apply {
             clear()
             addAll(newData)
