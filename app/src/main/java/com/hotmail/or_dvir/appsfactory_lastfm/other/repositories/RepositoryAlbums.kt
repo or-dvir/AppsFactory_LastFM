@@ -9,6 +9,7 @@ abstract class RepositoryAlbums
 {
     //region READ
     abstract fun getFavoriteAlbums(): LiveData<List<Album>>
+    abstract suspend fun isInFavorites(dbUUID: String): Boolean
     abstract suspend fun getTopAlbums(artistName: String): ServerWrapperTopAlbums
     abstract suspend fun getAlbumDetails(
         artistName: String,

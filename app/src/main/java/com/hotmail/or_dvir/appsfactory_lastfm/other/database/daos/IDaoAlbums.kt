@@ -30,4 +30,7 @@ interface IDaoAlbums
 
     @Query("select * from table_favoriteAlbums")
     fun getFavoriteAlbums(): LiveData<List<Album>>
+
+    @Query("select (count(*) > 0) from table_favoriteAlbums where dbUUID=:dbUUID limit 1")
+    fun isInFavorites(dbUUID: String): Boolean
 }

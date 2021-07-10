@@ -64,5 +64,10 @@ class RepositoryAlbumsImpl(
             }
         }
 
+    override suspend fun isInFavorites(dbUUID: String) =
+        withContext(Dispatchers.IO) {
+            daoAlbums.isInFavorites(dbUUID)
+        }
+
     override fun getFavoriteAlbums() = daoAlbums.getFavoriteAlbums()
 }
