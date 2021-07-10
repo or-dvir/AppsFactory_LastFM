@@ -7,15 +7,23 @@ import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.appsfactory_lastfm.databinding.RowAlbumBinding
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Album
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Image.Companion.Size
+import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryAlbums
 import com.hotmail.or_dvir.dxadapter.DxAdapter
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 
 class AdapterAlbums(
     val items: MutableList<Album>,
     val onFavoriteClick: (Int, Album) -> Unit
-) : DxAdapter<Album, AdapterAlbums.ViewHolder>()
+) : DxAdapter<Album, AdapterAlbums.ViewHolder>(), KoinComponent
 {
     //todo some code is duplicated from artist adapter. can i create a shared base adapter?
+
+    val repoAlbums: RepositoryAlbums = get()
 
     override fun getDxAdapterItems() = items
 
@@ -45,17 +53,25 @@ class AdapterAlbums(
 
             tvAlbumName.text = item.name
 
-            ivFavorite.apply {
-                val favoriteRes = when
-                {
-                    !item.canBeStoredInDb() -> R.drawable.ic_favorite_broken
-                    isInFavorites(item) -> R.drawable.ic_favorite_filled
-                    //item can be stored and is NOT in favorites
-                    else -> R.drawable.ic_favorite_outline
-                }
+            //todo BAD! either fix this later, or add a note in the documentation
+            // saying you know its bad!
+            // 1. dont start an "unbound" coroutine scope like that.
+            // 2. dont perform db queries in this function! it will be called many times!!!
+            CoroutineScope(Dispatchers.IO).launch {
+                ivFavorite.apply {
+                    val isInFavorites =
+                        item.canBeStoredInDb() && repoAlbums.isInFavorites(item.dbUUID!!)
 
-                setImageResource(favoriteRes)
-                //todo handle clicking favorite button
+                    val favoriteRes = when
+                    {
+                        !item.canBeStoredInDb() -> R.drawable.ic_favorite_broken
+                        isInFavorites -> R.drawable.ic_favorite_filled
+                        //item can be stored and is NOT in favorites
+                        else -> R.drawable.ic_favorite_outline
+                    }
+
+                    setImageResource(favoriteRes)
+                }
             }
 
             ivAlbumImage.apply {
@@ -89,14 +105,6 @@ class AdapterAlbums(
 
         super.onViewRecycled(holder)
     }
-
-    //we do not use the contains() function because that is based on Album.equals().
-    //since Album is a data class, its' equals() function consists of all the fields in the
-    //primary constructor, whereas 2 albums might be the same even with slightly varied fields
-    //(e.g. from database and from lastFM API, since they don't exactly match).
-    //it's easier to have this function than to override the Album.equals() method.
-    private fun isInFavorites(album: Album) =
-        favoriteAlbums.find { it.dbUUID == album.dbUUID } != null
 
     fun setData(newData: List<Album>)
     {
