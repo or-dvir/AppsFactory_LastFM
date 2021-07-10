@@ -51,8 +51,9 @@ class FragmentTopAlbumsViewModel(
         viewModelScope.launch(Dispatchers.Main) {
             isLoading.value = true
 
-            //todo do i have to observe this first to make it work?
-            val isInFavorite = repoAlbums.getFavoriteAlbums().value?.contains(album) ?: false
+            //album.dbUUID should not be null here because it's the first thing
+            //we check in this function
+            val isInFavorite = repoAlbums.isInFavorites(album.dbUUID!!)
             if (isInFavorite)
             {
                 //removing album from favorites
