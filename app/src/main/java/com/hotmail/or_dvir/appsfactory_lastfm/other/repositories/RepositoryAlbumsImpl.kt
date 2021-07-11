@@ -14,10 +14,7 @@ class RepositoryAlbumsImpl(
 {
     //todo try all kinds of scenarios and handle errors appropriately
     //todo the api has a list of error codes. handle them!!!
-    //todo how do i keep the information in the database up to date?
-    //      if the downloaded album is in my favorites, also update it?
-    //      maybe for simplicity just say that the information is only updated
-    //      if the user removes and saves the information again
+
     override suspend fun getTopAlbums(artistName: String) =
         withContext(Dispatchers.IO) {
             apiLastFM.getTopAlbums(artistName)
@@ -33,9 +30,11 @@ class RepositoryAlbumsImpl(
             apiLastFM.getAlbumDetails(artistName, albumName)
         }
 
+    //note: for simplicity, the information saved in the DB will NOT be automatically updated.
+    //to get the latest information about an album, it must be removed from favorites
+    // and then re-added
     //todo MUST FINISH no matter what!
     override suspend fun addFavoriteAlbum(album: Album) =
-        //todo should do nothing if already exists
         withContext(Dispatchers.IO) {
             //if we cannot uniquely identify the album, we cannot save it to the database
             if (album.canBeStoredInDb())
