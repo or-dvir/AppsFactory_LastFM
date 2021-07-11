@@ -89,13 +89,11 @@ data class Album(
     ////////////////////////////////////////////////////
     ////////////////////////////////////////////////////
 
-    //todo copied from Artist class. can i make a generic one that only compares id?
-    // the contents of the data (with the same id) does not change...
     class DiffCallback(private val oldList: List<Album>, private val newList: List<Album>) :
         DiffUtil.Callback()
     {
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
-            oldList[oldItemPosition] == newList[newItemPosition]
+            oldList[oldItemPosition].dbUUID == newList[newItemPosition].dbUUID
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean
         {
