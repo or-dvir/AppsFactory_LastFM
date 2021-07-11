@@ -6,7 +6,8 @@ interface IModelWithImages
 {
     fun getImageList(): List<Image>
 
-    fun getImageUrl(size: Size) = getImageList().find {
-        it.size == size && !it.url.isNullOrBlank()
-    }?.url
+    fun getImageUrl(size: Size) =
+        getImageList().find {
+            it.size == size && !it.url.isNullOrBlank()
+        }?.url
 }
