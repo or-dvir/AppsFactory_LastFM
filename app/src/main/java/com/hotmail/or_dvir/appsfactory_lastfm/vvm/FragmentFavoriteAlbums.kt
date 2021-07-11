@@ -45,11 +45,11 @@ class FragmentFavoriteAlbums : BaseFragment()
 
     private lateinit var observerAlbums: Observer<List<Album>>
 
-    //todo using same adapter as top albums because it has almost the exact same
-    // functionality as we need here. the only difference (for now) is that
-    // we know for sure that all the albums in this fragment ARE favorite albums
-    // so some calculations will be performed even though they are not needed
-    // for this fragment
+    //note: we are using same adapter as top albums because it has the exact same
+    // functionality as we need here. the only difference is querying whether each entry is
+    // favorite or not, which is always true in this fragment.
+    // so this query will be performed even though it is not needed here.
+    // for the purposes of this demo app, it is good enough.
     private lateinit var rvAdapter: AdapterAlbums
 
 
