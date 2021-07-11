@@ -35,8 +35,6 @@ class FragmentTopAlbums : BaseFragment()
     }
 
     //todo
-    // when showing an error for adding/removing album, if many albums have errors,
-    //      the snackbar will quickly disappear.
     // check api!!!! album object does not include list of tracks!!! (need to store this)
 
     private var _binding: FragmentTopAlbumsBinding? = null
@@ -74,13 +72,12 @@ class FragmentTopAlbums : BaseFragment()
         rvAdapter = AdapterAlbums(mutableListOf()) { position, album ->
             //favorite icon click listener
             viewModel.addOrRemoveAlbum(album) { error ->
+                //note: using listener and not diff util because there is no indication
+                // in the Album class as to whether it is in favorites or not,
+                // so the diffCallback will think nothing has changed
                 error?.let { getView()?.snackbar(it) }
                     ?: rvAdapter.notifyItemChanged(position)
             }
-
-            //todo add note about using listener and not diff util:
-            // there is no indication in the Album class as to whether
-            // it is in favorites or not, so the diffcallback will think nothing has changed
         }.apply {
             addFeature(
                 DxFeatureClick<Album>(
