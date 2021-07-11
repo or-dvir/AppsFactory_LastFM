@@ -3,11 +3,15 @@ package com.hotmail.or_dvir.appsfactory_lastfm.vvm
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hotmail.or_dvir.appsfactory_lastfm.R
@@ -33,12 +37,8 @@ class FragmentFavoriteAlbums : BaseFragment()
         private const val TAG = "FragmentFavoriteAlbums"
     }
 
-    i stopped here! fix all todo notes!!!
-
     //todo
-    // FIX NAVIGATION GRAPH!!!
     // clicking an album opens the details page
-    // add button to go to search fragment
     // show loading dialog when loading albums
     //      how? its observed directly from the database!
     //      perhaps automatically show loading dialog, and hide it in observer...
@@ -171,6 +171,25 @@ class FragmentFavoriteAlbums : BaseFragment()
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
+    {
+        inflater.inflate(R.menu.menu_fragment_favorites, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+        if (item.itemId == R.id.menuItem_favorites_search)
+        {
+            findNavController().navigate(
+                FragmentFavoriteAlbumsDirections.actionFragmentFavoritesToFragmentSearch()
+            )
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroyView()
