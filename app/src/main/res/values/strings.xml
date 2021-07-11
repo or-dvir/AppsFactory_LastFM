@@ -16,6 +16,8 @@
     <string name="title_topAlbumsFor_s">Top Albums for \"%s\"</string>
     <string name="title_s_by_s">\"%s\" by %s</string>
 
+    <string name="emptyView_favorites">Your favorite albums show up here</string>
+
     <string name="error_general">Some error occurred</string>
     <string name="error_noResults_s">No results found for \"%s\"</string>
     <string name="error_loadingAlbum">Error loading album</string>

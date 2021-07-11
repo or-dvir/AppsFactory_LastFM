@@ -156,7 +156,7 @@ class FragmentFavoriteAlbums : BaseFragment()
                     //handle views visibility
                     binding.apply {
                         rv.makeVisibleOrGone(!isEmpty())
-                        //todo show/hide empty view
+                        tvEmptyView.makeVisibleOrGone(isEmpty())
                     }
                 }
             }
