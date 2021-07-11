@@ -119,8 +119,8 @@ class FragmentSearch : BaseFragment()
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
     {
-        inflater.inflate(R.menu.menu_search, menu)
-        val searchView = menu.findItem(R.id.menuItem_search).actionView as SearchView
+        inflater.inflate(R.menu.menu_fragment_search, menu)
+        val searchView = menu.findItem(R.id.menuItem_searchView).actionView as SearchView
         setupSearchView(searchView)
 
         super.onCreateOptionsMenu(menu, inflater)
