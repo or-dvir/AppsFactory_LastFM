@@ -2,7 +2,6 @@ package com.hotmail.or_dvir.appsfactory_lastfm.other
 
 import android.app.Application
 import android.util.Log
-import androidx.annotation.VisibleForTesting
 import com.hotmail.or_dvir.appsfactory_lastfm.other.database.SMyDatabase
 import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryAlbums
 import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryAlbumsImpl
@@ -31,34 +30,17 @@ class MyApplication : Application()
         private const val TAG = "MyApplication"
     }
 
-    //todo keep for reference. delete if unused
-    @VisibleForTesting
     val appModule = module {
         //todo do i need to inject database? daos?
         viewModel { FragmentSearchViewModel(androidApplication(), get()) }
         viewModel { FragmentTopAlbumsViewModel(androidApplication(), get()) }
         viewModel { FragmentAlbumDetailsViewModel(androidApplication(), get()) }
         viewModel { FragmentFavoriteAlbumsViewModel(androidApplication(), get()) }
-//        viewModel { FragmentNewEditListViewModel(get(), androidApplication()) }
-//        viewModel { FragmentListItemsViewModel(androidApplication()) }
-//        viewModel { FragmentNewListItemsViewModel(androidApplication()) }
-//        viewModel { FragmentEditListItemViewModel(androidApplication()) }
-//        viewModel { ActivityLoginViewModel(androidApplication()) }
-//        viewModel { ActivityNavGraphViewModel(get(), get(), androidApplication()) }
-//        factory<RepositoryUserLists> { RepositoryUserListsImpl() }
-//        factory<RepositoryListItems> { (listId: UUID) -> RepositoryListItemsImpl(listId) }
         single<RepositoryArtists> { RepositoryArtistsImpl(SMyRetrofit.lastFmApi) }
         single<RepositoryAlbums> { RepositoryAlbumsImpl(SMyRetrofit.lastFmApi, get()) }
         single { SMyDatabase.getInstance(androidApplication()) }
         single { get<SMyDatabase>().daoAlbums() }
     }
-
-//todo delete this when ready
-// if not deleting, make sure that all dependencies in the appModule are included here
-//        val testModule = module(override = true) {
-//            factory<RepositoryUserLists> { RepositoryUserListsImplFake() }
-//            factory<RepositoryListItems> { (listId: UUID) -> RepositoryListItemsImplFake(listId) }
-//        }
 
     private val exceptionHandler = CoroutineExceptionHandler { context, t ->
         //todo is it useful to print the context here? check what it prints
