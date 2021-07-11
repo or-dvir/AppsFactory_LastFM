@@ -43,32 +43,30 @@ data class Album(
         private const val LASTFM_NULL = "(null)"
     }
 
-    /**
-     * unfortunately there doesn't seem to be a reliable field to use as id from the LastFm API.
-     * even "mbid" may bu empty, null, or completely missing!
-     *
-     * note that we CANNOT use [dbPrimaryKey] because that is not a value retrieved
-     * from the server so we cannot use it to identify existing rows.
-     *
-     * so instead we use a combination of the artist name and the album name.
-     * note that if one of these values is null or empty, the object does not have a unique id
-     * and therefore it cannot be saved in the database.
-     */
+    //IMPORTANT NOTE:
+    //unfortunately there doesn't seem to be a reliable field to use as id from the LastFm API.
+    //even "mbid" may be empty, null, or completely missing!
+    //note that we CANNOT use dbPrimaryKey because that is not a value retrieved
+    //from the server so we cannot use it to identify already existing rows.
+    //so instead we use a combination of the artist name and the album name
+    //(which are required for other API requests anyway).
+    //this means that if one of these values is null or empty, the object does not have a unique id
+    //and therefore it cannot be saved in the database.
     @ColumnInfo(name = "dbUUID")
     @Json(name = "dbUUID")
-    //made var and not val for convenience (otherwise Room complains).
-    //in real app, a better solution would be used
-    var dbUUID = name?.let { albumName ->
-        artist?.name?.let { artistName ->
-            if (artistName.isBlankOrEquals(LASTFM_NULL) || albumName.isBlankOrEquals(LASTFM_NULL))
-            {
-                null
-            } else
-            {
-                "$artistName$albumName"
+    //for simplicity, made var and not val (otherwise Room complains).
+    var dbUUID =
+        name?.let { albumName ->
+            artist?.name?.let { artistName ->
+                if (artistName.isBlankOrEquals(LASTFM_NULL) || albumName.isBlankOrEquals(LASTFM_NULL))
+                {
+                    null
+                } else
+                {
+                    "$artistName$albumName"
+                }
             }
         }
-    }
 
     fun canBeStoredInDb() = dbUUID != null
 
