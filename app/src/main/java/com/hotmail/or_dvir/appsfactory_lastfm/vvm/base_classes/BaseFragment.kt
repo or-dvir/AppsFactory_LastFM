@@ -16,7 +16,7 @@ abstract class BaseFragment() : Fragment()
 {
     //region abstract
     abstract fun getLoadingView(): View?
-    abstract fun getViewModel(): BaseAndroidViewModel
+    abstract fun getFragViewModel(): BaseAndroidViewModel
     abstract fun getRecyclerView(): RecyclerView?
     //endregion
 
@@ -38,7 +38,7 @@ abstract class BaseFragment() : Fragment()
         //this intercepts touch events so the user cannot interact with the screen
         //while the loading view is showing
         getLoadingView()?.setOnTouchListener { _, _ -> true }
-        getViewModel().isLoading.observe(viewLifecycleOwner, observerLoading)
+        getFragViewModel().isLoading.observe(viewLifecycleOwner, observerLoading)
     }
 
     override fun onPause()

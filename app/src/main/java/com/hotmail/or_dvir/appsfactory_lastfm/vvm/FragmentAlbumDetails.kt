@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
@@ -23,12 +22,11 @@ class FragmentAlbumDetails : BaseFragment()
     private val binding get() = _binding!!
     private val fragArgs: FragmentAlbumDetailsArgs by navArgs()
 
-    @VisibleForTesting
-    internal val viewModel: FragmentAlbumDetailsViewModel by viewModel()
+    private val viewModel: FragmentAlbumDetailsViewModel by viewModel()
     private lateinit var observerAlbum: Observer<Album?>
 
     override fun getLoadingView() = binding.loadingView.parent
-    override fun getViewModel() = viewModel
+    override fun getFragViewModel() = viewModel
 
     //no recycler view for this fragment
     override fun getRecyclerView(): RecyclerView? = null

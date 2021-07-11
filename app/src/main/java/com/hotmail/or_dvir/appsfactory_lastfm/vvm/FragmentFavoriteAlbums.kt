@@ -8,7 +8,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -39,10 +38,7 @@ class FragmentFavoriteAlbums : BaseFragment()
 
     private var _binding: FragmentFavoriteAlbumsBinding? = null
     private val binding get() = _binding!!
-
-    @VisibleForTesting
-    internal val viewModel: FragmentFavoriteAlbumsViewModel by viewModel()
-
+    private val viewModel: FragmentFavoriteAlbumsViewModel by viewModel()
     private lateinit var observerAlbums: Observer<List<Album>>
 
     //note: we are using same adapter as top albums because it has the exact same
@@ -55,7 +51,7 @@ class FragmentFavoriteAlbums : BaseFragment()
 
     override fun getLoadingView() = binding.loadingView.parent
     override fun getRecyclerView() = binding.rv
-    override fun getViewModel() = viewModel
+    override fun getFragViewModel() = viewModel
 
     override fun onCreate(savedInstanceState: Bundle?)
     {

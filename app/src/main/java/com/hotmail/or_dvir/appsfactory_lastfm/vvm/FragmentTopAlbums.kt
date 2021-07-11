@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -43,14 +42,12 @@ class FragmentTopAlbums : BaseFragment()
     private var _binding: FragmentTopAlbumsBinding? = null
     private val binding get() = _binding!!
     private val fragArgs: FragmentTopAlbumsArgs by navArgs()
-
-    @VisibleForTesting
-    internal val viewModel: FragmentTopAlbumsViewModel by viewModel()
+    private val viewModel: FragmentTopAlbumsViewModel by viewModel()
     private lateinit var observerAlbums: Observer<List<Album>?>
     private lateinit var rvAdapter: AdapterAlbums
 
     override fun getLoadingView() = binding.loadingView.parent
-    override fun getViewModel() = viewModel
+    override fun getFragViewModel() = viewModel
     override fun getRecyclerView() = binding.rv
 
     override fun onCreate(savedInstanceState: Bundle?)

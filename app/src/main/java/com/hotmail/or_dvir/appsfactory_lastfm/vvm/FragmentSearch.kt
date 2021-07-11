@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import androidx.annotation.VisibleForTesting
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -45,14 +44,12 @@ class FragmentSearch : BaseFragment()
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
-
-    @VisibleForTesting
-    internal val viewModel: FragmentSearchViewModel by viewModel()
+    private val viewModel: FragmentSearchViewModel by viewModel()
     private lateinit var observerArtistsSearch: Observer<List<Artist>?>
     private lateinit var rvAdapter: AdapterArtists
 
     override fun getLoadingView() = binding.loadingView.parent
-    override fun getViewModel() = viewModel
+    override fun getFragViewModel() = viewModel
     override fun getRecyclerView() = binding.rv
 
     override fun onCreate(savedInstanceState: Bundle?)
