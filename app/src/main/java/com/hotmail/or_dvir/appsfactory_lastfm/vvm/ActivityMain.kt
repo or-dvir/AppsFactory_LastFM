@@ -31,6 +31,8 @@ class ActivityMain : AppCompatActivity()
     // think about obvious features you did not add, and add comment what you would also do
     //      e.g. remove album from favorites from the "favorites" screen
     // remove all annotations @visibleForTesting and fix privacy modifier if needed
+    // add note saying that no special attention was given to landscape mode
+    //      make basic tests in landscape mode!!!
 
     private lateinit var binding: ActivityMainBinding
 
