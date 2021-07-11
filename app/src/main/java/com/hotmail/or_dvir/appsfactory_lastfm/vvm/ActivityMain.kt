@@ -33,6 +33,7 @@ class ActivityMain : AppCompatActivity()
     // remove all annotations @visibleForTesting and fix privacy modifier if needed
     // add note saying that no special attention was given to landscape mode
     //      make basic tests in landscape mode!!!
+    // for all network requests, add exception handler! especially for timeouts!
 
     private lateinit var binding: ActivityMainBinding
 
