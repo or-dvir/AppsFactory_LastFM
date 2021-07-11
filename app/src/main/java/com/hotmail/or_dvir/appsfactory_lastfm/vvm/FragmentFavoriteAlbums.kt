@@ -127,6 +127,8 @@ class FragmentFavoriteAlbums : BaseFragment()
     private fun initializeObservers()
     {
         observerAlbums = Observer { newList ->
+            viewModel.isLoading.value = false
+
             if (newList == null)
             {
                 binding.apply {

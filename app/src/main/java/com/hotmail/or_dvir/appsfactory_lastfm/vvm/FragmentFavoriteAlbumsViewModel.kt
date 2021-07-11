@@ -15,6 +15,15 @@ class FragmentFavoriteAlbumsViewModel(
 {
     val favoriteAlbums = repoAlbums.getFavoriteAlbums()
 
+    init
+    {
+        //the favorites fragment is immediately observing favoriteAlbums
+        // so it should show the loading view immediately.
+        // since it is observed directly from the database, it's the fragments'
+        // responsibility to dismiss the loading view when needed
+        isLoading.value = true
+    }
+
     //using a listener and not making this a suspend function because it will be called
     //from the fragment with the fragment lifecycle scope. so if the fragment dies,
     //it will also cancel coroutines started here (as child coroutines of the fragment scope)

@@ -16,8 +16,6 @@
     this view must be last so it shows above the other-->
     <include
         android:id="@+id/loadingView"
-        layout="@layout/generic_loading_view"
-        android:visibility="gone"
-        tools:visibility="visible" />
+        layout="@layout/generic_loading_view" />
 
 </RelativeLayout>
