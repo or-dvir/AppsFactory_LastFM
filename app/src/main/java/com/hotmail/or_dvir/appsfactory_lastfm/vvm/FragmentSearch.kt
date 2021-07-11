@@ -30,6 +30,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import or_dvir.hotmail.com.dxutils.hideKeyBoard
 import or_dvir.hotmail.com.dxutils.makeGone
+import or_dvir.hotmail.com.dxutils.makeVisible
 import or_dvir.hotmail.com.dxutils.makeVisibleOrGone
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -47,7 +48,7 @@ class FragmentSearch : BaseFragment()
 
     @VisibleForTesting
     internal val viewModel: FragmentSearchViewModel by viewModel()
-    private lateinit var observerArtistsSearch: Observer<List<Artist>>
+    private lateinit var observerArtistsSearch: Observer<List<Artist>?>
     private lateinit var rvAdapter: AdapterArtists
 
     override fun getLoadingView() = binding.loadingView.parent
@@ -164,11 +165,13 @@ class FragmentSearch : BaseFragment()
             {
                 binding.apply {
                     rv.makeGone()
-                    emptyView.makeGone()
+                    emptyView.apply {
+                        //todo make better error
+                        text = getString(R.string.error_general)
+                        makeVisible()
+                    }
                 }
 
-                //todo make better error
-                view?.longSnackbar(R.string.error_general)
                 return@Observer
             }
 
