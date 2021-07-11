@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="cardView_imageHeight">150dp</dimen>
+    <dimen name="cardView_margin">8dp</dimen>
+    <dimen name="cardView_textMargin">8dp</dimen>
+</resources>

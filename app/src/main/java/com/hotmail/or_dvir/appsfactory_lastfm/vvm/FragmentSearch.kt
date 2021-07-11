@@ -14,8 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.appsfactory_lastfm.databinding.FragmentSearchBinding
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Artist
@@ -100,16 +99,8 @@ class FragmentSearch : BaseFragment()
 //            }
 
             adapter = rvAdapter
-
-            //todo use grid layout manager like for albums!
             layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
-            addItemDecoration(
-                DividerItemDecoration(
-                    context, (layoutManager as LinearLayoutManager).orientation
-                )
-            )
+                GridLayoutManager(context, getInteger(R.integer.spanCountForGridLayout))
         }
 
         viewModel.artists.observe(viewLifecycleOwner, observerArtistsSearch)
