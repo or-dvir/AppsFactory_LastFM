@@ -24,7 +24,7 @@ class AdapterAlbums(
 {
     //todo some code is duplicated from artist adapter. can i create a shared base adapter?
 
-    val repoAlbums: RepositoryAlbums = get()
+    private val repoAlbums: RepositoryAlbums = get()
 
     override fun getDxAdapterItems() = items
 
