@@ -22,27 +22,9 @@ interface ILastFmApi
     @GET("?method=artist.gettopalbums&$API_PARAMS")
     suspend fun getTopAlbums(@Query("artist") artistName: String): ServerWrapperTopAlbums
 
-
     @GET("?method=album.getinfo&$API_PARAMS")
     suspend fun getAlbumDetails(
         @Query("artist") artistName: String,
         @Query("album") albumName: String
     ): ServerWrapperAlbumDetails
-
-    //todo keep for reference.
-    // remove when no longer needed
-//    @GET("/shows/{showId}?embed[]=seasons&embed[]=episodes")
-//    fun getMainInfoForShowWithSeasonsAndEpisodes(@Path("showId") showId: Long): Call<TvShowEntity>
-//    @GET("/shows/{showId}/cast")
-//    fun getCastForShow(@Path("showId") showId: Long): Call<List<CastCrewMember>>
-//    @GET("/shows/{showId}/crew")
-//    fun getCrewForShow(@Path("showId") showId: Long): Call<List<CastCrewMember>>
-//    @GET("/search/shows")
-//    fun searchForShow(@Query("q") searchQuery: String): Call<List<ShowSearchResult>>
-//    @GET("/seasons/{seasonId}/episodes")
-//    fun getAllEpisodesForSeason(@Path("seasonId") seasonId: Long): Call<List<EpisodeEntity>>
-//    @GET("/shows/{showId}/seasons")
-//    fun getAllSeasons(@Path("showId") showId: Long): Call<List<SeasonEntity>>
-//    @GET("/seasons/{seasonId}/episodes")
-//    fun getEpisodesForSeasons(@Path("seasonId") seasonId: Long): Call<List<EpisodeEntity>>
 }
