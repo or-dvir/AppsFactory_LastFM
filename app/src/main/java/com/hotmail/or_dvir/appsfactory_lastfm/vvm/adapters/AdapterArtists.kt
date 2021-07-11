@@ -50,7 +50,6 @@ class AdapterArtists(val items: MutableList<Artist>) :
                     Picasso.get().load(imageUrl)
                 }
 
-            //todo do i need scaling?
             picassoRequest
                 .error(placeholderImageRes)
                 .into(ivArtistImage)
