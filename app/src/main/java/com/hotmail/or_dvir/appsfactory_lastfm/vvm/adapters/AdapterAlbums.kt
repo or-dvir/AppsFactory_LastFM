@@ -98,14 +98,7 @@ class AdapterAlbums(
 
     override fun onViewRecycled(holder: ViewHolder)
     {
-        holder.binding.apply {
-            tvAlbumName.text = ""
-            //todo some of the images dont show.
-            // it might be fixed when setting image in onBindViewHolder()
-//            ivFavorite.setImageDrawable(null)
-            Picasso.get().cancelRequest(ivAlbumImage)
-        }
-
+        Picasso.get().cancelRequest(holder.binding.ivAlbumImage)
         super.onViewRecycled(holder)
     }
 
