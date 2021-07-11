@@ -3,6 +3,7 @@ package com.hotmail.or_dvir.appsfactory_lastfm.other
 import android.app.Application
 import android.util.Log
 import com.hotmail.or_dvir.appsfactory_lastfm.other.database.SMyDatabase
+import com.hotmail.or_dvir.appsfactory_lastfm.other.database.daos.IDaoAlbums
 import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryAlbums
 import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryAlbumsImpl
 import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryArtists
@@ -30,6 +31,7 @@ class MyApplication : Application()
         private const val TAG = "MyApplication"
     }
 
+    @Suppress("RemoveExplicitTypeArguments")
     val appModule = module {
         //todo do i need to inject database? daos?
         viewModel { FragmentSearchViewModel(androidApplication(), get()) }
@@ -38,12 +40,11 @@ class MyApplication : Application()
         viewModel { FragmentFavoriteAlbumsViewModel(androidApplication(), get()) }
         single<RepositoryArtists> { RepositoryArtistsImpl(SMyRetrofit.lastFmApi) }
         single<RepositoryAlbums> { RepositoryAlbumsImpl(SMyRetrofit.lastFmApi, get()) }
-        single { SMyDatabase.getInstance(androidApplication()) }
-        single { get<SMyDatabase>().daoAlbums() }
+        single<SMyDatabase> { SMyDatabase.getInstance(androidApplication()) }
+        single<IDaoAlbums> { get<SMyDatabase>().daoAlbums() }
     }
 
     private val exceptionHandler = CoroutineExceptionHandler { context, t ->
-        //todo is it useful to print the context here? check what it prints
         Log.d(TAG, "a coroutine with $context failed.\n${t.message}")
     }
 
