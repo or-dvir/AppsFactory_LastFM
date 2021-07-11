@@ -38,7 +38,6 @@ class FragmentFavoriteAlbums : BaseFragment()
     }
 
     //todo
-    // clicking an album opens the details page
     // show loading dialog when loading albums
     //      how? its observed directly from the database!
     //      perhaps automatically show loading dialog, and hide it in observer...
@@ -96,13 +95,12 @@ class FragmentFavoriteAlbums : BaseFragment()
             addFeature(
                 DxFeatureClick<Album>(
                     onItemClick = { _, _, item ->
-                        //todo navigate to details fragment
-//                        findNavController().navigate(
-//                            FragmentTopAlbumsDirections.actionFragmentTopAlbumsToFragmentAlbumDetails(
-//                                getArtistName(),
-//                                item.name
-//                            )
-//                        )
+                        findNavController().navigate(
+                            FragmentFavoriteAlbumsDirections.actionFragmentFavoritesToFragmentAlbumDetails(
+                                item.artist?.name,
+                                item.name
+                            )
+                        )
                     },
                     onItemLongClick = { _, _, _ ->
                         //do nothing
