@@ -37,11 +37,6 @@ class FragmentFavoriteAlbums : BaseFragment()
         private const val TAG = "FragmentFavoriteAlbums"
     }
 
-    //todo
-    // show loading dialog when loading albums
-    //      how? its observed directly from the database!
-    //      perhaps automatically show loading dialog, and hide it in observer...
-
     private var _binding: FragmentFavoriteAlbumsBinding? = null
     private val binding get() = _binding!!
 
