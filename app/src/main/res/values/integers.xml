@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--in a real app, i would assign different numbers according to screen sizes or even
+    calculate it dynamically. for the purposes of this demo app, it is good enough-->
+    <integer name="spanCountForGridLayout">3</integer>
+</resources>

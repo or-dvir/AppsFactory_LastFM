@@ -78,7 +78,7 @@ class FragmentFavoriteAlbums : BaseFragment()
         super.onViewCreated(view, savedInstanceState)
 
         //initialize with empty list
-        rvAdapter = AdapterAlbums(mutableListOf()) { position, album ->
+        rvAdapter = AdapterAlbums(mutableListOf()) { _, album ->
             //favorite icon click listener
             viewModel.removeAlbum(album) { success ->
                 if (!success)
@@ -105,15 +105,10 @@ class FragmentFavoriteAlbums : BaseFragment()
             )
         }
 
-        binding.apply {
-            rv.apply {
-                adapter = rvAdapter
-
-                //todo dynamically calculate number of columns?
-                // if not, add note that this is based on your own device and in production
-                // will be calculated dynamically
-                layoutManager = GridLayoutManager(context, 3)
-            }
+        binding.rv.apply {
+            adapter = rvAdapter
+            layoutManager =
+                GridLayoutManager(context, getInteger(R.integer.spanCountForGridLayout))
         }
 
         viewModel.favoriteAlbums.observe(viewLifecycleOwner, observerAlbums)
