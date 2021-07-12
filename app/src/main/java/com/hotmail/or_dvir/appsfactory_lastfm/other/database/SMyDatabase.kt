@@ -16,7 +16,7 @@ import com.hotmail.or_dvir.appsfactory_lastfm.other.database.daos.IDaoAlbums
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Types
 
-@Database(entities = [Album::class], version = 1)
+@Database(entities = [Album::class], version = 2)
 @TypeConverters(RoomConverters::class)
 abstract class SMyDatabase : RoomDatabase()
 {
