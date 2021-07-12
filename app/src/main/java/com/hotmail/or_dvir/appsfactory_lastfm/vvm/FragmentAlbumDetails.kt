@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.appsfactory_lastfm.databinding.FragmentAlbumDetailsBinding
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Album
+import com.hotmail.or_dvir.appsfactory_lastfm.model.Image
 import com.hotmail.or_dvir.appsfactory_lastfm.other.snackbar
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseFragment
+import com.squareup.picasso.Picasso
 import or_dvir.hotmail.com.dxutils.makeGone
 import or_dvir.hotmail.com.dxutils.makeVisible
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -67,16 +69,27 @@ class FragmentAlbumDetails : BaseFragment()
                     return@Observer
                 }
 
-                //NOTE:
-                //for some reason, moshi does not properly convert the server response
-                //to Album object (all fields are set to their default values).
-                //however we have the album and artist names in the fragment arguments,
-                //so use those to at least show some information to the uer
+                //todo if album/artist name is null or empty, show
+                // only one of them.
+                // what if both are null or empty?
                 tvAlbumNameAndArtist.text = getString(
                     R.string.title_s_by_s,
-                    fragArgs.albumName,
-                    fragArgs.artistName
+                    it.name,
+                    it.artist?.name
                 )
+
+                ivAlbumImage.apply {
+                    //todo copied from somewhere else (opne of the adapters).
+                    // can i make a shared function?
+                    val imageUrl = it.getImageUrl(Image.Companion.Size.LARGE)
+                    if (!imageUrl.isNullOrBlank())
+                    {
+                        Picasso.get()
+                            .load(imageUrl)
+                            .error(R.drawable.ic_album_placeholder)
+                            .into(this)
+                    }
+                }
 
                 tvTracks.text = viewModel.getAlbumTracksAsListText()
                     ?: getString(R.string.error_noTrackInformationAvailable)
