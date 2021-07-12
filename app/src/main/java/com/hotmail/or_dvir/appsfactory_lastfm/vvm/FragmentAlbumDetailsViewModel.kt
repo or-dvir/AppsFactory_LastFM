@@ -4,8 +4,6 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Album
-import com.hotmail.or_dvir.appsfactory_lastfm.model.Artist
-import com.hotmail.or_dvir.appsfactory_lastfm.model.server_wrappers.ServerWrapperAlbumDetails
 import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryAlbums
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseAndroidViewModel
 import kotlinx.coroutines.Dispatchers
@@ -60,16 +58,8 @@ class FragmentAlbumDetailsViewModel(
         viewModelScope.launch(Dispatchers.Main) {
             isLoading.value = true
             val serverAlbumDetails = repoAlbums.getAlbumDetails(artistName!!, albumName!!)
-            album.value = convertServerAlbumToAppAlbum(serverAlbumDetails)
+            album.value = serverAlbumDetails.toAppAlbum()
             isLoading.value = false
         }
     }
-
-    private fun convertServerAlbumToAppAlbum(serverAlbum: ServerWrapperAlbumDetails) =
-        Album(
-            serverAlbum.albumName,
-            Artist(serverAlbum.artistName),
-            serverAlbum.tracks,
-            serverAlbum.images
-        )
 }
