@@ -3,6 +3,7 @@ package com.hotmail.or_dvir.appsfactory_lastfm.model
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.appsfactory_lastfm.other.isBlankOrEquals
@@ -10,7 +11,11 @@ import com.hotmail.or_dvir.dxclick.IDxItemClickable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-@Entity(tableName = "table_favoriteAlbums")
+@Entity(
+    //index the column used to identify albums so our queries will be more efficient
+    indices = [Index(value = [Album.COLUMN_DB_UUID])],
+    tableName = "table_favoriteAlbums"
+)
 @JsonClass(generateAdapter = true)
 data class Album(
     //note: the names of the columns and json just HAPPEN to be the same.
@@ -34,13 +39,13 @@ data class Album(
     var dbPrimaryKey: Long = 0L
 ) : IDxItemClickable, IModelWithImages
 {
-    //todo index the field names used to delete in the database
     //todo some album names are "(null)"
     // handle this in the recycler view (search for albums by "cher")
 
-    private companion object
+    companion object
     {
         private const val LASTFM_NULL = "(null)"
+        internal const val COLUMN_DB_UUID = "dbUUID"
     }
 
     //IMPORTANT NOTE:
@@ -52,7 +57,7 @@ data class Album(
     //(which are required for other API requests anyway).
     //this means that if one of these values is null or empty, the object does not have a unique id
     //and therefore it cannot be saved in the database.
-    @ColumnInfo(name = "dbUUID")
+    @ColumnInfo(name = COLUMN_DB_UUID)
     @Json(name = "dbUUID")
     //for simplicity, made var and not val (otherwise Room complains).
     var dbUUID =
