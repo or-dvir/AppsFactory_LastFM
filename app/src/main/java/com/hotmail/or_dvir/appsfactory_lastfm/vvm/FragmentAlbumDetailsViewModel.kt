@@ -43,8 +43,11 @@ class FragmentAlbumDetailsViewModel(
 
     fun getAlbumDetails(artistName: String?, albumName: String?)
     {
-        //todo can theoretically use id (if exists) instead.
-        // but there is no time for this... just add a note in the documentation
+        //note: these values are used in the albums repository to retrieve data from the internet
+        //and local database (see Album.dbUUID).
+        //if one of these fields is null, we cannot identify this album.
+        //lastFM api also allows to get information via the id, but we are not using this field
+        //in this app.
         if (atLeastOneNull(artistName, albumName))
         {
             album.value = null
