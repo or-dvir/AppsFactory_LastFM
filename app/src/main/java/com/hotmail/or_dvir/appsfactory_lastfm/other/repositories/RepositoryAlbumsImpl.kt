@@ -22,8 +22,6 @@ class RepositoryAlbumsImpl(
             apiLastFM.getTopAlbums(artistName)
         }
 
-    //todo this should work offline!
-    // if no internet connection, load from database
     override suspend fun getAlbumDetails(
         artistName: String,
         albumName: String
