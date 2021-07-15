@@ -1,5 +1,8 @@
 package com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
@@ -58,6 +61,16 @@ abstract class BaseFragment() : Fragment()
         ContextCompat.getColor(requireContext(), color)
 
     fun getInteger(@IntegerRes intRes: Int) = resources.getInteger(intRes)
+
+    fun hasInternetConnection(): Boolean
+    {
+        //these classes/methods were only deprecated in API 29.
+        //for the purposes of this demo app, its good enough to still use them
+        val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+
+        return activeNetwork?.isConnectedOrConnecting == true
+    }
 
     override fun onDestroyView()
     {
