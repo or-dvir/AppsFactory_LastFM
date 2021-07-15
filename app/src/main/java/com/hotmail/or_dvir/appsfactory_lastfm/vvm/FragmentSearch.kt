@@ -130,7 +130,13 @@ class FragmentSearch : BaseFragment()
                 {
                     override fun onQueryTextSubmit(query: String?): Boolean
                     {
-                        query?.let { viewModel.searchArtists(it) }
+                        query?.let {
+                            if(hasInternetConnection()) {
+                                viewModel.searchArtists(it)
+                            } else {
+                                view?.longSnackbar(R.string.error_offline)
+                            }
+                        }
                         return true
                     }
 

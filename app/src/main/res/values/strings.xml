@@ -21,6 +21,7 @@
 
     <string name="emptyView_favorites">Your favorite albums show up here</string>
 
+    <string name="error_offline">You seem to be offline</string>
     <string name="error_general">Some error occurred</string>
     <string name="error_noResults_s">No results found for \"%s\"</string>
     <string name="error_loadingAlbum">Error loading album</string>

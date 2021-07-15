@@ -98,7 +98,13 @@ class FragmentTopAlbums : BaseFragment()
         }
 
         binding.apply {
-            viewModel.loadTopAlbums(getArtistName())
+            if (hasInternetConnection())
+            {
+                viewModel.loadTopAlbums(getArtistName())
+            } else
+            {
+                setError(getString(R.string.error_offline))
+            }
 
             rv.apply {
                 //todo might be needed for pagination?
@@ -116,17 +122,21 @@ class FragmentTopAlbums : BaseFragment()
         viewModel.topAlbums.observe(viewLifecycleOwner, observerAlbums)
     }
 
+    private fun setError(error: String)
+    {
+        binding.apply {
+            rv.makeGone()
+            tvTitle.text = error
+        }
+    }
+
     private fun initializeObservers()
     {
         observerAlbums = Observer { newList ->
             if (newList == null)
             {
-                binding.apply {
-                    rv.makeGone()
-                    //todo make better error
-                    tvTitle.text = getString(R.string.error_general)
-                }
-
+                //todo make better error
+                setError(getString(R.string.error_general))
                 return@Observer
             }
 
