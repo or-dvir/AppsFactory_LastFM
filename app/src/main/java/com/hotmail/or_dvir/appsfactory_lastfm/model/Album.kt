@@ -109,9 +109,8 @@ data class Album(
             val old = oldList[oldItemPosition]
             val new = newList[newItemPosition]
 
-            //todo should i add images here too?
-            // what about artist?
-            return old.name == new.name
+            return old.name == new.name &&
+                    old.artist?.name == new.artist?.name
         }
 
         override fun getOldListSize() = oldList.size

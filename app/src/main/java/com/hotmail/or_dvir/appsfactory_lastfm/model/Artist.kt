@@ -34,7 +34,6 @@ data class Artist(
             val old = oldList[oldItemPosition]
             val new = newList[newItemPosition]
 
-            //todo should i add images here too?
             return old.name == new.name
         }
 
