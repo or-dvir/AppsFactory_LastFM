@@ -33,7 +33,6 @@ class MyApplication : Application()
 
     @Suppress("RemoveExplicitTypeArguments")
     val appModule = module {
-        //todo do i need to inject database? daos?
         viewModel { FragmentSearchViewModel(androidApplication(), get()) }
         viewModel { FragmentTopAlbumsViewModel(androidApplication(), get()) }
         viewModel { FragmentAlbumDetailsViewModel(androidApplication(), get()) }
