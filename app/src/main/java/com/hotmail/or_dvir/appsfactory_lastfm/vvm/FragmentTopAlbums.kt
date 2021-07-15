@@ -35,9 +35,6 @@ class FragmentTopAlbums : BaseFragment()
         private const val TAG = "FragmentTopAlbums"
     }
 
-    //todo
-    // check api!!!! album object does not include list of tracks!!! (need to store this)
-
     private var _binding: FragmentTopAlbumsBinding? = null
     private val binding get() = _binding!!
     private val fragArgs: FragmentTopAlbumsArgs by navArgs()
