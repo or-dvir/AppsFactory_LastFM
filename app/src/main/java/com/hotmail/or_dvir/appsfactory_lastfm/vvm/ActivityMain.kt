@@ -20,8 +20,7 @@ class ActivityMain : AppCompatActivity()
     // i made all fields in all classes nullable or have default values.
     //      its possible there will be side-effects (e.g. null strings will show as "null").
     //      check app thoroughly
-    // add the instructional pdf file to the repository so you can make comments like
-    //      "i didnt add this obvious feature because it was not in the instructions"
+    // make comments like "i didnt add this obvious feature because it was not in the instructions"
     // think about obvious features you did not add, and add comment what you would also do
     //      e.g. remove album from favorites from the "favorites" screen
     // add note saying that no special attention was given to landscape mode
