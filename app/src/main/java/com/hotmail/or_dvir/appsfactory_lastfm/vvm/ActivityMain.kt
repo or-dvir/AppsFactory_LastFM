@@ -20,9 +20,6 @@ class ActivityMain : AppCompatActivity()
     // i made all fields in all classes nullable or have default values.
     //      its possible there will be side-effects (e.g. null strings will show as "null").
     //      check app thoroughly
-    // add note that since "id" field is unreliable (can be missing or empty), we use names instead
-    // as "unique" identifiers. they may also be missing or empty, but then its just the same as id,
-    //      so we don't really need this extra field
     // add the instructional pdf file to the repository so you can make comments like
     //      "i didnt add this obvious feature because it was not in the instructions"
     // think about obvious features you did not add, and add comment what you would also do
