@@ -4,6 +4,8 @@ import android.view.View
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 
+//todo when done, delete unused functions
+
 fun View.snackbar(text: String) = Snackbar.make(this, text, Snackbar.LENGTH_SHORT).show()
 fun View.snackbar(@StringRes textRes: Int) = snackbar(resources.getString(textRes))
 
