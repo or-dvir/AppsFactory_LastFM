@@ -20,7 +20,6 @@ class FragmentAlbumDetailsViewModel(
     //do NOT initialize this with null or empty data! the UI observer will be triggered!
     val album = MutableLiveData<Album?>()
 
-    //todo does this work as expected?
     fun getAlbumTracksAsListText(): String?
     {
         return album.value?.let { album ->
