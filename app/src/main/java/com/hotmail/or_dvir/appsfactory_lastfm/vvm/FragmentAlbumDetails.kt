@@ -74,8 +74,8 @@ class FragmentAlbumDetails : BaseFragment()
                     //artist is null - <album name>
                     //both null - nothing
 
-                    val isArtistNameValid = it.hasValidArtist()
-                    val isAlbumNameValid = it.hasValidName()
+                    val isArtistNameValid = it.isArtistNameValid()
+                    val isAlbumNameValid = it.isNameValid()
 
                     text = when
                     {

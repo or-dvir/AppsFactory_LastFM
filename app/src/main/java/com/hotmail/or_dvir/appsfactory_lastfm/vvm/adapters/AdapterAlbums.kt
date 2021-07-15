@@ -52,7 +52,17 @@ class AdapterAlbums(
             val item = items[holder.bindingAdapterPosition]
             val placeholderImageRes = R.drawable.ic_album_placeholder
 
-            tvAlbumName.text = item.name
+
+
+            tvAlbumName.apply {
+                text = if (item.isNameValid())
+                {
+                    item.name
+                } else
+                {
+                    context.getString(R.string.unknownAlbum)
+                }
+            }
 
             //todo BAD! either fix this later, or add a note in the documentation
             // saying you know its bad!

@@ -9,6 +9,8 @@
 
     <string name="hint_artistName">artist name</string>
 
+    <string name="unknownAlbum">Unknown Album</string>
+
     <string name="title_topAlbums">Top Albums</string>
     <string name="title_favorites">Favorites</string>
     <string name="title_albumDetails">Album Details</string>

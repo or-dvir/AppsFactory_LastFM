@@ -39,9 +39,6 @@ data class Album(
     var dbPrimaryKey: Long = 0L
 ) : IDxItemClickable, IModelWithImages
 {
-    //todo some album names are "(null)"
-    // handle this in the recycler view (search for albums by "cher")
-
     companion object
     {
         private const val LASTFM_NULL = "(null)"
@@ -75,14 +72,14 @@ data class Album(
 
     fun canBeStoredInDb() = dbUUID != null
 
-    fun hasValidName() = when
+    fun isNameValid() = when
     {
         name.isNullOrBlank() -> false
         name == LASTFM_NULL -> false
         else -> true
     }
 
-    fun hasValidArtist() = when
+    fun isArtistNameValid() = when
     {
         artist?.name.isNullOrBlank() -> false
         artist?.name == LASTFM_NULL -> false
