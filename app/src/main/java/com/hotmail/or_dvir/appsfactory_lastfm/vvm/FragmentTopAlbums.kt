@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.appsfactory_lastfm.databinding.FragmentTopAlbumsBinding
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Album
+import com.hotmail.or_dvir.appsfactory_lastfm.other.hasInternetConnection
 import com.hotmail.or_dvir.appsfactory_lastfm.other.longSnackbar
 import com.hotmail.or_dvir.appsfactory_lastfm.other.snackbar
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.adapters.AdapterAlbums
@@ -98,7 +99,7 @@ class FragmentTopAlbums : BaseFragment()
         }
 
         binding.apply {
-            if (hasInternetConnection())
+            if (requireContext().hasInternetConnection())
             {
                 viewModel.loadTopAlbums(getArtistName())
             } else

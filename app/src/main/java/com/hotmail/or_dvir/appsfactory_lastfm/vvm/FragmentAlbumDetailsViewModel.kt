@@ -53,7 +53,6 @@ class FragmentAlbumDetailsViewModel(
 
         //if we get here, artistName and albumName should not be null
         //due to the above "if" statement
-
         viewModelScope.launch(Dispatchers.Main) {
             isLoading.value = true
             val serverAlbumDetails = repoAlbums.getAlbumDetails(artistName!!, albumName!!)

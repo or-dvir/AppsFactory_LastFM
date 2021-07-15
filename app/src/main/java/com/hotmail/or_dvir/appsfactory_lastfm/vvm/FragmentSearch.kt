@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.appsfactory_lastfm.databinding.FragmentSearchBinding
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Artist
+import com.hotmail.or_dvir.appsfactory_lastfm.other.hasInternetConnection
 import com.hotmail.or_dvir.appsfactory_lastfm.other.longSnackbar
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.adapters.AdapterArtists
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseFragment
@@ -131,9 +132,11 @@ class FragmentSearch : BaseFragment()
                     override fun onQueryTextSubmit(query: String?): Boolean
                     {
                         query?.let {
-                            if(hasInternetConnection()) {
+                            if (requireContext().hasInternetConnection())
+                            {
                                 viewModel.searchArtists(it)
-                            } else {
+                            } else
+                            {
                                 view?.longSnackbar(R.string.error_offline)
                             }
                         }
