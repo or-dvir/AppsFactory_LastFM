@@ -42,6 +42,8 @@ data class Album(
     {
         private const val LASTFM_NULL = "(null)"
         internal const val COLUMN_DB_UUID = "dbUUID"
+
+        fun toDbUuid(artistName: String, albumName: String) = "${artistName}$albumName"
     }
 
     //IMPORTANT NOTE:
@@ -59,7 +61,8 @@ data class Album(
     var dbUUID =
         if (isNameValid() && isArtistNameValid())
         {
-            "${artist!!.name}$name"
+            //non of these should be null because of the "if" above
+            toDbUuid(artist!!.name!!, name!!)
         } else
         {
             null
