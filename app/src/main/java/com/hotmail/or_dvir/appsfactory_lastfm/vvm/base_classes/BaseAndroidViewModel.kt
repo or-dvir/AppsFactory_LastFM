@@ -8,6 +8,9 @@ import org.koin.core.component.KoinComponent
 
 abstract class BaseAndroidViewModel(val app: Application) : AndroidViewModel(app), KoinComponent
 {
+    //todo a lot of pretty much duplicated exception handlers for coroutines
+    // can i make them shared?
+
     val isLoading = MutableLiveData<Boolean>()
 
     fun getString(@StringRes stringRes: Int) = app.getString(stringRes)

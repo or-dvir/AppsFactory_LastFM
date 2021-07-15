@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineExceptionHandler
 import or_dvir.hotmail.com.dxutils.hideKeyBoard
 import or_dvir.hotmail.com.dxutils.makeVisibleOrGone
 

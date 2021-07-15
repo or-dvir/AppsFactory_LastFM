@@ -26,7 +26,7 @@ class ActivityMain : AppCompatActivity()
     //      e.g. remove album from favorites from the "favorites" screen
     // add note saying that no special attention was given to landscape mode
     //      make basic tests in landscape mode!!!
-    // for all network requests, add exception handler! especially for timeouts!
+    // for all network requests, handle timeouts (already have exception handlers, show specific message)
 
     private lateinit var binding: ActivityMainBinding
 
