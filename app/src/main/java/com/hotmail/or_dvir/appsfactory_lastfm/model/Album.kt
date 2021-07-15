@@ -28,7 +28,7 @@ data class Album(
     val artist: Artist?,
     @ColumnInfo(name = "tracks")
     @Json(name = "tracks")
-    val tracks: Tracks?,
+    var tracks: Tracks?,
     @ColumnInfo(name = "image")
     @Json(name = "image")
     val images: List<Image> = listOf(),

@@ -43,18 +43,34 @@ class RepositoryAlbumsImpl(
     //to get the latest information about an album, it must be removed from favorites
     // and then re-added
     //todo MUST FINISH no matter what!
-    override suspend fun addFavoriteAlbum(album: Album) =
-        withContext(Dispatchers.IO) {
+    override suspend fun addFavoriteAlbum(album: Album): Boolean
+    {
+        return withContext(Dispatchers.IO) {
             //if we cannot uniquely identify the album, we cannot save it to the database
-            if (album.canBeStoredInDb())
-            {
-                val rowId = daoAlbums.insert(album)
-                rowId != -1L
-            } else
-            {
-                false
+            album.apply {
+                if (!canBeStoredInDb())
+                {
+                    return@withContext false
+                }
+
+                //tracks are missing. need to retrieve separately.
+                //can only do this if we have internet connection, and valid album/artist names
+                if (application.hasInternetConnection() &&
+                    tracks == null &&
+                    isNameValid() &&
+                    isArtistNameValid()
+                )
+                {
+                    //artist/album name should not be null because we are checking
+                    //they are valid in the "if" above
+                    tracks = getAlbumDetails(artist!!.name!!, name!!)?.tracks
+                }
             }
+
+            val rowId = daoAlbums.insert(album)
+            rowId != -1L
         }
+    }
 
     //todo MUST FINISH no matter what!
     override suspend fun deleteFavoriteAlbum(album: Album) =
