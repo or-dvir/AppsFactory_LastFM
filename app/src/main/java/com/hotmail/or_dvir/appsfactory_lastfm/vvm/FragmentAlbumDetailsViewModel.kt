@@ -55,8 +55,7 @@ class FragmentAlbumDetailsViewModel(
         //due to the above "if" statement
         viewModelScope.launch(Dispatchers.Main) {
             isLoading.value = true
-            val serverAlbumDetails = repoAlbums.getAlbumDetails(artistName!!, albumName!!)
-            album.value = serverAlbumDetails.toAppAlbum()
+            album.value = repoAlbums.getAlbumDetails(artistName!!, albumName!!)
             isLoading.value = false
         }
     }

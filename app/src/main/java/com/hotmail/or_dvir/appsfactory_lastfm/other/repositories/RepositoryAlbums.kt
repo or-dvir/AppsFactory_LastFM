@@ -14,7 +14,7 @@ abstract class RepositoryAlbums
     abstract suspend fun getAlbumDetails(
         artistName: String,
         albumName: String
-    ): ServerWrapperAlbumDetails
+    ): Album?
     //endregion
 
     //region WRITE

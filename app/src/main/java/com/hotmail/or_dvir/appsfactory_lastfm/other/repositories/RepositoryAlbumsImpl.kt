@@ -1,13 +1,15 @@
 package com.hotmail.or_dvir.appsfactory_lastfm.other.repositories
 
+import android.app.Application
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Album
-import com.hotmail.or_dvir.appsfactory_lastfm.model.server_wrappers.ServerWrapperAlbumDetails
 import com.hotmail.or_dvir.appsfactory_lastfm.other.database.daos.IDaoAlbums
+import com.hotmail.or_dvir.appsfactory_lastfm.other.hasInternetConnection
 import com.hotmail.or_dvir.appsfactory_lastfm.other.retrofit.ILastFmApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class RepositoryAlbumsImpl(
+    private val application: Application,
     private val apiLastFM: ILastFmApi,
     private val daoAlbums: IDaoAlbums
 ) : RepositoryAlbums()
@@ -25,10 +27,19 @@ class RepositoryAlbumsImpl(
     override suspend fun getAlbumDetails(
         artistName: String,
         albumName: String
-    ): ServerWrapperAlbumDetails =
-        withContext(Dispatchers.IO) {
-            apiLastFM.getAlbumDetails(artistName, albumName)
+    ): Album?
+    {
+        return withContext(Dispatchers.IO) {
+            if (application.hasInternetConnection())
+            {
+                apiLastFM.getAlbumDetails(artistName, albumName).toAppAlbum()
+            } else
+            {
+                //no internet. load from database
+                daoAlbums.getAlbum(Album.toDbUuid(artistName, albumName))
+            }
         }
+    }
 
     //note: for simplicity, the information saved in the DB will NOT be automatically updated.
     //to get the latest information about an album, it must be removed from favorites

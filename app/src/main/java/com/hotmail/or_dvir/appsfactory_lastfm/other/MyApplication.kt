@@ -37,10 +37,16 @@ class MyApplication : Application()
         viewModel { FragmentTopAlbumsViewModel(androidApplication(), get()) }
         viewModel { FragmentAlbumDetailsViewModel(androidApplication(), get()) }
         viewModel { FragmentFavoriteAlbumsViewModel(androidApplication(), get()) }
-        single<RepositoryArtists> { RepositoryArtistsImpl(SMyRetrofit.lastFmApi) }
-        single<RepositoryAlbums> { RepositoryAlbumsImpl(SMyRetrofit.lastFmApi, get()) }
         single<SMyDatabase> { SMyDatabase.getInstance(androidApplication()) }
         single<IDaoAlbums> { get<SMyDatabase>().daoAlbums() }
+        single<RepositoryArtists> { RepositoryArtistsImpl(SMyRetrofit.lastFmApi) }
+        single<RepositoryAlbums> {
+            RepositoryAlbumsImpl(
+                androidApplication(),
+                SMyRetrofit.lastFmApi,
+                get()
+            )
+        }
     }
 
     private val exceptionHandler = CoroutineExceptionHandler { context, t ->
