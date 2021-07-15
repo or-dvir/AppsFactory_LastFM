@@ -69,17 +69,27 @@ class FragmentAlbumDetails : BaseFragment()
                     return@Observer
                 }
 
-                //todo if album/artist name is null or empty, show
-                // only one of them.
-                // what if both are null or empty?
-                tvAlbumNameAndArtist.text = getString(
-                    R.string.title_s_by_s,
-                    it.name,
-                    it.artist?.name
-                )
+                tvAlbumNameAndArtist.apply {
+                    //album name is null - "album by <artist>"
+                    //artist is null - <album name>
+                    //both null - nothing
+
+                    val isArtistNameValid = it.hasValidArtist()
+                    val isAlbumNameValid = it.hasValidName()
+
+                    text = when
+                    {
+                        isAlbumNameValid && isArtistNameValid ->
+                            getString(R.string.title_s_by_s, it.name, it.artist!!.name)
+                        //only album name is valid
+                        isAlbumNameValid -> "\"${it.name}\""
+                        //only artist name is valid
+                        else -> getString(R.string.title_album_by_s, it.artist!!.name)
+                    }
+                }
 
                 ivAlbumImage.apply {
-                    //todo copied from somewhere else (opne of the adapters).
+                    //todo copied from somewhere else (one of the adapters).
                     // can i make a shared function?
                     val imageUrl = it.getImageUrl(Image.Companion.Size.LARGE)
                     if (!imageUrl.isNullOrBlank())

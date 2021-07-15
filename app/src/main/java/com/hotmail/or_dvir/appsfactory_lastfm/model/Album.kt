@@ -75,6 +75,20 @@ data class Album(
 
     fun canBeStoredInDb() = dbUUID != null
 
+    fun hasValidName() = when
+    {
+        name.isNullOrBlank() -> false
+        name == LASTFM_NULL -> false
+        else -> true
+    }
+
+    fun hasValidArtist() = when
+    {
+        artist?.name.isNullOrBlank() -> false
+        artist?.name == LASTFM_NULL -> false
+        else -> true
+    }
+
     override fun getImageList() = images
     override fun getViewType() = R.id.viewType_Album
 
