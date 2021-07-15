@@ -6,7 +6,6 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.hotmail.or_dvir.appsfactory_lastfm.R
-import com.hotmail.or_dvir.appsfactory_lastfm.other.isBlankOrEquals
 import com.hotmail.or_dvir.dxclick.IDxItemClickable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -58,16 +57,12 @@ data class Album(
     @Json(name = "dbUUID")
     //for simplicity, made var and not val (otherwise Room complains).
     var dbUUID =
-        name?.let { albumName ->
-            artist?.name?.let { artistName ->
-                if (artistName.isBlankOrEquals(LASTFM_NULL) || albumName.isBlankOrEquals(LASTFM_NULL))
-                {
-                    null
-                } else
-                {
-                    "$artistName$albumName"
-                }
-            }
+        if (isNameValid() && isArtistNameValid())
+        {
+            "${artist!!.name}$name"
+        } else
+        {
+            null
         }
 
     fun canBeStoredInDb() = dbUUID != null
