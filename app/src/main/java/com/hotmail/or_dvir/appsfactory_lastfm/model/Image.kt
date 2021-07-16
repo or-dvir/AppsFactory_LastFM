@@ -13,30 +13,29 @@ data class Image(
 {
     companion object
     {
+        //even though not all of these values are used, they are required for moshi
+        @Suppress("unused")
         enum class Size
         {
-            //todo only keep 2 sizes, and create a mechanism that
-            // if one is not available, try the other one.
-            // remove the rest (unused)
             @Json(name = "small")
-            SMALL(),
+            SMALL,
 
             @Json(name = "medium")
-            MEDIUM(),
+            MEDIUM,
 
             @Json(name = "large")
-            LARGE(),
+            LARGE,
 
             @Json(name = "extralarge")
             EXTRA_LARGE,
 
             @Json(name = "mega")
-            MEGA(),
+            MEGA,
 
             //its possible that there are other "edge cases",
             //however i have not encountered any.
             @Json(name = "")
-            UNKNOWN()
+            UNKNOWN
         }
     }
 }
