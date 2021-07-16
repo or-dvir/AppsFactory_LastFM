@@ -32,6 +32,11 @@ class ActivityMain : AppCompatActivity()
     //for simplicity, errors are handled in a generic way (simple, non-specific error messages).
     //in a real app, we would handle specific errors appropriately and display more meaningful
     //messages to the user.
+    //
+    //it seems that all artist images are the same (image of a star icon).
+    //due to time constraints, and given that this is an issue with the api, there is nothing
+    //we can do about it.
+
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?)

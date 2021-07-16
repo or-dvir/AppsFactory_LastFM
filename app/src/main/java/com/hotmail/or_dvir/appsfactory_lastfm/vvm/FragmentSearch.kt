@@ -40,8 +40,6 @@ class FragmentSearch : BaseFragment()
         private const val TAG = "FragmentSearch"
     }
 
-    //todo are all artist images just star icons???
-
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
     private val viewModel: FragmentSearchViewModel by viewModel()
