@@ -6,8 +6,9 @@ interface IModelWithImages
 {
     fun getImageList(): List<Image>
 
-    fun getImageUrl(size: Size) =
-        getImageList().find {
-            it.size == size && !it.url.isNullOrBlank()
-        }?.url
+    fun getImageUrl() = getImageList().filterNot { it.url.isNullOrBlank() }.let { images ->
+        //first look for the large image, and if not available, look for the medium image.
+        //for the purposes of this demo app it's good enough
+        images.find { it.size == Size.LARGE } ?: images.find { it.size == Size.MEDIUM }
+    }?.url
 }
