@@ -43,17 +43,17 @@ class MyApplication : Application()
         single<RepositoryAlbums> {
             RepositoryAlbumsImpl(
                 androidApplication(),
+                appCoroutineScope,
                 SMyRetrofit.lastFmApi,
                 get()
             )
         }
     }
 
-    private val exceptionHandler = CoroutineExceptionHandler { context, t ->
-        Log.d(TAG, "a coroutine with $context failed.\n${t.message}")
+    private val exceptionHandler = CoroutineExceptionHandler { _, t ->
+        Log.e(TAG, "a coroutine running under application scope threw an exception.", t)
     }
 
-    //todo DONT DELETE!!! may be needed in the future
     private val appCoroutineScope = CoroutineScope(SupervisorJob() + exceptionHandler)
 
     override fun onCreate()
