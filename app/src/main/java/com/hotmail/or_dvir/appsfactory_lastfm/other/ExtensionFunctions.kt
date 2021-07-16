@@ -32,11 +32,6 @@ fun View.longSnackbar(@StringRes textRes: Int)
     longSnackbar(resources.getString(textRes))
 }
 
-/**
- * checks if this string is blank or equals to the given [str] (ignoring the case)
- */
-fun String.isBlankOrEquals(str: String) = this.isBlank() || this.equals(str, true)
-
 fun Context.hasInternetConnection(): Boolean
 {
     //these classes/methods were only deprecated in API 29.

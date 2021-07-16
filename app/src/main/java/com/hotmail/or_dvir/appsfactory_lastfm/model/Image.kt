@@ -15,6 +15,9 @@ data class Image(
     {
         enum class Size
         {
+            //todo only keep 2 sizes, and create a mechanism that
+            // if one is not available, try the other one.
+            // remove the rest (unused)
             @Json(name = "small")
             SMALL(),
 
@@ -30,8 +33,8 @@ data class Image(
             @Json(name = "mega")
             MEGA(),
 
-            //todo what other possible "edge case" values are there?
-            // add a note in documentation...
+            //its possible that there are other "edge cases",
+            //however i have not encountered any.
             @Json(name = "")
             UNKNOWN()
         }

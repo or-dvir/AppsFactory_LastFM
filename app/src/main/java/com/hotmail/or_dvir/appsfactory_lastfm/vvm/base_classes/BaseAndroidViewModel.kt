@@ -14,7 +14,4 @@ abstract class BaseAndroidViewModel(val app: Application) : AndroidViewModel(app
     val isLoading = MutableLiveData<Boolean>()
 
     fun getString(@StringRes stringRes: Int) = app.getString(stringRes)
-
-    fun getString(@StringRes stringRes: Int, vararg args: String) =
-        String.format(app.getString(stringRes), args)
 }

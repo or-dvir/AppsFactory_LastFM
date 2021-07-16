@@ -25,6 +25,8 @@ data class ServerWrapperAlbumDetails(
         }
     }
 
+    //cannot use existing Album class because it requires an Artist object, whereas here
+    // the artist is only a string.
     @JsonClass(generateAdapter = true)
     data class AlbumDetails(
         @Json(name = "name")
@@ -37,6 +39,3 @@ data class ServerWrapperAlbumDetails(
         val tracks: Tracks?
     )
 }
-
-//note: cannot use existing Album class because it requires an Artist object, whereas here
-// the artist is only a string. Conversion will have to be done elsewhere

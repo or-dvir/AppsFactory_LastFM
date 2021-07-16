@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
     app:startDestination="@id/fragmentFavoriteAlbums">
-    <!--    todo check the animations-->
     <fragment
         android:id="@+id/fragmentSearch"
         android:name="com.hotmail.or_dvir.appsfactory_lastfm.vvm.FragmentSearch"
