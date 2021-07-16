@@ -38,10 +38,7 @@ abstract class SMyDatabase : RoomDatabase()
                         context.applicationContext,
                         SMyDatabase::class.java,
                         "LastFM_database"
-                    )
-                        //todo remove this in production!!!
-                        .fallbackToDestructiveMigration()
-                        .build()
+                    ).build()
 
                     INSTANCE = instance
                 }
