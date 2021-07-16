@@ -16,7 +16,12 @@ interface ILastFmApi
 
     //todo add pagination for all operations!!!
 
-    @GET("?method=artist.search&$API_PARAMS")
+    //instead of implementing paging, we limit the search query to 100 results.
+    //not only will this mean less code (and therefore potential bugs), but it also makes sense
+    //because if the user cannot find the artist they were looking for in the first 100 results,
+    //they probably need to adjust their search query.
+    //if we really wanted to have paging anyway, we would use google's Paging library
+    @GET("?method=artist.search&$API_PARAMS&limit=100")
     suspend fun search(@Query("artist") searchQuery: String): ServerWrapperArtistsSearch
 
     @GET("?method=artist.gettopalbums&$API_PARAMS")
