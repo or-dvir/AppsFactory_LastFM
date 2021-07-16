@@ -63,10 +63,16 @@ class AdapterAlbums(
                 }
             }
 
-            //todo BAD! either fix this later, or add a note in the documentation
-            // saying you know its bad!
-            // 1. dont start an "unbound" coroutine scope like that.
-            // 2. dont perform db queries in this function! it will be called many times!!!
+            //BAD PROGRAMMER! BAD!
+            // - its bad to start a coroutine scope like that.
+            // - its bad to perform db queries in this function, since it will be called many times
+            //      and this is very inefficient!
+            //of course in a real app, we would NEVER use this "technique".
+            //however... if we want to attach a "favorites" button for every album in this adapter,
+            //since we are using DiffUtil, we need to either include (and properly maintain it)
+            //a field "isFavorite" in the Album class, or create a mechanism where this adapter
+            //knows about all the users' favorite albums (and properly maintain it).
+            //due to time constraints, such a mechanism would be too complicated to implement.
             CoroutineScope(Dispatchers.IO).launch {
                 ivFavorite.apply {
                     val isInFavorites =
