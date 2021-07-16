@@ -93,12 +93,6 @@ class FragmentSearch : BaseFragment()
         }
 
         binding.rv.apply {
-            //todo might be needed for pagination?
-//            onScrollListener = DxScrollListener(25).apply {
-//                onScrollDown = { getFab().hide() }
-//                onScrollUp = { getFab().show() }
-//            }
-
             adapter = rvAdapter
             layoutManager =
                 GridLayoutManager(context, getInteger(R.integer.spanCountForGridLayout))
