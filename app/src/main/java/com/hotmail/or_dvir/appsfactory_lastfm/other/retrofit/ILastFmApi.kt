@@ -20,11 +20,14 @@ interface ILastFmApi
     //not only will this mean less code (and therefore potential bugs), but it also makes sense
     //because if the user cannot find the artist they were looking for in the first 100 results,
     //they probably need to adjust their search query.
-    //if we really wanted to have paging anyway, we would use google's Paging library
+    //if we really wanted to display all the results, we would use google's Paging library
     @GET("?method=artist.search&$API_PARAMS&limit=100")
     suspend fun search(@Query("artist") searchQuery: String): ServerWrapperArtistsSearch
 
-    @GET("?method=artist.gettopalbums&$API_PARAMS")
+    //for simplicity, we limit the results to the top 100 albums.
+    //for the purposes of this demo app, it's good enough.
+    //if we really wanted to display all the results, we would use google's Paging library
+    @GET("?method=artist.gettopalbums&$API_PARAMS&limit=100")
     suspend fun getTopAlbums(@Query("artist") artistName: String): ServerWrapperTopAlbums
 
     @GET("?method=album.getinfo&$API_PARAMS")
