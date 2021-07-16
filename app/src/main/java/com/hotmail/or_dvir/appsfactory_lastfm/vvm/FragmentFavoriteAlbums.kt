@@ -119,7 +119,6 @@ class FragmentFavoriteAlbums : BaseFragment()
             {
                 binding.apply {
                     rv.makeGone()
-                    //todo make better error
                     view?.snackbar(R.string.error_general)
                 }
 
@@ -128,7 +127,6 @@ class FragmentFavoriteAlbums : BaseFragment()
 
             val exceptionHandler = CoroutineExceptionHandler { _, t ->
                 Log.e(TAG, t.message, t)
-                //todo make better error
                 view?.longSnackbar(R.string.error_general)
             }
 

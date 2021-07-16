@@ -18,7 +18,6 @@ class RepositoryAlbumsImpl(
 ) : RepositoryAlbums()
 {
     //todo try all kinds of scenarios and handle errors appropriately
-    //todo the api has a list of error codes. handle them!!!
 
     override suspend fun getTopAlbums(artistName: String) =
         withContext(Dispatchers.IO) {

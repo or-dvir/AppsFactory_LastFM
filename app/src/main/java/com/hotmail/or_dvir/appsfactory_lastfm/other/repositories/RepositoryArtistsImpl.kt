@@ -7,7 +7,6 @@ import kotlinx.coroutines.withContext
 class RepositoryArtistsImpl(private val lastFmApi: ILastFmApi) : RepositoryArtists()
 {
     //todo try all kinds of scenarios and handle errors appropriately
-    //todo the api has a list of error codes. handle them!!!
     override suspend fun searchArtists(searchQuery: String) =
         withContext(Dispatchers.IO) {
             lastFmApi.search(searchQuery)

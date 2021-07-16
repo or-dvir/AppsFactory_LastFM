@@ -157,7 +157,6 @@ class FragmentSearch : BaseFragment()
                 binding.apply {
                     rv.makeGone()
                     emptyView.apply {
-                        //todo make better error
                         text = getString(R.string.error_general)
                         makeVisible()
                     }
@@ -168,7 +167,6 @@ class FragmentSearch : BaseFragment()
 
             val exceptionHandler = CoroutineExceptionHandler { _, t ->
                 Log.e(TAG, t.message, t)
-                //todo make better error
                 view?.longSnackbar(R.string.error_general)
             }
 

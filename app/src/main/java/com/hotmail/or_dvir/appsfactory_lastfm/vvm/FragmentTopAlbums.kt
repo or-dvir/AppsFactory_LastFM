@@ -127,14 +127,12 @@ class FragmentTopAlbums : BaseFragment()
         observerAlbums = Observer { newList ->
             if (newList == null)
             {
-                //todo make better error
                 setError(getString(R.string.error_general))
                 return@Observer
             }
 
             val exceptionHandler = CoroutineExceptionHandler { _, t ->
                 Log.e(TAG, t.message, t)
-                //todo make better error
                 view?.longSnackbar(R.string.error_general)
             }
 
