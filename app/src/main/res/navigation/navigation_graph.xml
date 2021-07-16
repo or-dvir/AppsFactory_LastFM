@@ -39,9 +39,6 @@
             app:popExitAnim="@anim/slide_out_to_right" />
     </fragment>
 
-    <!--    todo any way to not allow empty strings as arguments?
-            todo they may be used as ids for the database... valid for all fragments!!!-->
-
     <fragment
         android:id="@+id/fragmentTopAlbums"
         android:name="com.hotmail.or_dvir.appsfactory_lastfm.vvm.FragmentTopAlbums"

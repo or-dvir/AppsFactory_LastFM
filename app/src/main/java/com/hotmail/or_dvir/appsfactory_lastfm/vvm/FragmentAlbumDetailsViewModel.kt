@@ -22,8 +22,6 @@ class FragmentAlbumDetailsViewModel(
         private const val TAG = "FragAlbumDetailsVM"
     }
 
-    //todo add option to add/remove album to/from favorites?
-
     //do NOT initialize this with null or empty data! the UI observer will be triggered!
     val album = MutableLiveData<Album?>()
 
