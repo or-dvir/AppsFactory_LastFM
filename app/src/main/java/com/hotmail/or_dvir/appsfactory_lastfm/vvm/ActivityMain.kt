@@ -13,19 +13,12 @@ class ActivityMain : AppCompatActivity()
     //todo
     // go over ALL to-do notes!!!
     // add documentation for everything!!!
-    // go over EVERY SINGLE FILE and check if there is any unnecessary/commented out code
     // go over EVERY SINGLE FILE and auto arrange code and imports
     // go over EVERY SINGLE FILE and check ALL warnings
-    // in every fragment/activity, check the error messages and make them more specific
     // some entire project folders were copied from other projects. remove all unused files!!!
-    // i made all fields in all classes nullable or have default values.
-    //      its possible there will be side-effects (e.g. null strings will show as "null").
-    //      check app thoroughly
-    // make comments like "i didnt add this obvious feature because it was not in the instructions"
     // think about obvious features you did not add, and add comment what you would also do
     //      e.g. remove album from favorites from the "favorites" screen
-    // add note saying that no special attention was given to landscape mode
-    //      make basic tests in landscape mode!!!
+    // make basic tests in landscape mode
     // for all network requests, handle timeouts (already have exception handlers, show specific message)
 
     //general notes:
@@ -36,6 +29,13 @@ class ActivityMain : AppCompatActivity()
     //it seems that all artist images are the same (image of a star icon).
     //due to time constraints, and given that this is an issue with the api, there is nothing
     //we can do about it.
+    //
+    //even though all fields in all classes are either nullable or have default values,
+    //its possible that the lastFM api still holds some surprises for us... for example
+    //we know for sure that some strings have the value "(null)"
+    //
+    //for simplicity, no special attention was given to landscape mode
+    //(or small/large screen sizes for that matter
 
     private lateinit var binding: ActivityMainBinding
 

@@ -19,6 +19,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FragmentAlbumDetails : BaseFragment()
 {
+    //todo can i add a "favorites" menu button?
+
     private var _binding: FragmentAlbumDetailsBinding? = null
     private val binding get() = _binding!!
     private val fragArgs: FragmentAlbumDetailsArgs by navArgs()
