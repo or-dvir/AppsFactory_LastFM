@@ -15,6 +15,7 @@ class ActivityMain : AppCompatActivity()
     // add documentation for everything!!!
     // go over EVERY SINGLE FILE and check if there is any unnecessary/commented out code
     // go over EVERY SINGLE FILE and auto arrange code and imports
+    // go over EVERY SINGLE FILE and check ALL warnings
     // in every fragment/activity, check the error messages and make them more specific
     // some entire project folders were copied from other projects. remove all unused files!!!
     // i made all fields in all classes nullable or have default values.
