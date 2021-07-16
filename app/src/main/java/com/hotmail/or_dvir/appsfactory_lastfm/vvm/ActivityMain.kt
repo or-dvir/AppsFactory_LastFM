@@ -28,6 +28,10 @@ class ActivityMain : AppCompatActivity()
     //      make basic tests in landscape mode!!!
     // for all network requests, handle timeouts (already have exception handlers, show specific message)
 
+    //general notes:
+    //for simplicity, errors are handled in a generic way (simple, non-specific error messages).
+    //in a real app, we would handle specific errors appropriately and display more meaningful
+    //messages to the user.
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?)
