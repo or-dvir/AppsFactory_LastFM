@@ -17,8 +17,6 @@ class RepositoryAlbumsImpl(
     private val daoAlbums: IDaoAlbums
 ) : RepositoryAlbums()
 {
-    //todo try all kinds of scenarios and handle errors appropriately
-
     override suspend fun getTopAlbums(artistName: String) =
         withContext(Dispatchers.IO) {
             apiLastFM.getTopAlbums(artistName)

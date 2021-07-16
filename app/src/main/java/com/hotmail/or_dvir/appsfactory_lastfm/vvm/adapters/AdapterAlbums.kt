@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.appsfactory_lastfm.databinding.RowAlbumBinding
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Album
-import com.hotmail.or_dvir.appsfactory_lastfm.model.Image.Companion.Size
 import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryAlbums
 import com.hotmail.or_dvir.dxadapter.DxAdapter
 import com.squareup.picasso.Picasso
@@ -88,7 +87,7 @@ class AdapterAlbums(
             }
 
             ivAlbumImage.apply {
-                val imageUrl = item.getImageUrl(Size.LARGE)
+                val imageUrl = item.getImageUrl()
                 val picassoRequest =
                     if (imageUrl.isNullOrBlank())
                     {

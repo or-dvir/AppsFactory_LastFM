@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.appsfactory_lastfm.databinding.RowArtistBinding
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Artist
-import com.hotmail.or_dvir.appsfactory_lastfm.model.Image.Companion.Size
 import com.hotmail.or_dvir.dxadapter.DxAdapter
 import com.squareup.picasso.Picasso
 
@@ -39,7 +38,7 @@ class AdapterArtists(val items: MutableList<Artist>) :
 
             tvArtistName.text = item.name
 
-            val imageUrl = item.getImageUrl(Size.MEDIUM)
+            val imageUrl = item.getImageUrl()
             val picassoRequest =
                 if (imageUrl.isNullOrBlank())
                 {

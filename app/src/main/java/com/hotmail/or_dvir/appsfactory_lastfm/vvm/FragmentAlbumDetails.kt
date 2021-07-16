@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.appsfactory_lastfm.databinding.FragmentAlbumDetailsBinding
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Album
-import com.hotmail.or_dvir.appsfactory_lastfm.model.Image
 import com.hotmail.or_dvir.appsfactory_lastfm.other.snackbar
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseFragment
 import com.squareup.picasso.Picasso
@@ -91,7 +90,7 @@ class FragmentAlbumDetails : BaseFragment()
                 ivAlbumImage.apply {
                     //todo copied from somewhere else (one of the adapters).
                     // can i make a shared function?
-                    val imageUrl = it.getImageUrl(Image.Companion.Size.LARGE)
+                    val imageUrl = it.getImageUrl()
                     if (!imageUrl.isNullOrBlank())
                     {
                         Picasso.get()
