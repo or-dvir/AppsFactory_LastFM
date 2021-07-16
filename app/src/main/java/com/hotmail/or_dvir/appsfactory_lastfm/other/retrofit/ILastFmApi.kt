@@ -23,8 +23,12 @@ interface ILastFmApi
     suspend fun search(@Query("artist") searchQuery: String): ServerWrapperArtistsSearch
 
     //for simplicity, we limit the results to the top 100 albums.
-    //for the purposes of this demo app, it's good enough.
-    //if we really wanted to display all the results, we would use google's Paging library
+    //for the purposes of this demo app, and given that most artists will not even
+    //reach this number, it's good enough.
+    //for reference:
+    // Nana Mouskouri, one of the artists with the most albums ever released, made 450 albums.
+    // The Beatles have made 286 albums (source: wikipedia).
+    //if we really wanted to display all the results, we would use google's Paging library.
     @GET("?method=artist.gettopalbums&$API_PARAMS&limit=100")
     suspend fun getTopAlbums(@Query("artist") artistName: String): ServerWrapperTopAlbums
 
