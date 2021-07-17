@@ -21,7 +21,8 @@ class ActivityMain : AppCompatActivity()
     // make basic tests in landscape mode
     // for all network requests, handle timeouts (already have exception handlers, show specific message)
 
-    //general notes:
+    //General Notes:
+    //
     //for simplicity, errors are handled in a generic way (simple, non-specific error messages).
     //in a real app, we would handle specific errors appropriately and display more meaningful
     //messages to the user.
@@ -36,6 +37,15 @@ class ActivityMain : AppCompatActivity()
     //
     //for simplicity, no special attention was given to landscape mode
     //(or small/large screen sizes for that matter
+    //
+    //the lastFM api is inconsistent!!! this can lead to crashes for specific artists/albums!
+    //for example, the album "Believe" by Cher contains a LIST of tracks, where as
+    //the album "Empty & Alone" by Tootiredtocare contains a single track OBJECT.
+    //this causes Moshi to crash because it was expecting an array but got an object.
+    //the correct thing to do (in terms of the api), of course, is that albums with only
+    //a single track should have that track inside a list of size 1.
+    //this is an api issue! considering this is just a demo app, and due to time constraints,
+    //creating a mechanism to overcome this would be too complicated.
 
     private lateinit var binding: ActivityMainBinding
 
