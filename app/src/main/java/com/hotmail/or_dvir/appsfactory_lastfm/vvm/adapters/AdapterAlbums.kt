@@ -7,7 +7,6 @@ import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.appsfactory_lastfm.databinding.RowAlbumBinding
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Album
 import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryAlbums
-import com.hotmail.or_dvir.dxadapter.DxAdapter
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,15 +16,11 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
 class AdapterAlbums(
-    val items: MutableList<Album>,
+    items: MutableList<Album>,
     val onFavoriteClick: (Int, Album) -> Unit
-) : DxAdapter<Album, AdapterAlbums.ViewHolder>(), KoinComponent
+) : BaseAdapter<Album, AdapterAlbums.ViewHolder>(items), KoinComponent
 {
-    //todo some code is duplicated from artist adapter. can i create a shared base adapter?
-
     private val repoAlbums: RepositoryAlbums = get()
-
-    override fun getDxAdapterItems() = items
 
     override fun createAdapterViewHolder(
         parent: ViewGroup,
@@ -50,8 +45,6 @@ class AdapterAlbums(
         holder.binding.apply {
             val item = items[holder.bindingAdapterPosition]
             val placeholderImageRes = R.drawable.ic_album_placeholder
-
-
 
             tvAlbumName.apply {
                 text = if (item.isNameValid())
@@ -116,17 +109,6 @@ class AdapterAlbums(
         Picasso.get().cancelRequest(holder.binding.ivAlbumImage)
         super.onViewRecycled(holder)
     }
-
-    fun setData(newData: List<Album>)
-    {
-        items.apply {
-            clear()
-            addAll(newData)
-        }
-        //note that there is no need to notify the adapter because we are using DiffUtil
-    }
-
-    fun isEmpty() = itemCount == 0
 
     /////////////////////////////////////////
     /////////////////////////////////////////

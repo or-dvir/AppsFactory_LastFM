@@ -6,14 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.appsfactory_lastfm.databinding.RowArtistBinding
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Artist
-import com.hotmail.or_dvir.dxadapter.DxAdapter
 import com.squareup.picasso.Picasso
 
-class AdapterArtists(val items: MutableList<Artist>) :
-    DxAdapter<Artist, AdapterArtists.ViewHolder>()
+class AdapterArtists(items: MutableList<Artist>) :
+    BaseAdapter<Artist, AdapterArtists.ViewHolder>(items)
 {
-    override fun getDxAdapterItems() = items
-
     override fun createAdapterViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -64,17 +61,6 @@ class AdapterArtists(val items: MutableList<Artist>) :
 
         super.onViewRecycled(holder)
     }
-
-    fun setData(data: List<Artist>)
-    {
-        items.apply {
-            clear()
-            addAll(data)
-        }
-        //note that there is no need to notify the adapter because we are using DiffUtil
-    }
-
-    fun isEmpty() = itemCount == 0
 
     /////////////////////////////////////////
     /////////////////////////////////////////
