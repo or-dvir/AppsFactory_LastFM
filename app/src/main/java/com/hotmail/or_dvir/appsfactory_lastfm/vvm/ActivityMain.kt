@@ -11,15 +11,11 @@ import com.hotmail.or_dvir.appsfactory_lastfm.databinding.ActivityMainBinding
 class ActivityMain : AppCompatActivity()
 {
     //todo
-    // go over ALL to-do notes!!!
     // add documentation for everything!!!
     // go over EVERY SINGLE FILE and auto arrange code and imports
     // go over EVERY SINGLE FILE and check ALL warnings
     // some entire project folders were copied from other projects. remove all unused files!!!
-    // think about obvious features you did not add, and add comment what you would also do
-    //      e.g. remove album from favorites from the "favorites" screen
     // make basic tests in landscape mode
-    // for all network requests, handle timeouts (already have exception handlers, show specific message)
 
     //General Notes:
     //
