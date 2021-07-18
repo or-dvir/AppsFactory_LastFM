@@ -140,7 +140,7 @@ class FragmentTopAlbums : BaseFragment()
             //ui operation - should by tied to lifecycle scope.
             //uses main dispatcher by default.
             lifecycleScope.launch(exceptionHandler) {
-                //switch to Dispatchers.default which is recommended for DiffUtil
+                //switch to Dispatchers.Default which is recommended for DiffUtil
                 val result = withContext(Dispatchers.Default) {
                     DiffUtil.calculateDiff(
                         Album.DiffCallback(rvAdapter.items, newList),

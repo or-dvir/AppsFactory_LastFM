@@ -73,8 +73,6 @@ abstract class SMyDatabase : RoomDatabase()
             }
         }
 
-        //todo test all of the converters with null values
-
         //region artist
         @TypeConverter
         fun toArtist(json: String) = adapterArtist.fromJson(json)
