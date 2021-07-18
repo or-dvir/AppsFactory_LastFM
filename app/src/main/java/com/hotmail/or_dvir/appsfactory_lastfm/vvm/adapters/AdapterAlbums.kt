@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.appsfactory_lastfm.databinding.RowAlbumBinding
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Album
+import com.hotmail.or_dvir.appsfactory_lastfm.other.loadWithPicasso
 import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryAlbums
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -43,13 +44,12 @@ class AdapterAlbums(
         super.onBindViewHolder(holder, position)
 
         holder.binding.apply {
-            val item = items[holder.bindingAdapterPosition]
-            val placeholderImageRes = R.drawable.ic_album_placeholder
+            val album = items[holder.bindingAdapterPosition]
 
             tvAlbumName.apply {
-                text = if (item.isNameValid())
+                text = if (album.isNameValid())
                 {
-                    item.name
+                    album.name
                 } else
                 {
                     context.getString(R.string.unknownAlbum)
@@ -69,11 +69,11 @@ class AdapterAlbums(
             CoroutineScope(Dispatchers.IO).launch {
                 ivFavorite.apply {
                     val isInFavorites =
-                        item.canBeStoredInDb() && repoAlbums.isInFavorites(item.dbUUID!!)
+                        album.canBeStoredInDb() && repoAlbums.isInFavorites(album.dbUUID!!)
 
                     val favoriteRes = when
                     {
-                        !item.canBeStoredInDb() -> R.drawable.ic_favorite_broken
+                        !album.canBeStoredInDb() -> R.drawable.ic_favorite_broken
                         isInFavorites -> R.drawable.ic_favorite_filled
                         //item can be stored and is NOT in favorites
                         else -> R.drawable.ic_favorite_outline
@@ -85,22 +85,7 @@ class AdapterAlbums(
                 }
             }
 
-            ivAlbumImage.apply {
-                val imageUrl = item.getImageUrl()
-                val picassoRequest =
-                    if (imageUrl.isNullOrBlank())
-                    {
-                        Picasso.get().load(placeholderImageRes)
-                    } else
-                    {
-                        //we have a valid url
-                        Picasso.get().load(imageUrl)
-                    }
-
-                picassoRequest
-                    .error(placeholderImageRes)
-                    .into(this)
-            }
+            ivAlbumImage.loadWithPicasso(album.getImageUrl(), R.drawable.ic_album_placeholder)
         }
     }
 

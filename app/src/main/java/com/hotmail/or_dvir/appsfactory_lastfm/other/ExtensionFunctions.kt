@@ -4,8 +4,11 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.view.View
+import android.widget.ImageView
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import or_dvir.hotmail.com.dxutils.hideKeyBoard
 
 fun View.snackbar(text: String)
@@ -40,4 +43,19 @@ fun Context.hasInternetConnection(): Boolean
     val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
 
     return activeNetwork?.isConnectedOrConnecting == true
+}
+
+fun ImageView.loadWithPicasso(url: String?, @DrawableRes errorRes: Int)
+{
+    //p for picasso
+    var pUrl = url
+
+    if (pUrl.isNullOrBlank())
+    {
+        //any string to make picasso fail and load the error image.
+        //cannot be empty string (picasso crashes)
+        pUrl = "123"
+    }
+
+    Picasso.get().load(pUrl).error(errorRes).into(this)
 }

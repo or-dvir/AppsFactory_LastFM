@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hotmail.or_dvir.appsfactory_lastfm.R
 import com.hotmail.or_dvir.appsfactory_lastfm.databinding.RowArtistBinding
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Artist
+import com.hotmail.or_dvir.appsfactory_lastfm.other.loadWithPicasso
 import com.squareup.picasso.Picasso
 
 class AdapterArtists(items: MutableList<Artist>) :
@@ -30,25 +31,9 @@ class AdapterArtists(items: MutableList<Artist>) :
         super.onBindViewHolder(holder, position)
 
         holder.binding.apply {
-            val item = items[holder.bindingAdapterPosition]
-            val placeholderImageRes = R.drawable.ic_artist_placeholder
-
-            tvArtistName.text = item.name
-
-            val imageUrl = item.getImageUrl()
-            val picassoRequest =
-                if (imageUrl.isNullOrBlank())
-                {
-                    Picasso.get().load(placeholderImageRes)
-                } else
-                {
-                    //we have a valid url
-                    Picasso.get().load(imageUrl)
-                }
-
-            picassoRequest
-                .error(placeholderImageRes)
-                .into(ivArtistImage)
+            val artist = items[holder.bindingAdapterPosition]
+            tvArtistName.text = artist.name
+            ivArtistImage.loadWithPicasso(artist.getImageUrl(), R.drawable.ic_artist_placeholder)
         }
     }
 
