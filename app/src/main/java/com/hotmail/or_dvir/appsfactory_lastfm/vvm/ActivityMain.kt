@@ -12,8 +12,6 @@ class ActivityMain : AppCompatActivity()
 {
     //todo
     // add documentation for everything!!!
-    // some entire project folders were copied from other projects. remove all unused files!!!
-    // make basic tests in landscape mode
 
     //General Notes:
     //
@@ -30,7 +28,7 @@ class ActivityMain : AppCompatActivity()
     //we know for sure that some strings have the value "(null)"
     //
     //for simplicity, no special attention was given to landscape mode
-    //(or small/large screen sizes for that matter
+    //(or small/large screen sizes for that matter). only basic testing was done.
     //
     //the lastFM api is inconsistent!!! this can lead to crashes for specific artists/albums!
     //for example, the album "Believe" by Cher contains a LIST of tracks, where as
