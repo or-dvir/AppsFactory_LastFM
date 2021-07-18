@@ -1,13 +1,11 @@
 package com.hotmail.or_dvir.appsfactory_lastfm.vvm
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Album
 import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryAlbums
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseAlbumsViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import or_dvir.hotmail.com.dxutils.atLeastOneNull
@@ -80,11 +78,7 @@ class FragmentAlbumDetailsViewModel(
             return
         }
 
-        val exceptionHandler = CoroutineExceptionHandler { _, t ->
-            Log.e(TAG, t.message, t)
-            album.value = null
-            isLoading.value = false
-        }
+        val exceptionHandler = createCoroutineExceptionHandler(TAG) { album.value = null }
 
         //if we get here, artistName and albumName should not be null
         //due to the above "if" statement

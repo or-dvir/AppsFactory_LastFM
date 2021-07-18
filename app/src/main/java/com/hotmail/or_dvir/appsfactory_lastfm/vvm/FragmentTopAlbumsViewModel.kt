@@ -1,13 +1,11 @@
 package com.hotmail.or_dvir.appsfactory_lastfm.vvm
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Album
 import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryAlbums
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseAlbumsViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -31,11 +29,7 @@ class FragmentTopAlbumsViewModel(
             return
         }
 
-        val exceptionHandler = CoroutineExceptionHandler { _, t ->
-            Log.e(TAG, t.message, t)
-            topAlbums.value = null
-            isLoading.value = false
-        }
+        val exceptionHandler = createCoroutineExceptionHandler(TAG) { topAlbums.value = null }
 
         viewModelScope.launch(Dispatchers.Main + exceptionHandler) {
             isLoading.value = true

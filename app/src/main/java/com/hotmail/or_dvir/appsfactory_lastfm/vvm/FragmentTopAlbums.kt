@@ -1,7 +1,6 @@
 package com.hotmail.or_dvir.appsfactory_lastfm.vvm
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +19,6 @@ import com.hotmail.or_dvir.appsfactory_lastfm.other.snackbar
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.adapters.AdapterAlbums
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseFragment
 import com.hotmail.or_dvir.dxclick.DxFeatureClick
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -131,8 +129,7 @@ class FragmentTopAlbums : BaseFragment()
                 return@Observer
             }
 
-            val exceptionHandler = CoroutineExceptionHandler { _, t ->
-                Log.e(TAG, t.message, t)
+            val exceptionHandler = viewModel.createCoroutineExceptionHandler(TAG) {
                 view?.longSnackbar(R.string.error_general)
             }
 
