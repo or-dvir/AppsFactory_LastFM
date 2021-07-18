@@ -42,10 +42,15 @@ class ActivityMain : AppCompatActivity()
     //for example, the album "Believe" by Cher contains a LIST of tracks, where as
     //the album "Empty & Alone" by Tootiredtocare contains a single track OBJECT.
     //this causes Moshi to crash because it was expecting an array but got an object.
-    //the correct thing to do (in terms of the api), of course, is that albums with only
+    //the correct thing to do of course (in terms of the api), is that albums with only
     //a single track should have that track inside a list of size 1.
     //this is an api issue! considering this is just a demo app, and due to time constraints,
     //creating a mechanism to overcome this would be too complicated.
+    //
+    //there is some code duplication in this project (e.g. calculating DiffUtil and updating
+    //the adapter in fragments). Due to time constraints and the fact that this is just a demo app,
+    //it was decided that this is good enough (reducing some of these code duplications would
+    //require more effort and complexity which you might initially think)
 
     private lateinit var binding: ActivityMainBinding
 
