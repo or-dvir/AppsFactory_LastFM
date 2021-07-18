@@ -12,8 +12,6 @@ class ActivityMain : AppCompatActivity()
 {
     //todo
     // add documentation for everything!!!
-    // go over EVERY SINGLE FILE and auto arrange code and imports
-    // go over EVERY SINGLE FILE and check ALL warnings
     // some entire project folders were copied from other projects. remove all unused files!!!
     // make basic tests in landscape mode
 
