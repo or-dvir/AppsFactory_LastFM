@@ -10,9 +10,13 @@ android {
 
     defaultConfig {
         applicationId "com.hotmail.or_dvir.appsfactory_lastfm"
-        minSdkVersion 24
+        //setting minimum sdk to 26 to avoid some lint warnings and having to deal
+        //with backwards compatibility for some features.
+        //for the purposes of this demo app, this is good enough
+        minSdkVersion 26
         //targeting sdk 28 to avoid restrictions of sdk 29 and 30.
-        //this app does not go in the play store so its fine
+        //this app does not go in the play store anyways.
+        //for the purposes of this demo app, this is good enough
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
