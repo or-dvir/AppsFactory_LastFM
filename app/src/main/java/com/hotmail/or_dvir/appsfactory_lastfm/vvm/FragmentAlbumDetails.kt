@@ -1,10 +1,15 @@
 package com.hotmail.or_dvir.appsfactory_lastfm.vvm
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.hotmail.or_dvir.appsfactory_lastfm.R
@@ -13,6 +18,7 @@ import com.hotmail.or_dvir.appsfactory_lastfm.model.Album
 import com.hotmail.or_dvir.appsfactory_lastfm.other.loadWithPicasso
 import com.hotmail.or_dvir.appsfactory_lastfm.other.snackbar
 import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseFragment
+import kotlinx.coroutines.launch
 import or_dvir.hotmail.com.dxutils.makeGone
 import or_dvir.hotmail.com.dxutils.makeVisible
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -57,10 +63,68 @@ class FragmentAlbumDetails : BaseFragment()
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
+    {
+        inflater.inflate(R.menu.menu_fragment_album_details, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu)
+    {
+        //uses main dispatcher by default
+        lifecycleScope.launch {
+            val album = viewModel.album.value
+            val favoritesMenuItem = menu.findItem(R.id.menuItem_albumDetails_addOrRemoveFavorite)
+
+            favoritesMenuItem.apply {
+                if (album == null || !album.canBeStoredInDb())
+                {
+                    isVisible = false
+                } else
+                {
+                    //album is NOT null AND has a valid dbUUID
+                    isVisible = true
+                    //setting the tint in the menu xml is not enough.
+                    iconTintList = ColorStateList.valueOf(getColor(R.color.white))
+
+                    if (viewModel.isInFavorites())
+                    {
+                        setTitle(R.string.removeFromFavorites)
+                        setIcon(R.drawable.ic_favorite_filled)
+                    } else
+                    {
+                        setTitle(R.string.addToFavorites)
+                        setIcon(R.drawable.ic_favorite_outline)
+                    }
+                }
+            }
+
+            super.onPrepareOptionsMenu(menu)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+        if (item.itemId == R.id.menuItem_albumDetails_addOrRemoveFavorite)
+        {
+            viewModel.addOrRemoveAlbumFavorites { error ->
+                error?.let { view?.snackbar(it) }
+                //favorites status changed - reset menu
+                    ?: activity?.invalidateOptionsMenu()
+            }
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun initializeObservers()
     {
         observerAlbum = Observer {
             binding.apply {
+                //we got a new album - reset menu
+                activity?.invalidateOptionsMenu()
+
                 if (it == null)
                 {
                     view?.snackbar(R.string.error_general)

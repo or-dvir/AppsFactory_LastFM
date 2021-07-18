@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!--have the item invisible by default because the icon and
+    title require a database query-->
+    <item
+        android:id="@+id/menuItem_albumDetails_addOrRemoveFavorite"
+        android:icon="@drawable/ic_favorite_filled"
+        android:iconTint="@color/white"
+        android:title="@string/removeFromFavorites"
+        android:visible="false"
+        app:showAsAction="ifRoom"
+        tools:visible="false" />
+</menu>

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">AppsFactory_LastFM</string>
     <string name="search">Search</string>
+    <string name="removeFromFavorites">Remove from favorites</string>
+    <string name="addToFavorites">Add to favorites</string>
     <string name="searchDescription">When you search for an artist, the results will appear here</string>
 
     <string name="contentDescription_artistImage">artist image</string>

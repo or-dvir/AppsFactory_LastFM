@@ -69,7 +69,7 @@ class FragmentTopAlbums : BaseFragment()
         //initialize with empty list
         rvAdapter = AdapterAlbums(mutableListOf()) { position, album ->
             //favorite icon click listener
-            viewModel.addOrRemoveAlbum(album) { error ->
+            viewModel.addOrRemoveAlbumFavorites(album) { error ->
                 //note: using listener and not diff util because there is no indication
                 // in the Album class as to whether it is in favorites or not,
                 // so the diffCallback will think nothing has changed

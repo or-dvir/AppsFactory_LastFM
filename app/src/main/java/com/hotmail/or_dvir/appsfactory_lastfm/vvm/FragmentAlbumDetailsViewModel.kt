@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Album
 import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryAlbums
-import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseAndroidViewModel
+import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseAlbumsViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,8 +14,8 @@ import or_dvir.hotmail.com.dxutils.atLeastOneNull
 
 class FragmentAlbumDetailsViewModel(
     app: Application,
-    private val repoAlbums: RepositoryAlbums
-) : BaseAndroidViewModel(app)
+    repoAlbums: RepositoryAlbums
+) : BaseAlbumsViewModel(app, repoAlbums)
 {
     private companion object
     {
@@ -40,6 +40,30 @@ class FragmentAlbumDetailsViewModel(
                     }.toString()
                 }
             )
+        }
+    }
+
+    suspend fun isInFavorites(): Boolean
+    {
+        return album.value?.let {
+            it.canBeStoredInDb() && repoAlbums.isInFavorites(it.dbUUID!!)
+        } ?: false
+    }
+
+    /**
+     * calls [BaseAlbumsViewModel.addOrRemoveAlbumFavorites] with the album held
+     * by this view model. If that album is null, this function does nothing and immediately
+     * invokes [onFinish] with a null error (nothing happened, so technically there was no error)
+     */
+    fun addOrRemoveAlbumFavorites(onFinish: (String?) -> Unit)
+    {
+        if (album.value == null)
+        {
+            onFinish.invoke(null)
+        } else
+        {
+            //album.value is not null because of the "if" above
+            super.addOrRemoveAlbumFavorites(album.value!!, onFinish)
         }
     }
 
