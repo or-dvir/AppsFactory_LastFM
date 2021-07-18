@@ -2,7 +2,6 @@ package com.hotmail.or_dvir.appsfactory_lastfm.other.repositories
 
 import androidx.lifecycle.LiveData
 import com.hotmail.or_dvir.appsfactory_lastfm.model.Album
-import com.hotmail.or_dvir.appsfactory_lastfm.model.server_wrappers.ServerWrapperAlbumDetails
 import com.hotmail.or_dvir.appsfactory_lastfm.model.server_wrappers.ServerWrapperTopAlbums
 
 abstract class RepositoryAlbums
