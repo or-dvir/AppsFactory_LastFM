@@ -62,10 +62,11 @@ class AdapterAlbums(
             //      and this is very inefficient!
             //of course in a real app, we would NEVER use this "technique".
             //however... if we want to attach a "favorites" button for every album in this adapter,
-            //since we are using DiffUtil, we need to either include (and properly maintain it)
+            //since we are using DiffUtil, we need to either include (and properly maintain)
             //a field "isFavorite" in the Album class, or create a mechanism where this adapter
             //knows about all the users' favorite albums (and properly maintain it).
-            //due to time constraints, such a mechanism would be too complicated to implement.
+            //due to time constraints, such a mechanism would be too complicated to implement
+            //(an attempt was made, but proved more complicated than you'd think).
             CoroutineScope(Dispatchers.IO).launch {
                 ivFavorite.apply {
                     val isInFavorites =

@@ -130,7 +130,6 @@ class FragmentFavoriteAlbums : BaseFragment()
                 view?.longSnackbar(R.string.error_general)
             }
 
-            //todo copied from search fragment. can i make this shared?
             //ui operation - should by tied to lifecycle scope.
             //uses main dispatcher by default.
             lifecycleScope.launch(exceptionHandler) {
