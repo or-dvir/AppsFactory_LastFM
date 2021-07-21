@@ -11,30 +11,46 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import or_dvir.hotmail.com.dxutils.hideKeyBoard
 
+/**
+ * shows a [Snackbar] for [Snackbar.LENGTH_SHORT] duration, with the given [text]
+ */
 fun View.snackbar(text: String)
 {
     hideKeyBoard(this, 0)
     Snackbar.make(this, text, Snackbar.LENGTH_SHORT).show()
 }
 
+/**
+ * a convenience function for [snackbar]
+ */
 fun View.snackbar(@StringRes textRes: Int)
 {
     hideKeyBoard(this, 0)
     snackbar(resources.getString(textRes))
 }
 
+/**
+ * shows a [Snackbar] for [Snackbar.LENGTH_LONG] duration, with the given [text]
+ */
 fun View.longSnackbar(text: String)
 {
     hideKeyBoard(this, 0)
     Snackbar.make(this, text, Snackbar.LENGTH_LONG).show()
 }
 
+/**
+ * a convenience function for [longSnackbar]
+ */
 fun View.longSnackbar(@StringRes textRes: Int)
 {
     hideKeyBoard(this, 0)
     longSnackbar(resources.getString(textRes))
 }
 
+/**
+ * returns whether or not the device has internet connection at the moment this function
+ * was called
+ */
 fun Context.hasInternetConnection(): Boolean
 {
     //these classes/methods were only deprecated in API 29.
@@ -45,6 +61,13 @@ fun Context.hasInternetConnection(): Boolean
     return activeNetwork?.isConnectedOrConnecting == true
 }
 
+/**
+ * a helper class using the Picasso library to load an image into this [ImageView].
+ *
+ * @param url String? the url of the image to load. if the value is null, the given error image
+ * will be shown
+ * @param errorRes Int the resource ID of an image to show in case the loading of [url] failed
+ */
 fun ImageView.loadWithPicasso(url: String?, @DrawableRes errorRes: Int)
 {
     //p for picasso

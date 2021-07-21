@@ -12,11 +12,27 @@ import androidx.recyclerview.widget.RecyclerView
 import or_dvir.hotmail.com.dxutils.hideKeyBoard
 import or_dvir.hotmail.com.dxutils.makeVisibleOrGone
 
+/**
+ * a base class holding some shared functionality for all the fragments in this app
+ */
 abstract class BaseFragment : Fragment()
 {
     //region abstract
+    /**
+     * returns a view used to indicate the app is loading some data,
+     * or null if no such view exists for this fragment
+     */
     abstract fun getLoadingView(): View?
+
+    /**
+     * returns this framgnets' view model
+     */
     abstract fun getFragViewModel(): BaseAndroidViewModel
+
+    /**
+     * returns this fragments [RecyclerView], or null if this fragment does not
+     * contain one
+     */
     abstract fun getRecyclerView(): RecyclerView?
     //endregion
 
@@ -54,9 +70,15 @@ abstract class BaseFragment : Fragment()
         }
     }
 
-    fun getColor(@ColorRes color: Int) =
-        ContextCompat.getColor(requireContext(), color)
+    /**
+     * a helper function to retrieve the integer representation of the given [colorRes]
+     */
+    fun getColor(@ColorRes colorRes: Int) =
+        ContextCompat.getColor(requireContext(), colorRes)
 
+    /**
+     * a helper function to retrieve the integer value represented by the given [IntegerRes]
+     */
     fun getInteger(@IntegerRes intRes: Int) = resources.getInteger(intRes)
 
     override fun onDestroyView()

@@ -54,6 +54,9 @@ class MyApplication : Application()
         Log.e(TAG, "a coroutine running under application scope threw an exception.", t)
     }
 
+    /**
+     * a [CoroutineScope] used to run coroutines that should not be cancelled
+     */
     private val appCoroutineScope = CoroutineScope(SupervisorJob() + exceptionHandler)
 
     override fun onCreate()

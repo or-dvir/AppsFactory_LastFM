@@ -8,13 +8,27 @@ import com.hotmail.or_dvir.appsfactory_lastfm.other.repositories.RepositoryAlbum
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * a base class holding some shared functionality for view models handling [Album]s
+ */
 abstract class BaseAlbumsViewModel(
     app: Application,
     internal val repoAlbums: RepositoryAlbums
 ) : BaseAndroidViewModel(app)
 {
     /**
-     * @return String? error string, or null if successful
+     * adds or removes the given [album] to/from the database.
+     * the function automatically determines whether [album] needs to be added or removed
+     * based on whether it is already in the favorites list or not.
+     *
+     * if this album cannot be saved in the database, this function immediately triggers
+     * [onFinish] and finishes
+     *
+     * @param onFinish a listener to be invoked when the operation finishes.
+     * the string parameter of this listener represents an error that occurred
+     * during the insert/delete operation. if this value is `null`, the operation was successful
+     *
+     * @see [Album.canBeStoredInDb]
      */
     //using a listener and not making this a suspend function because it will be called
     //from the fragment with the fragment lifecycle scope. so if the fragment dies,

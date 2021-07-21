@@ -16,6 +16,12 @@ import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 
+/**
+ * a [RecyclerView.Adapter] holding a list of [Album]s.
+ *
+ * @param onFavoriteClick a click listener to be triggered when the user clicks
+ * the favorites icon on a single [Album] item
+ */
 class AdapterAlbums(
     items: MutableList<Album>,
     val onFavoriteClick: (Int, Album) -> Unit
@@ -102,6 +108,9 @@ class AdapterAlbums(
     /////////////////////////////////////////
     /////////////////////////////////////////
 
+    /**
+     * a [RecyclerView.ViewHolder] representing a single [Album] held in [AdapterAlbums]
+     */
     class ViewHolder(
         val binding: RowAlbumBinding,
         val onFavoriteClick: (Int) -> Unit

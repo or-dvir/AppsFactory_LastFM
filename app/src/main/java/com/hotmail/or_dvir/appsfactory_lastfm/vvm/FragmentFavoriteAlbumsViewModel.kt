@@ -8,6 +8,9 @@ import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseAndroidViewMo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * a view model holding information about the users' favorite albums
+ */
 class FragmentFavoriteAlbumsViewModel(
     app: Application,
     private val repoAlbums: RepositoryAlbums
@@ -18,6 +21,9 @@ class FragmentFavoriteAlbumsViewModel(
         private const val TAG = "FragFavoriteAlbumsVM"
     }
 
+    /**
+     * a list of all the users' favorite albums
+     */
     val favoriteAlbums = repoAlbums.getFavoriteAlbums()
 
     init
@@ -30,8 +36,17 @@ class FragmentFavoriteAlbumsViewModel(
     }
 
     //using a listener and not making this a suspend function because it will be called
-    //from the fragment with the fragment lifecycle scope. so if the fragment dies,
-    //it will also cancel coroutines started here (as child coroutines of the fragment scope)
+    // from the fragment with the fragment lifecycle scope. so if the fragment dies,
+    // it will also cancel coroutines started here (as child coroutines of the fragment scope).
+    //note the we are deliberately NOT using BaseAndroidViewModel.addOrRemoveAlbumFavorites()
+    // because in this view model we know extra details about the album which makes the
+    // implementation of this function much simpler
+    /**
+     * removes the given [album] from the users' favorites list.
+     *
+     * @param onFinish a listener to be invoked when the operation finishes.
+     * the boolean parameter of this listener represents whether the operation succeeded or failed.
+     */
     fun removeAlbum(album: Album, onFinish: (Boolean) -> Unit)
     {
         viewModelScope.launch(Dispatchers.Main + createCoroutineExceptionHandler(TAG)) {

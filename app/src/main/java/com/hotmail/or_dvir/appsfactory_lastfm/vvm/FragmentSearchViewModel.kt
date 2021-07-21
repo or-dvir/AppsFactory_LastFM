@@ -9,6 +9,9 @@ import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseAndroidViewMo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * a view model holding information about search results for an [Artist]
+ */
 class FragmentSearchViewModel(
     app: Application,
     private val repoArtists: RepositoryArtists
@@ -19,13 +22,28 @@ class FragmentSearchViewModel(
         private const val TAG = "FragmentSearchViewModel"
     }
 
+    /**
+     * a helper field telling us whether or not this is the first search performed by the user
+     */
     var hasSearchedBefore = false
         private set
 
+    /**
+     * holds the search results of the last query performed by the user
+     */
     val artists: MutableLiveData<List<Artist>?> = MutableLiveData(listOf())
+
+    /**
+     * a helper field holding the last artist the user searched for
+     */
     var lastSearchQuery = ""
         private set
 
+    /**
+     * searches for artists matching the given [query]
+     *
+     * the results would be sent to [artists]
+     */
     fun searchArtists(query: String)
     {
         val exceptionHandler = createCoroutineExceptionHandler(TAG) { artists.value = null }

@@ -7,9 +7,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
+/**
+ * a singleton class to access retrofit functionality
+ */
 object SMyRetrofit
 {
     private const val TIMEOUT_SECONDS: Long = 15
+
+    /**
+     * our access point to the LastFM api
+     */
     internal val lastFmApi: ILastFmApi
 
     init

@@ -7,12 +7,18 @@ import com.hotmail.or_dvir.appsfactory_lastfm.model.Tracks
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+/**
+ * A wrapper class for the servers' response for retrieving album details
+ */
 @JsonClass(generateAdapter = true)
 data class ServerWrapperAlbumDetails(
     @Json(name = "album")
     val albumDetails: AlbumDetails?
 )
 {
+    /**
+     * converts this [ServerWrapperAlbumDetails] to [Album]
+     */
     fun toAppAlbum(): Album?
     {
         return albumDetails?.let {
@@ -25,6 +31,10 @@ data class ServerWrapperAlbumDetails(
         }
     }
 
+    /**
+     * a helper class which represent part of the servers' structure of results when
+     * retrieving an album details
+     */
     //cannot use existing Album class because it requires an Artist object, whereas here
     // the artist is only a string.
     @JsonClass(generateAdapter = true)

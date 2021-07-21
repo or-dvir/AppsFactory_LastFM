@@ -10,6 +10,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 
+/**
+ * an implementation for [RepositoryAlbums]
+ */
 class RepositoryAlbumsImpl(
     private val app: Application,
     private val appCoroutineScope: CoroutineScope,
@@ -98,7 +101,7 @@ class RepositoryAlbumsImpl(
     override suspend fun isInFavorites(dbUUID: String) =
         withContext(Dispatchers.IO) {
             daoAlbums.isInFavorites(dbUUID)
-        }
+        }W
 
     override fun getFavoriteAlbums() = daoAlbums.getFavoriteAlbums()
 }

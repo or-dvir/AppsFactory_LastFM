@@ -16,6 +16,9 @@ import com.hotmail.or_dvir.appsfactory_lastfm.other.database.daos.IDaoAlbums
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Types
 
+/**
+ * a singleton class representing our Room database
+ */
 @Database(entities = [Album::class], version = 2)
 @TypeConverters(RoomConverters::class)
 abstract class SMyDatabase : RoomDatabase()
@@ -27,6 +30,9 @@ abstract class SMyDatabase : RoomDatabase()
         @Volatile
         private var INSTANCE: SMyDatabase? = null
 
+        /**
+         * returns a shared instance of [SMyDatabase]
+         */
         fun getInstance(context: Context): SMyDatabase
         {
             synchronized(this) {
@@ -54,6 +60,10 @@ abstract class SMyDatabase : RoomDatabase()
     ////////////////////////////////////////////////////
     ////////////////////////////////////////////////////
 
+    /**
+     * a class holding helper functions to convert between json strings
+     * and app/database objects
+     */
     @Suppress("unused")
     class RoomConverters
     {
@@ -74,25 +84,43 @@ abstract class SMyDatabase : RoomDatabase()
         }
 
         //region artist
+        /**
+         * converts the given [json] to an [Artist] object
+         */
         @TypeConverter
         fun toArtist(json: String) = adapterArtist.fromJson(json)
 
+        /**
+         * converts the given [artist] to a json string
+         */
         @TypeConverter
         fun fromArtist(artist: Artist?): String = adapterArtist.toJson(artist)
         //endregion
 
         //region tracks
+        /**
+         * converts the given [json] to a [Tracks] object
+         */
         @TypeConverter
         fun toTracks(json: String) = adapterTracks.fromJson(json)
 
+        /**
+         * converts the given [tracks] to a json string
+         */
         @TypeConverter
         fun fromTracks(tracks: Tracks?): String = adapterTracks.toJson(tracks)
         //endregion
 
         //region image list
+        /**
+         * converts the given [json] to an [Image] list
+         */
         @TypeConverter
         fun toImageList(json: String) = adapterImageList.fromJson(json)
 
+        /**
+         * converts the given [images] to a json string
+         */
         @TypeConverter
         fun fromImageList(images: List<Image>?): String = adapterImageList.toJson(images)
         //endregion

@@ -10,6 +10,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import or_dvir.hotmail.com.dxutils.atLeastOneNull
 
+/**
+ * a view model holding detailed information about a specific album
+ */
 class FragmentAlbumDetailsViewModel(
     app: Application,
     repoAlbums: RepositoryAlbums
@@ -20,9 +23,25 @@ class FragmentAlbumDetailsViewModel(
         private const val TAG = "FragAlbumDetailsVM"
     }
 
+    /**
+     * detailed information about the album held by this [FragmentAlbumDetailsViewModel]
+     */
     //do NOT initialize this with null or empty data! the UI observer will be triggered!
     val album = MutableLiveData<Album?>()
 
+    /**
+     * retrieves a numbered list of the tracks of [album], represented as a single string,
+     * or null if creating such a list is not possible.
+     *
+     * the returned string will look like this (if not `null`):
+     * 1. song 1
+     * 2. song 2
+     * 3. song 3
+     *
+     * and so forth...
+     *
+     * note that if the song number cannot be determined, only the song name will be included
+     */
     fun getAlbumTracksAsListText(): String?
     {
         return album.value?.let { album ->
@@ -41,6 +60,9 @@ class FragmentAlbumDetailsViewModel(
         }
     }
 
+    /**
+     * returns whether or not [album] is marked as favorite
+     */
     suspend fun isInFavorites(): Boolean
     {
         return album.value?.let {
@@ -49,9 +71,10 @@ class FragmentAlbumDetailsViewModel(
     }
 
     /**
-     * calls [BaseAlbumsViewModel.addOrRemoveAlbumFavorites] with the album held
-     * by this view model. If that album is null, this function does nothing and immediately
+     * calls [BaseAlbumsViewModel.addOrRemoveAlbumFavorites] with [album].
+     * If [album] is null, this function does nothing and immediately
      * invokes [onFinish] with a null error (nothing happened, so technically there was no error)
+     *
      */
     fun addOrRemoveAlbumFavorites(onFinish: (String?) -> Unit)
     {
@@ -65,6 +88,11 @@ class FragmentAlbumDetailsViewModel(
         }
     }
 
+    /**
+     * loads the details of an album with the given [albumName] and [artistName]
+     *
+     * the result will be sent to [album]
+     */
     fun getAlbumDetails(artistName: String?, albumName: String?)
     {
         //note: these values are used in the albums repository to retrieve data from the internet

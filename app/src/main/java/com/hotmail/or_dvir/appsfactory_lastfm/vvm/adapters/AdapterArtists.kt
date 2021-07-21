@@ -9,6 +9,9 @@ import com.hotmail.or_dvir.appsfactory_lastfm.model.Artist
 import com.hotmail.or_dvir.appsfactory_lastfm.other.loadWithPicasso
 import com.squareup.picasso.Picasso
 
+/**
+ * a [RecyclerView.Adapter] holding a list of [Artist]s
+ */
 class AdapterArtists(items: MutableList<Artist>) :
     BaseAdapter<Artist, AdapterArtists.ViewHolder>(items)
 {
@@ -53,5 +56,8 @@ class AdapterArtists(items: MutableList<Artist>) :
     /////////////////////////////////////////
     /////////////////////////////////////////
 
+    /**
+     * a [RecyclerView.ViewHolder] representing a single [Artist] held in [AdapterArtists]
+     */
     class ViewHolder(val binding: RowArtistBinding) : RecyclerView.ViewHolder(binding.root)
 }

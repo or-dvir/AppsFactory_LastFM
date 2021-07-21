@@ -10,6 +10,9 @@ import com.hotmail.or_dvir.dxclick.IDxItemClickable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+/**
+ * a class representing an [Album]
+ */
 @Entity(
     //index the column used to identify albums so our queries will be more efficient
     indices = [Index(value = [Album.COLUMN_DB_UUID])],
@@ -43,6 +46,10 @@ data class Album(
         private const val LASTFM_NULL = "(null)"
         internal const val COLUMN_DB_UUID = "dbUUID"
 
+        /**
+         * returns the unique database ID for an [Album] with the given [artistName] and [albumName]
+         * @see dbUUID
+         */
         fun toDbUuid(artistName: String, albumName: String) = "${artistName}$albumName"
     }
 
@@ -55,6 +62,16 @@ data class Album(
     //(which are required for other API requests anyway).
     //this means that if one of these values is null or empty, the object does not have a unique id
     //and therefore it cannot be saved in the database.
+    /**
+     * the unique database ID for this [Album] comprised of the album name and artist name,
+     * or `null` if this [Album] does not contain valid values to be uniquely identified
+     * in the database
+     * @see canBeStoredInDb
+     * @see toDbUuid
+     * @see canBeStoredInDb
+     * @see isNameValid
+     * @see isArtistNameValid
+     */
     @ColumnInfo(name = COLUMN_DB_UUID)
     @Json(name = "dbUUID")
     //for simplicity, made var and not val (otherwise Room complains).
@@ -68,8 +85,18 @@ data class Album(
             null
         }
 
+    /**
+     * returns whether or not this [Album] holds valid values for creating the [dbUUID].
+     * if the returned value is `false`, this [Album] cannot be uniquely identified and therefore
+     * cannot be stored in the local database
+     * @see dbUUID
+     */
     fun canBeStoredInDb() = dbUUID != null
 
+    /**
+     * a helper function to determine whether or not the name of this album is valid.
+     * this is required for creating a valid [dbUUID]
+     */
     fun isNameValid() = when
     {
         name.isNullOrBlank() -> false
@@ -77,6 +104,11 @@ data class Album(
         else -> true
     }
 
+    /**
+     * a helper function to determine whether or not the name of the artist of this album
+     * is valid.
+     * this is required for creating a valid [dbUUID]
+     */
     fun isArtistNameValid() = when
     {
         artist?.name.isNullOrBlank() -> false
@@ -84,9 +116,21 @@ data class Album(
         else -> true
     }
 
+    /**
+     * returns a list of [Image]s for this [Album]
+     */
     override fun getImageList() = images
+
+    /**
+     * a unique id representing this object (used only internally)
+     */
     override fun getViewType() = R.id.viewType_Album
 
+    /**
+     * returns this [Album]s' list of [Tracks.Track]s.
+     * @param sorted Boolean whether or not the returned list should be sorted by the order
+     * the [Tracks.Track] appear on the album
+     */
     fun getTracks(sorted: Boolean = true) =
         tracks?.trackList?.apply {
             if (sorted)
@@ -101,12 +145,22 @@ data class Album(
     ////////////////////////////////////////////////////
     ////////////////////////////////////////////////////
 
+    /**
+     * used for [DiffUtil] calculations.
+     */
     class DiffCallback(private val oldList: List<Album>, private val newList: List<Album>) :
         DiffUtil.Callback()
     {
+        /**
+         * 2 [Album]s are considered the same, if the [Album.equals] method return `true`
+         */
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
             oldList[oldItemPosition].dbUUID == newList[newItemPosition].dbUUID
 
+        /**
+         * the contents of 2 [Album]s is considered the same, if they have the same name,
+         * and same artist name
+         */
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean
         {
             val old = oldList[oldItemPosition]

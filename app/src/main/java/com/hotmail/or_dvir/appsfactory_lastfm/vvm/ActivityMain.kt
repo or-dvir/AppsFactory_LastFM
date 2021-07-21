@@ -10,9 +10,6 @@ import com.hotmail.or_dvir.appsfactory_lastfm.databinding.ActivityMainBinding
 
 class ActivityMain : AppCompatActivity()
 {
-    //todo
-    // add documentation for everything!!!
-
     //General Notes:
     //
     //for simplicity, errors are handled in a generic way (simple, non-specific error messages).

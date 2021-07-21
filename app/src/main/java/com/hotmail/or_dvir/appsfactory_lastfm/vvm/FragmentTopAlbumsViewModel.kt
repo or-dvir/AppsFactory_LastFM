@@ -9,6 +9,9 @@ import com.hotmail.or_dvir.appsfactory_lastfm.vvm.base_classes.BaseAlbumsViewMod
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * a view model holding information on top albums of an Artist
+ */
 class FragmentTopAlbumsViewModel(
     app: Application,
     repoAlbums: RepositoryAlbums
@@ -19,8 +22,15 @@ class FragmentTopAlbumsViewModel(
         private const val TAG = "FragTopAlbumsVM"
     }
 
+    /**
+     * the top albums currently held by this [FragmentTopAlbumsViewModel]
+     */
     val topAlbums = MutableLiveData<List<Album>?>(listOf())
 
+    /**
+     * searches for the top albums of the artist with the given [artistName]
+     * the result would be set in [topAlbums]
+     */
     fun loadTopAlbums(artistName: String?)
     {
         if (artistName == null)

@@ -112,6 +112,9 @@ class FragmentTopAlbums : BaseFragment()
         viewModel.topAlbums.observe(viewLifecycleOwner, observerAlbums)
     }
 
+    /**
+     * hides the recycler view and shows the given [error] on the screen
+     */
     private fun setError(error: String)
     {
         binding.apply {
@@ -168,6 +171,9 @@ class FragmentTopAlbums : BaseFragment()
         }
     }
 
+    /**
+     * a helper function to get teh artist name passed as an argument to this [FragmentTopAlbums]
+     */
     private fun getArtistName() = fragArgs.artistName
 
     override fun onDestroyView()

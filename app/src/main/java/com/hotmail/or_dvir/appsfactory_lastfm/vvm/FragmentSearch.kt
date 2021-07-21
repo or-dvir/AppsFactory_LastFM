@@ -106,6 +106,9 @@ class FragmentSearch : BaseFragment()
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    /**
+     * [SearchView] requires special setup. This functions performs that setup
+     */
     private fun setupSearchView(sv: SearchView)
     {
         sv.apply {
